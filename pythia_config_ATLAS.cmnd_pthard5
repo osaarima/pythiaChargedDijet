@@ -1,0 +1,51 @@
+! main03.cmnd.
+! This file contains commands to be read in for a Pythia8 run. 
+! Lines not beginning with a letter or digit are comments.
+
+! 1) Settings used in the main program.
+Main:numberOfEvents = 1000000      ! number of events to generate
+!Main:numberToList = 1              ! number of events to print
+!Main:timesToShow = 20              ! show how far along run is
+!Main:showChangedSettings = on      ! print changed flags/modes/parameters
+!Main:showChangedParticleData = on  ! print changed particle and decay data
+
+! 2) Beam parameter settings. Values below agree with default ones.
+Beams:idA = 2212                   ! first beam, p = 2212, pbar = -2212
+Beams:idB = 2212                   ! second beam, p = 2212, pbar = -2212
+Beams:eCM = 7000.                  ! CM energy of collision
+
+! 3) Settings for the hard-process generation.
+HardQCD:all = on                   ! switch on all QCD jet + jet processes
+!PromptPhoton:all = on              ! swich on gamma + jet and gamma + gamma 
+
+PhaseSpace:pTHatMin = 5.0          ! minimal pT scale in process 
+PhaseSpace:pTHatMax = -1.0          ! minimal pT scale in process 
+
+! 4) Settings for the event generation process in the Pythia8 library.
+PartonLevel:MPI = on               ! no multiple interactions
+PartonLevel:ISR = on              ! no initial-state radiation 
+PartonLevel:FSR = on              ! no final-state radiation
+HadronLevel:Hadronize = on          ! no hadronization
+
+! 5) Non-standard settings; exemplifies tuning possibilities.
+#SpaceShower:pT0Ref = 2.0           ! dampening of pT -> 0 divergence
+#MultipleInteractions:pT0Ref = 3.0  ! dampening of pT -> 0 divergence
+
+!HadronLevel:Decay = off
+
+! 6) switch off decay channels
+!130:mayDecay = no   ! K0L
+!310:mayDecay = no   ! K0S
+!3122:mayDecay = no  ! lambda
+!3322:mayDecay = no  ! Xsi0
+!3312:mayDecay = no  ! Xsi-
+!3334:mayDecay = no  ! Omega
+!-3122:mayDecay = no ! anti-lambda
+!-3322:mayDecay = no ! anti-Xsi0
+!-3312:mayDecay = no ! anti-Xsi-
+!-3334:mayDecay = no ! anti-Omega
+
+# Makes particles with c*tau > 10 mm stable:
+ParticleDecays:limitTau0 = On
+ParticleDecays:tau0Max = 10.0
+
