@@ -34,7 +34,14 @@
 # Root-files:
 *.root
 
+# Exec-files
+exec_dijet_*
+
 #Additional files:
+.*.swp
+.*.sw0
+.*.swn
+outputs/*
 nanoDict.cc
 nanoDict_rdict.pcm
 pythiaChargedDijet

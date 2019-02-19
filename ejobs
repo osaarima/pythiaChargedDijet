@@ -1,0 +1,58 @@
+#!/bin/bash 
+############################
+
+PROG=`basename $0`
+if [ $# -ne 4 ]
+then
+    echo "Usage: $PROG pythiaconfig.cmnd pthardmin pthardmax leadingJetmin"
+    exit;
+fi
+
+function setenv(){ export $1=$2; }
+
+setenv pyconfigname $1
+setenv pthardmin $2
+setenv pthardmax $3
+setenv leadingJetmin $4
+setenv comment ${pthardmin}_${pthardmax}_${leadingJetmin}
+#################################
+# Output file locations
+#################################
+setenv Main_DIR     `pwd`
+setenv DoWhat       pythiaChargedDijet
+setenv oname        pythia8226_pp5TeV_Monash_BGSubTest_chargedjets_noweight_pthard$comment
+setenv Disk         `pwd`
+setenv OUT_ERRORS   $Disk/outputs/${oname}/errors
+setenv Out_DIR      $Disk/outputs/${oname}/data
+setenv LOG_DIR      $Disk/outputs/${oname}/logs
+#################################
+# Need for serial job in sepeli(pbs)
+#################################
+setenv noFileToRun 100
+#################################
+
+mkdir -p $OUT_ERRORS
+mkdir -p $Out_DIR
+mkdir -p $LOG_DIR
+
+#################################
+# Runlist to scan
+#################################
+
+# simplify this !!!
+cat << EOF > exec_dijet_$comment
+#!/bin/bash -f
+cd $Main_DIR
+source setup.sh.elc
+export what=$DoWhat
+export sedN=1000
+export iseg=\$SLURM_ARRAY_TASK_ID
+sedN=\`expr \$sedN + \${iseg}\`
+export outfile=$Out_DIR/$DoWhat-\$sedN.root
+export Log=$LOG_DIR/$DoWhat-\$sedN.log
+./\${what} $pyconfigname $pthardmin $pthardmax $leadingJetmin \$outfile \$sedN  >& \$Log
+cd $Main_DIR
+EOF
+#\${what} \$outfile \$sedN 5000000 >& \$Log
+chmod +x exec_dijet_$comment
+    sbatch -v --array=1-$noFileToRun exec_dijet_$comment -J $comment  -e $OUT_ERRORS -o $OUT_ERRORS

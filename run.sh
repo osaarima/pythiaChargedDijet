@@ -1,0 +1,10 @@
+./ejobs pythia_config_Monash2013.cmnd 11 21 20
+./ejobs pythia_config_Monash2013.cmnd 21 36 20
+./ejobs pythia_config_Monash2013.cmnd 36 57 20
+./ejobs pythia_config_Monash2013.cmnd 57 84 20
+./ejobs pythia_config_Monash2013.cmnd 84 117 20
+./ejobs pythia_config_Monash2013.cmnd 117 152 20
+./ejobs pythia_config_Monash2013.cmnd 152 191 20
+./ejobs pythia_config_Monash2013.cmnd 191 234 20
+./ejobs pythia_config_Monash2013.cmnd 234 300 20
+./ejobs pythia_config_Monash2013.cmnd 300 -1 20

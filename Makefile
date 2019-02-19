@@ -32,7 +32,7 @@ CXXFLAGS  += $(INCS)
 LDFLAGS += $L -ldl
 
 #HDRSDICT = src/AliJBaseCard.h src/AliJCard.h src/JHistos.h src/AliJBaseTrack.h #For pythiaChargedJet and others
-HDRSDICT = src/AliJCDijetHistos.h src/AliJHistogramInterface.h src/AliJHistManager.h src/AliJBaseTrack.h src/AliJBaseCard.h #For pythiaChargedDijet
+HDRSDICT = src/AliJCDijetHistos.h src/AliJHistogramInterface.h src/AliJHistManager.h src/AliJBaseTrack.h src/AliJBaseCard.h src/AliJCard.h src/AliJPhoton.h #For pythiaChargedDijet
            
 HDRS	+= $(HDRSDICT)  nanoDict.h
 
