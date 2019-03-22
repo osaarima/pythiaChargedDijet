@@ -16,7 +16,7 @@ Random:seed = 0
 ! 2) Beam parameter settings. Values below agree with default ones.
 Beams:idA = 2212                   ! first beam, p = 2212, pbar = -2212
 Beams:idB = 2212                   ! second beam, p = 2212, pbar = -2212
-Beams:eCM = 7000.                  ! CM energy of collision
+Beams:eCM = 5020.                  ! CM energy of collision
 
 ! 3) Settings for the hard-process generation.
 HardQCD:all = on                   ! switch on all QCD jet + jet processes

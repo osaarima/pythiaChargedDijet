@@ -100,7 +100,7 @@ int main(int argc, char **argv) {
 	double dijetLeadingPt = atof(argv[4]);
 	TString outputs = argv[5];
 	Int_t random_seed = argc>6 ? atoi(argv[6]) : 0;//placing the inputs into variables
-	unsigned trackingInEff = argc>7 ? atoi(argv[7]) : 0; //placing the inputs into variables
+	unsigned trackingInEff = argc>7 ? atoi(argv[7]) : 0; //Default: no tracking ineffciency
 
 
 	TFile *fout = new TFile(outputs.Data(),"RECREATE");

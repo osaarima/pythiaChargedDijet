@@ -2,9 +2,9 @@
 ############################
 
 PROG=`basename $0`
-if [ $# -ne 4 ]
+if [ $# -ne 5 ]
 then
-    echo "Usage: $PROG pythiaconfig.cmnd pthardmin pthardmax leadingJetmin"
+    echo "Usage: $PROG pythiaconfig.cmnd pthardmin pthardmax leadingJetmin trackingIneff"
     exit;
 fi
 
@@ -14,13 +14,14 @@ setenv pyconfigname $1
 setenv pthardmin $2
 setenv pthardmax $3
 setenv leadingJetmin $4
-setenv comment ${pthardmin}_${pthardmax}_${leadingJetmin}
+setenv trackingIneff $5
+setenv comment ${pthardmin}_${pthardmax}_${leadingJetmin}_TrIneff${trackingIneff}
 #################################
 # Output file locations
 #################################
 setenv Main_DIR     `pwd`
 setenv DoWhat       pythiaChargedDijet
-setenv oname        pythia8226_pp5TeV_Monash_BGSubTest_chargedjets_noweight_pthard$comment
+setenv oname        pythia8226_pp5TeV_Monash_charged_noweight_pthard$comment
 setenv Disk         `pwd`
 setenv OUT_ERRORS   $Disk/outputs/${oname}/errors
 setenv Out_DIR      $Disk/outputs/${oname}/data
@@ -50,7 +51,7 @@ export iseg=\$SLURM_ARRAY_TASK_ID
 sedN=\`expr \$sedN + \${iseg}\`
 export outfile=$Out_DIR/$DoWhat-\$sedN.root
 export Log=$LOG_DIR/$DoWhat-\$sedN.log
-./\${what} $pyconfigname $pthardmin $pthardmax $leadingJetmin \$outfile \$sedN  >& \$Log
+./\${what} $pyconfigname $pthardmin $pthardmax $leadingJetmin \$outfile \$sedN $trackingIneff  >& \$Log
 cd $Main_DIR
 EOF
 #\${what} \$outfile \$sedN 5000000 >& \$Log
