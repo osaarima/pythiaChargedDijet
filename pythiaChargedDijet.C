@@ -5,6 +5,7 @@
 #include "TVector2.h"
 #include "TVector3.h"
 #include "TLorentzVector.h"
+#include "TRandom3.h"
 #include <Pythia8/Pythia.h>
 #include <TStopwatch.h>
 
@@ -88,7 +89,7 @@ AliJCDijetHistos *fhistos;
 int main(int argc, char **argv) {
 
 	if(argc<6){
-		cout<<"usage: " << argv[0] << " pythia.config pTHatMin pTHatMax dijetLeadingPt <output.root> [random_seed]"<<endl;exit(1);
+		cout<<"usage: " << argv[0] << " pythia.config pTHatMin pTHatMax dijetLeadingPt <output.root> [random_seed] [tracking inefficiency]"<<endl;exit(1);
 	}
 	TStopwatch timer; 
 	timer.Start();   
@@ -99,6 +100,7 @@ int main(int argc, char **argv) {
 	double dijetLeadingPt = atof(argv[4]);
 	TString outputs = argv[5];
 	Int_t random_seed = argc>6 ? atoi(argv[6]) : 0;//placing the inputs into variables
+	unsigned trackingInEff = argc>7 ? atoi(argv[7]) : 0; //placing the inputs into variables
 
 
 	TFile *fout = new TFile(outputs.Data(),"RECREATE");
@@ -199,6 +201,7 @@ int main(int argc, char **argv) {
     cout << "dijet leading pt cut:       " << dijetLeadingPt << endl;
     cout << "dijet subleading pt cut:    " << dijetSubleadingPt << endl;
     cout << "dijet DeltaPhi cut:         pi/" << dijetDeltaPhiCut << endl;
+    cout << "tracking inefficiency:      " << trackingInEff << endl;
     cout << endl;
 
     if(fusePionMassInktjets && fktScheme!=0) {
@@ -221,6 +224,7 @@ int main(int argc, char **argv) {
     fhistos->fh_info->Fill("Subleading jet cut", dijetSubleadingPt);
     fhistos->fh_info->Fill("Const. cut", jetConstituentCut);
     fhistos->fh_info->Fill("Delta phi cut pi/",dijetDeltaPhiCut);
+    fhistos->fh_info->Fill("Tracking ineff",trackingInEff);
 
     // Initialize fh_events so that the bin order is correct
     fhistos->fh_events[0]->Fill("events",nEvent);
@@ -272,6 +276,7 @@ int main(int argc, char **argv) {
 	Int_t nAccepted = 0;
 	Float_t sigmaGen = 0.0;
 	Float_t ebeweight = 1.0;
+	TRandom3 *randomGenerator = new TRandom3();
 
 	for(int iEvent = 0; iEvent < nEvent; ++iEvent) {//begin event loop
 
@@ -287,6 +292,8 @@ int main(int argc, char **argv) {
 
         for (int i = 0; i < pythia.event.size(); ++i) {//loop over all the particles in the event
             if (pythia.event[i].isFinal() && pythia.event[i].isCharged() && pythia.event[i].isHadron() ) { // Only check if it is final, charged and hadron since the acceptance is checked in the CalculateJetsDijets
+                if (trackingInEff!=0 && randomGenerator->Uniform(0.0,1.0) < 0.03) continue;// Lose 3% of tracks, as in ALICE.
+
 				TLorentzVector lParticle(pythia.event[i].px(), pythia.event[i].py(), pythia.event[i].pz(), pythia.event[i].e());
                 AliJBaseTrack track( lParticle );
                 track.SetID(pythia.event[i].id());
