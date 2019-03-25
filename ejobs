@@ -44,7 +44,7 @@ mkdir -p $LOG_DIR
 cat << EOF > exec_dijet_$comment
 #!/bin/bash -f
 cd $Main_DIR
-source setup.sh.elc
+source setup.sh
 export what=$DoWhat
 export sedN=1000
 export iseg=\$SLURM_ARRAY_TASK_ID
