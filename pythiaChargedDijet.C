@@ -120,7 +120,6 @@ int main(int argc, char **argv) {
 
 	// Extract settings to be used in the main program.
 	int    nEvent  = pythia.mode("Main:numberOfEvents");
-	bool   showCS  = pythia.flag("Main:showChangedSettings");
 	bool   showCPD = pythia.flag("Main:showChangedParticleData");
 	double energy  = pythia.mode("Beams:eCM");
 
@@ -135,7 +134,6 @@ int main(int argc, char **argv) {
 	pythia.init();
 
 	// List changed data. 
-	if (showCS)  pythia.settings.listChanged();
 	if (showCPD) pdt.listChanged();
 
 	//-------------------------------------------------------

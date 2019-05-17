@@ -1,0 +1,35 @@
+! http://home.thep.lu.se/~torbjorn/pythia82html/Welcome.html
+! This file contains commands to be read in for a Pythia8 run. 
+! Lines not beginning with a letter or digit are comments.
+
+Main:numberOfEvents = 10000      ! number of events to generate
+
+! 2) Beam parameter settings. Values below agree with default ones.
+Beams:idA = 2212                   ! first beam, p = 2212, pbar = -2212
+Beams:idB = 2212                   ! second beam, p = 2212, pbar = -2212
+Beams:eCM = 2760.                  ! CM energy of collision
+
+! 3) Settings for the hard-process generation.
+HardQCD:all = on
+PromptPhoton:all = on
+
+Next:numberShowEvent = 0
+Init:showAllSettings = off
+Tune:pp = 19
+!PDF:LHAPDFset = cteq6l.LHpdf
+!PDF:NuclearEffects = on
+!PDF:NuclearPDF=EPS09LO
+
+PartonLevel:ISR = on
+PartonLevel:MPI = on
+PartonLevel:FSR = on
+
+MultipartonInteractions:pTmin = 2.0
+MultipartonInteractions:alphaSvalue = 0.123
+TimeShower:renormMultFac = 0.1
+TimeShower:alphaSvalue = 0.148
+SpaceShower:alphaSvalue = 0.123
+
+
+!PhaseSpace:pTHatMin =  2.0          ! minimal pT scale in process 
+!PhaseSpace:pTHatMax = -1.0          ! minimal pT scale in process 
