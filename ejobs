@@ -21,7 +21,7 @@ setenv comment ${pthardmin}_${pthardmax}_${leadingJetmin}_TrIneff${trackingIneff
 #################################
 setenv Main_DIR     `pwd`
 setenv DoWhat       pythiaChargedDijet
-setenv oname        pythia8226_pp5TeV_Monash_charged_noweight_pthard$comment
+setenv oname        pythia8226_pp2TeV_Chanwook_charged_noweight_pthard$comment
 setenv Disk         `pwd`
 setenv OUT_ERRORS   $Disk/outputs/${oname}/errors
 setenv Out_DIR      $Disk/outputs/${oname}/data

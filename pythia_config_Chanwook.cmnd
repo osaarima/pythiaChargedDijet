@@ -15,7 +15,9 @@ PromptPhoton:all = on
 
 Next:numberShowEvent = 0
 Init:showAllSettings = off
-Tune:pp = 19
+
+
+!MARTINI settings:
 !PDF:LHAPDFset = cteq6l.LHpdf
 !PDF:NuclearEffects = on
 !PDF:NuclearPDF=EPS09LO
@@ -29,6 +31,10 @@ MultipartonInteractions:alphaSvalue = 0.123
 TimeShower:renormMultFac = 0.1
 TimeShower:alphaSvalue = 0.148
 SpaceShower:alphaSvalue = 0.123
+
+
+! option 19 : "ATLAS A14 central tune with CTEQL1", a full-scale tune to most ATLAS jet and underlying-event observables [ATL14a], starting out from the Monash 2013 tune. The following tunes 20 - 32 belong to the same group. 
+Tune:pp = 19
 
 
 !PhaseSpace:pTHatMin =  2.0          ! minimal pT scale in process 

@@ -21,6 +21,7 @@ CXXFLAGS += $(shell $(FASTJET)/bin/fastjet-config --cxxflags )
 #LDFLAGS += -Wl,-rpath,/cvmfs/alice.cern.ch/x86_64-2.6-gnu-4.1.2/Packages/fastjet/v3.0.6_1.012-7/lib -lm  -L/cvmfs/alice.cern.ch/x86_64-2.6-gnu-4.1.2/Packages/fastjet/v3.0.6_1.012-7/lib -lfastjettools -lfastjet
 LDFLAGS += $(shell $(FASTJET)/bin/fastjet-config --libs --plugins ) 
 LDFLAGS += -L$(PYTHIA8)/lib -lpythia8 
+LDFLAGS += -Wl,-rpath,$(PYTHIA8)/lib -lpythia8lhapdf5
 INCS    += -I$(PYTHIA8)/include
 #LDFLAGS += -L$(HEPMC)/lib -lHepMC 
 #LDFLAGS += -Wl,-rpath -Wl,$(HEPMC)/lib

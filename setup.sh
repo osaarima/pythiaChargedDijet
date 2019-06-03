@@ -9,6 +9,7 @@
 
 #For puck:
 export FASTJET=/n/work00/osanmasa/fastjet/fastjet-install
-export PYTHIA8=/n/work00/osanmasa/pythia/pythia8226
+#export PYTHIA8=/n/work00/osanmasa/pythia/pythia8226
+export PYTHIA8=/n/work00/osanmasa/pythia/pythia8226-lhapdf-test/pythia8226
 source /n/work00/osanmasa/root/root-6.10.08-build/bin/thisroot.sh
 
