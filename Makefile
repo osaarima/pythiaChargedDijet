@@ -21,7 +21,8 @@ CXXFLAGS += $(shell $(FASTJET)/bin/fastjet-config --cxxflags )
 #LDFLAGS += -Wl,-rpath,/cvmfs/alice.cern.ch/x86_64-2.6-gnu-4.1.2/Packages/fastjet/v3.0.6_1.012-7/lib -lm  -L/cvmfs/alice.cern.ch/x86_64-2.6-gnu-4.1.2/Packages/fastjet/v3.0.6_1.012-7/lib -lfastjettools -lfastjet
 LDFLAGS += $(shell $(FASTJET)/bin/fastjet-config --libs --plugins ) 
 LDFLAGS += -L$(PYTHIA8)/lib -lpythia8 
-LDFLAGS += -Wl,-rpath,$(PYTHIA8)/lib -lpythia8lhapdf5
+# When running pythia with lhapdf:
+#LDFLAGS += -Wl,-rpath,$(PYTHIA8)/lib -lpythia8lhapdf5
 INCS    += -I$(PYTHIA8)/include
 #LDFLAGS += -L$(HEPMC)/lib -lHepMC 
 #LDFLAGS += -Wl,-rpath -Wl,$(HEPMC)/lib
@@ -29,11 +30,20 @@ INCS    += -I$(PYTHIA8)/include
 #LDFLAGS += -Wl,-rpath -Wl,$(HEPPDT)/lib
 #INCS    += -I$(HEPMC)/include
 #INCS    += -I$(HEPPDT)/include
+LDFLAGS += -L/home/alidock/.sw/slc7_x86-64/cgal/v4.6.3-48/lib/ -lCGAL 
+LDFLAGS += -L/home/alidock/.sw/slc7_x86-64/GMP/v6.0.0-45/lib/ -lgmp
 CXXFLAGS  += $(INCS)
 LDFLAGS += $L -ldl
 
 #HDRSDICT = src/AliJBaseCard.h src/AliJCard.h src/JHistos.h src/AliJBaseTrack.h #For pythiaChargedJet and others
-HDRSDICT = src/AliJCDijetHistos.h src/AliJHistogramInterface.h src/AliJHistManager.h src/AliJBaseTrack.h src/AliJBaseCard.h src/AliJCard.h src/AliJPhoton.h #For pythiaChargedDijet
+HDRSDICT = src/AliJCDijetHistos.h \
+           src/AliJCDijetAna.h \
+           src/AliJHistogramInterface.h \
+           src/AliJHistManager.h \
+           src/AliJBaseTrack.h \
+           src/AliJBaseCard.h \
+           src/AliJCard.h \
+           src/AliJPhoton.h #For pythiaChargedDijet
            
 HDRS	+= $(HDRSDICT)  nanoDict.h
 
