@@ -176,59 +176,6 @@ int main(int argc, char **argv) {
         cout << endl;
     }
 
-    // Save information about the settings used.
-    fhistos->fh_info->Fill("Count", 1.0);
-    fhistos->fh_info->Fill("MC", 1.0);
-    fhistos->fh_info->Fill("Cent bin border 00", 0.0);
-    fhistos->fh_info->Fill("Cent bin border 01", 100.0);
-    fhistos->fh_info->Fill("Jet cone", coneR);
-    fhistos->fh_info->Fill("kt-jet cone", ktconeR);
-    fhistos->fh_info->Fill("Scheme", fktScheme);
-    fhistos->fh_info->Fill("Use pion mass", fusePionMassInktjets);
-    fhistos->fh_info->Fill("Particle eta cut", partMinEtaCut);
-    fhistos->fh_info->Fill("Particle pt cut", partMinPtCut);
-    fhistos->fh_info->Fill("Leading jet cut", dijetLeadingPt);
-    fhistos->fh_info->Fill("Subleading jet cut", dijetSubleadingPt);
-    fhistos->fh_info->Fill("Const. cut", jetConstituentCut);
-    fhistos->fh_info->Fill("Delta phi cut pi/",dijetDeltaPhiCut);
-    fhistos->fh_info->Fill("Tracking ineff",trackingInEff);
-
-    // Initialize fh_events so that the bin order is correct
-    fhistos->fh_events[0]->Fill("events",nEvent);
-    fhistos->fh_events[0]->Fill("particles",0.0);
-    fhistos->fh_events[0]->Fill("acc. particles",0.0);
-    fhistos->fh_events[0]->Fill("no rho calc. events",0.0);
-    fhistos->fh_events[0]->Fill("rho calc. events",0.0);
-    fhistos->fh_events[0]->Fill("jets",0.0);
-    fhistos->fh_events[0]->Fill("acc. jets",0.0);
-    fhistos->fh_events[0]->Fill("const. cut jets",0.0);
-    fhistos->fh_events[0]->Fill("bg. subtr. jets",0.0);
-    fhistos->fh_events[0]->Fill("bg. subtr. const. cut jets",0.0);
-    fhistos->fh_events[0]->Fill("kt-jets",0.0);
-    fhistos->fh_events[0]->Fill("acc. kt-jets",0.0);
-    fhistos->fh_events[0]->Fill("leading jet drop",0.0);
-    fhistos->fh_events[0]->Fill("subleading jet drop",0.0);
-    fhistos->fh_events[0]->Fill("raw dijets",0.0);
-    fhistos->fh_events[0]->Fill("raw dijets leading cut",0.0);
-    fhistos->fh_events[0]->Fill("raw acc. dijets",0.0);
-    fhistos->fh_events[0]->Fill("raw deltaphi cut dijets",0.0);
-    fhistos->fh_events[0]->Fill("bg. subtr. dijets",0.0);
-    fhistos->fh_events[0]->Fill("bg. subtr. dijets leading cut",0.0);
-    fhistos->fh_events[0]->Fill("bg. subtr. acc. dijets",0.0);
-    fhistos->fh_events[0]->Fill("bg. subtr. deltaphi cut dijets",0.0);
-    fhistos->fh_events[0]->Fill("bg. subtr. const. cut dijets",0.0);
-    fhistos->fh_events[0]->Fill("bg. subtr. const. cut dijets leading cut",0.0);
-    fhistos->fh_events[0]->Fill("bg. subtr. const. cut acc. dijets",0.0);
-    fhistos->fh_events[0]->Fill("bg. subtr. const. cut deltaphi cut dijets",0.0);
-    fhistos->fh_events[0]->Fill("const. cut dijets",0.0);
-    fhistos->fh_events[0]->Fill("const. cut dijets leading cut",0.0);
-    fhistos->fh_events[0]->Fill("const. cut acc. dijets",0.0);
-    fhistos->fh_events[0]->Fill("const. cut deltaphi cut dijets",0.0);
-    fhistos->fh_events[0]->Fill("kt dijets",0.0);
-    fhistos->fh_events[0]->Fill("kt dijets leading cut",0.0);
-    fhistos->fh_events[0]->Fill("kt acc. dijets",0.0);
-    fhistos->fh_events[0]->Fill("kt deltaphi cut dijets",0.0);
-
     fana->SetSettings(5,
                       partMinEtaCut,
                       partMinPtCut,
@@ -242,6 +189,7 @@ int main(int argc, char **argv) {
                       dijetSubleadingPt,
                       dijetDeltaPhiCut,
                       fmatchingR);
+    fana->InitHistos(fhistos, true, 1);
 
 
     //--------------------------------------------------------
@@ -285,7 +233,8 @@ int main(int argc, char **argv) {
         } // end of finalparticles
 
         // Here I call my function
-        fana->CalculateJetsDijets(inputList, fhistos, fCBin);
+        fana->CalculateJets(inputList, fhistos, fCBin);
+        fana->FillJetsDijets(fhistos, fCBin);
 
         EventCounter++;
         if(iEvent == nEvent-1) cout << nEvent << "\t" << "100%, nTried:" << pythia.info.nTried() << ", sigma:" << pythia.info.sigmaGen() << endl ;
