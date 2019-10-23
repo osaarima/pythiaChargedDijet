@@ -49,7 +49,9 @@ using namespace Pythia8;
 class AliJCDijetHistos;
 
 AliJCDijetHistos *fhistos;
+AliJCDijetHistos *fhistosDet;
 AliJCDijetAna *fana;
+AliJCDijetAna *fanaMC;
 
 
 int main(int argc, char **argv) {
@@ -105,14 +107,21 @@ int main(int argc, char **argv) {
     //-------------------------------------------------------
     // Histograms and tools
     //-------------------------------------------------------
-    fhistos = new AliJCDijetHistos();
     vector<double> centbins = {0.0, 100.0};
+    fhistos = new AliJCDijetHistos();
+    fhistos->SetName("jcdijet");
     fhistos->SetCentralityBinsHistos(centbins);
     fhistos->CreateEventTrackHistos();
-
     fhistos->fHMG->Print();
 
+    fhistosDet = new AliJCDijetHistos();
+    fhistosDet->SetName("jcdijetDetMC");
+    fhistosDet->SetCentralityBinsHistos(centbins);
+    fhistosDet->CreateEventTrackHistos();
+    fhistosDet->fHMG->Print();
+
     fana = new AliJCDijetAna();
+    if(trackingInEff!=0) fanaMC = new AliJCDijetAna();
 
     TH1D *hCrossSectionInfo = new TH1D("hCrossSection","CrossSectionInfo",8,0,8);
 
@@ -120,9 +129,10 @@ int main(int argc, char **argv) {
     // Define jet reconstruction
     //------------------------------------------------------------------
     TClonesArray *inputList = new TClonesArray("AliJBaseTrack",1500);
+    TClonesArray *inputListDet = new TClonesArray("AliJBaseTrack",1500);
 
     double partMinPtCut         = 0.15;// atlas 0.5 cms/alice 0.15
-    double partMinEtaCut        = 0.8;
+    double partMinEtaCut        = 0.9;
     double coneR                = 0.4; // atlas 0.6, cms 0.7 alice 0.4
     double ktconeR              = 0.4;
     double fusePionMassInktjets = false;
@@ -130,7 +140,7 @@ int main(int argc, char **argv) {
     double jetConstituentCut    = 5.0;
     double dijetSubleadingPt    = 20.0;
     double dijetDeltaPhiCut     = 2.0; // Cut is pi/dijetDeltaPhiCut
-    double fmatchingR           = 0.2;
+    double fmatchingR           = 0.3;
     int fktScheme               = 1;
     int centBin=0;
 
@@ -182,14 +192,35 @@ int main(int argc, char **argv) {
                       coneR,
                       ktconeR,
                       fktScheme,
+                      fktScheme, //antikt
                       fusePionMassInktjets,
                       fuseDeltaPhiBGSubtr,
                       jetConstituentCut,
                       dijetLeadingPt,
                       dijetSubleadingPt,
+                      5, //jet  pt cut
                       dijetDeltaPhiCut,
                       fmatchingR);
     fana->InitHistos(fhistos, true, 1);
+
+    if(trackingInEff!=0) {
+        fanaMC->SetSettings(5,
+                partMinEtaCut,
+                partMinPtCut,
+                coneR,
+                ktconeR,
+                fktScheme,
+                fktScheme, //antikt
+                fusePionMassInktjets,
+                fuseDeltaPhiBGSubtr,
+                jetConstituentCut,
+                dijetLeadingPt,
+                dijetSubleadingPt,
+                5, //jet  pt cut
+                dijetDeltaPhiCut,
+                fmatchingR);
+        fanaMC->InitHistos(fhistosDet, true, 1);
+    }
 
 
     //--------------------------------------------------------
@@ -212,6 +243,7 @@ int main(int argc, char **argv) {
 
         if (!pythia.next()) continue;
         inputList->Clear("C");
+        inputListDet->Clear("C");
         nTried = pythia.info.nTried();
         nTrial = nTried - prev_nTried;
         prev_nTried = nTried;
@@ -222,19 +254,29 @@ int main(int argc, char **argv) {
 
         for (int i = 0; i < pythia.event.size(); ++i) {//loop over all the particles in the event
             if (pythia.event[i].isFinal() && pythia.event[i].isCharged() && pythia.event[i].isHadron() ) { // Only check if it is final, charged and hadron since the acceptance is checked in the CalculateJetsDijets
-                if (trackingInEff!=0 && randomGenerator->Uniform(0.0,1.0) < 0.03) continue;// Lose 3% of tracks, as in ALICE.
 
                 TLorentzVector lParticle(pythia.event[i].px(), pythia.event[i].py(), pythia.event[i].pz(), pythia.event[i].e());
                 AliJBaseTrack track( lParticle );
                 track.SetID(pythia.event[i].id());
                 track.SetTrackEff(1.);
                 new ((*inputList)[inputList->GetEntriesFast()]) AliJBaseTrack(track);
+
+                if (trackingInEff!=0 && randomGenerator->Uniform(0.0,1.0) < 0.04) continue;// Lose 4% of tracks, as in ALICE.
+                new ((*inputListDet)[inputListDet->GetEntriesFast()]) AliJBaseTrack(track);
             }
         } // end of finalparticles
 
         // Here I call my function
         fana->CalculateJets(inputList, fhistos, fCBin);
         fana->FillJetsDijets(fhistos, fCBin);
+
+        if(trackingInEff!=0) {
+            fanaMC->CalculateJets(inputListDet, fhistosDet, fCBin);
+            fanaMC->FillJetsDijets(fhistosDet, fCBin);
+
+            // Here response matrix calculation.
+            fana->CalculateResponse(fanaMC,fhistosDet);
+        }
 
         EventCounter++;
         if(iEvent == nEvent-1) cout << nEvent << "\t" << "100%, nTried:" << pythia.info.nTried() << ", sigma:" << pythia.info.sigmaGen() << endl ;
