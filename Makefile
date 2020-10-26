@@ -30,8 +30,8 @@ INCS    += -I$(PYTHIA8)/include
 #LDFLAGS += -Wl,-rpath -Wl,$(HEPPDT)/lib
 #INCS    += -I$(HEPMC)/include
 #INCS    += -I$(HEPPDT)/include
-LDFLAGS += -L/home/alidock/.sw/slc7_x86-64/cgal/v4.6.3-48/lib/ -lCGAL 
-LDFLAGS += -L/home/alidock/.sw/slc7_x86-64/GMP/v6.0.0-45/lib/ -lgmp
+LDFLAGS += -L/home/alidock/.sw/slc7_x86-64/cgal/latest-aliroot6-user-next-root6/lib/ -lCGAL 
+LDFLAGS += -L/home/alidock/.sw/slc7_x86-64/GMP/latest-aliroot6-user-next-root6/lib/ -lgmp
 CXXFLAGS  += $(INCS)
 LDFLAGS += $L -ldl
 

@@ -68,7 +68,7 @@ int main(int argc, char **argv) {
     double dijetLeadingPt = atof(argv[4]);
     TString outputs = argv[5];
     Int_t random_seed = argc>6 ? atoi(argv[6]) : 0;//placing the inputs into variables
-    unsigned trackingInEff = argc>7 ? atoi(argv[7]) : 0; //Default: no tracking ineffciency
+    double trackingInEff = argc>7 ? atoi(argv[7]) : 0.0; //Default: no tracking ineffciency
 
 
     TFile *fout = new TFile(outputs.Data(),"RECREATE");
@@ -121,7 +121,7 @@ int main(int argc, char **argv) {
     fhistosDet->fHMG->Print();
 
     fana = new AliJCDijetAna();
-    if(trackingInEff!=0) fanaMC = new AliJCDijetAna();
+    if(trackingInEff!=0.0) fanaMC = new AliJCDijetAna();
 
     TH1D *hCrossSectionInfo = new TH1D("hCrossSection","CrossSectionInfo",8,0,8);
 
@@ -200,10 +200,11 @@ int main(int argc, char **argv) {
                       dijetSubleadingPt,
                       5, //jet  pt cut
                       dijetDeltaPhiCut,
-                      fmatchingR);
+                      fmatchingR,
+                      0.0);
     fana->InitHistos(fhistos, true, 1);
 
-    if(trackingInEff!=0) {
+    if(trackingInEff!=0.0) {
         fanaMC->SetSettings(5,
                 partMinEtaCut,
                 partMinPtCut,
@@ -218,7 +219,8 @@ int main(int argc, char **argv) {
                 dijetSubleadingPt,
                 5, //jet  pt cut
                 dijetDeltaPhiCut,
-                fmatchingR);
+                fmatchingR,
+                trackingInEff);
         fanaMC->InitHistos(fhistosDet, true, 1);
     }
 
@@ -261,7 +263,7 @@ int main(int argc, char **argv) {
                 track.SetTrackEff(1.);
                 new ((*inputList)[inputList->GetEntriesFast()]) AliJBaseTrack(track);
 
-                if (trackingInEff!=0 && randomGenerator->Uniform(0.0,1.0) < 0.04) continue;// Lose 4% of tracks, as in ALICE.
+                if (trackingInEff!=0.0) continue;// Lose 4% of tracks, as in ALICE.
                 new ((*inputListDet)[inputListDet->GetEntriesFast()]) AliJBaseTrack(track);
             }
         } // end of finalparticles
@@ -270,7 +272,7 @@ int main(int argc, char **argv) {
         fana->CalculateJets(inputList, fhistos, fCBin);
         fana->FillJetsDijets(fhistos, fCBin);
 
-        if(trackingInEff!=0) {
+        if(trackingInEff!=0.0) {
             fanaMC->CalculateJets(inputListDet, fhistosDet, fCBin);
             fanaMC->FillJetsDijets(fhistosDet, fCBin);
 
