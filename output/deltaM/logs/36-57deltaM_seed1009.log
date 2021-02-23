@@ -1,0 +1,1511 @@
+
+ *------------------------------------------------------------------------------------* 
+ |                                                                                    | 
+ |  *------------------------------------------------------------------------------*  | 
+ |  |                                                                              |  | 
+ |  |                                                                              |  | 
+ |  |   PPP   Y   Y  TTTTT  H   H  III    A      Welcome to the Lund Monte Carlo!  |  | 
+ |  |   P  P   Y Y     T    H   H   I    A A     This is PYTHIA version 8.226      |  | 
+ |  |   PPP     Y      T    HHHHH   I   AAAAA    Last date of change: 26 Apr 2017  |  | 
+ |  |   P       Y      T    H   H   I   A   A                                      |  | 
+ |  |   P       Y      T    H   H  III  A   A    Now is 02 Dec 2020 at 09:44:44    |  | 
+ |  |                                                                              |  | 
+ |  |   Torbjorn Sjostrand;  Department of Astronomy and Theoretical Physics,      |  | 
+ |  |      Lund University, Solvegatan 14A, SE-223 62 Lund, Sweden;                |  | 
+ |  |      e-mail: torbjorn@thep.lu.se                                             |  | 
+ |  |   Nishita Desai;  Laboratoire Charles Coulomb (L2C),                         |  | 
+ |  |      CNRS-Universite de Montpellier, 34090 Montpellier, France;              |  | 
+ |  |      e-mail: nishita.desai@umontpellier.fr                                   |  | 
+ |  |   Nadine Fischer;  School of Physics,                                        |  | 
+ |  |      Monash University, PO Box 27, 3800 Melbourne, Australia;                |  | 
+ |  |      e-mail: nadine.fischer@monash.edu                                       |  | 
+ |  |   Ilkka Helenius;  Institute for Theoretical Physics,                        |  | 
+ |  |     Tuebingen University, Auf der Morgenstelle 14, 72076 Tuebingen, Germany; |  | 
+ |  |      e-mail: ilkka.helenius@uni-tuebingen.de                                 |  | 
+ |  |   Philip Ilten;  Massachusetts Institute of Technology,                      |  | 
+ |  |      77 Massachusetts Ave, Cambridge, MA 02139, USA;                         |  | 
+ |  |      e-mail: philten@cern.ch                                                 |  | 
+ |  |   Leif Lonnblad;  Department of Astronomy and Theoretical Physics,           |  | 
+ |  |      Lund University, Solvegatan 14A, SE-223 62 Lund, Sweden;                |  | 
+ |  |      e-mail: leif.lonnblad@thep.lu.se                                        |  | 
+ |  |   Stephen Mrenna;  Computing Division, Simulations Group,                    |  | 
+ |  |      Fermi National Accelerator Laboratory, MS 234, Batavia, IL 60510, USA;  |  | 
+ |  |      e-mail: mrenna@fnal.gov                                                 |  | 
+ |  |   Stefan Prestel;  Theoretical Physics Department,                           |  | 
+ |  |      Fermi National Accelerator Laboratory, MS 106, Batavia, IL 60510, USA;  |  | 
+ |  |      e-mail: sprestel@fnal.gov                                               |  | 
+ |  |   Christine O. Rasmussen;  Department of Astronomy and Theoretical Physics,  |  | 
+ |  |      Lund University, Solvegatan 14A, SE-223 62 Lund, Sweden;                |  | 
+ |  |      e-mail: christine.rasmussen@thep.lu.se                                  |  | 
+ |  |   Peter Skands;  School of Physics,                                          |  | 
+ |  |      Monash University, PO Box 27, 3800 Melbourne, Australia;                |  | 
+ |  |      e-mail: peter.skands@monash.edu                                         |  | 
+ |  |                                                                              |  | 
+ |  |   The main program reference is 'An Introduction to PYTHIA 8.2',             |  | 
+ |  |   T. Sjostrand et al, Comput. Phys. Commun. 191 (2015) 159                   |  | 
+ |  |   [arXiv:1410.3012 [hep-ph]]                                                 |  | 
+ |  |                                                                              |  | 
+ |  |   The main physics reference is the 'PYTHIA 6.4 Physics and Manual',         |  | 
+ |  |   T. Sjostrand, S. Mrenna and P. Skands, JHEP05 (2006) 026 [hep-ph/0603175]  |  | 
+ |  |                                                                              |  | 
+ |  |   An archive of program versions and documentation is found on the web:      |  | 
+ |  |   http://www.thep.lu.se/Pythia                                               |  | 
+ |  |                                                                              |  | 
+ |  |   This program is released under the GNU General Public Licence version 2.   |  | 
+ |  |   Please respect the MCnet Guidelines for Event Generator Authors and Users. |  | 
+ |  |                                                                              |  | 
+ |  |   Disclaimer: this program comes without any guarantees.                     |  | 
+ |  |   Beware of errors and use common sense when interpreting results.           |  | 
+ |  |                                                                              |  | 
+ |  |   Copyright (C) 2017 Torbjorn Sjostrand                                      |  | 
+ |  |                                                                              |  | 
+ |  |                                                                              |  | 
+ |  *------------------------------------------------------------------------------*  | 
+ |                                                                                    | 
+ *------------------------------------------------------------------------------------* 
+
+ PYTHIA Error in Settings::flag: unknown key Main:showChangedParticleData
+ PYTHIA Error in Settings::mode: unknown key Beams:eCM
+Events=10000 RNDM seed 1009
+
+ *-------  PYTHIA Process Initialization  --------------------------*
+ |                                                                  |
+ | We collide p+ with p+ at a CM energy of 5.020e+03 GeV            |
+ |                                                                  |
+ |------------------------------------------------------------------|
+ |                                                    |             |
+ | Subprocess                                    Code |   Estimated |
+ |                                                    |    max (mb) |
+ |                                                    |             |
+ |------------------------------------------------------------------|
+ |                                                    |             |
+ | g g -> g g                                     111 |   3.181e-02 |
+ | g g -> q qbar (uds)                            112 |   6.226e-04 |
+ | q g -> q g                                     113 |   3.668e-02 |
+ | q q(bar)' -> q q(bar)'                         114 |   5.102e-03 |
+ | q qbar -> g g                                  115 |   4.926e-05 |
+ | q qbar -> q' qbar' (uds)                       116 |   3.630e-05 |
+ | g g -> c cbar                                  121 |   2.068e-04 |
+ | q qbar -> c cbar                               122 |   1.208e-05 |
+ | g g -> b bbar                                  123 |   2.005e-04 |
+ | q qbar -> b bbar                               124 |   1.186e-05 |
+ |                                                                  |
+ *-------  End PYTHIA Process Initialization -----------------------*
+
+ *-------  PYTHIA Multiparton Interactions Initialization  ---------* 
+ |                                                                  | 
+ |                   sigmaNonDiffractive =    48.03 mb              | 
+ |                                                                  | 
+ |    pT0 =  2.12 gives sigmaInteraction =   210.58 mb: accepted    | 
+ |                                                                  | 
+ *-------  End PYTHIA Multiparton Interactions Initialization  -----* 
+
+ *-------  PYTHIA Flag + Mode + Parm + Word + FVec + MVec + PVec + WVec Settings (changes only)  ------------------* 
+ |                                                                                                                 | 
+ | Name                                          |                      Now |      Default         Min         Max | 
+ |                                               |                          |                                      | 
+ | Beams:eCM                                     |                 5020.000 |    14000.000    10.00000             | 
+ | HardQCD:all                                   |                       on |          off                         | 
+ | Main:numberOfEvents                           |                    10000 |         1000           0             | 
+ | ParticleDecays:limitTau0                      |                       on |          off                         | 
+ | PhaseSpace:mHatMin                            |                      0.0 |      4.00000         0.0             | 
+ | PhaseSpace:pTHatMax                           |                 57.00000 |     -1.00000                         | 
+ | PhaseSpace:pTHatMin                           |                 36.00000 |          0.0         0.0             | 
+ | Random:seed                                   |                     1009 |           -1               900000000 | 
+ | Random:setSeed                                |                       on |          off                         | 
+ |                                                                                                                 | 
+ *-------  End PYTHIA Flag + Mode + Parm + Word + FVec + MVec + PVec + WVec Settings  -----------------------------* 
+
+ --------  PYTHIA Particle Data Table (changed only)  ------------------------------------------------------------------------------
+ 
+      id   name            antiName         spn chg col      m0        mWidth      mMin       mMax       tau0    res dec ext vis wid
+             no onMode   bRatio   meMode     products 
+
+ no particle data has been changed from its default value 
+
+ --------  End PYTHIA Particle Data Table  -----------------------------------------------------------------------------------------
+
+============ AliJHistManager : AliJCDijetHistManagerjcdijet ===================
+
+---- AliJBin ----
+*AliJBin	CentBin	CentBin	"Cent:"	&mode=Single	0.000000 1.000000
+*AliJBin	JetBin	JetBin	"Jet bin:"	&mode=Single	0.000000 1.000000 2.000000 3.000000 4.000000
+
+---- AliJTH1 ----
+*AliJTH1D	h_events	"h_events"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_eventSel	"h_eventSel"	&Lazy&Single	 1
+*AliJTH1D	h_info	"h_info"	&Lazy&Single	 1
+*AliJTH1D	h_centrality	"h_centrality"	&Lazy&Single	 1
+*AliJTH1D	h_zvtx	"h_zvtx"	&Lazy&Single	 1
+*AliJTH1D	h_nch	"h_nch"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_pt	"h_pt"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_ptPosEta	"h_ptPosEta"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_ptNegEta	"h_ptNegEta"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_eta	"h_eta"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_phi	"h_phi"	&Dir=default&Lazy	 CentBin
+*AliJTH2D	h_etaPhi	"h_etaPhi"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_rho	"h_rho"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_rhoHighPt	"h_rhoHighPt"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_rhom	"h_rhom"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_rhomHighPt	"h_rhomHighPt"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_rhoLin	"h_rhoLin"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_rhoLinHighPt	"h_rhoLinHighPt"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_rhomLin	"h_rhomLin"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_rhomLinHighPt	"h_rhomLinHighPt"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_jetPt	"h_jetPt"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH1D	h_jetPt_ALICE	"h_jetPt_ALICE"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH1D	h_jetPtTransBGSub	"h_jetPtTransBGSub"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH1D	h_jetN	"h_jetN"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_jetEta	"h_jetEta"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH1D	h_jetPhi	"h_jetPhi"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH2D	h_jetEtaPhi	"h_jetEtaPhi"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH2D	h_randConeEtaPhi	"h_randConeEtaPhi"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_jetArea	"h_jetArea"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH1D	h_jetAreaRho	"h_jetAreaRho"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH1D	h_deltaPt	"h_deltaPt"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_maxJetptOverPtHard	"h_maxJetptOverPtHard"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_ptHard	"h_ptHard"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_dijetInvM	"h_dijetInvM"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH1D	h_dijetPtPair	"h_dijetPtPair"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH1D	h_dijetDeltaPhi	"h_dijetDeltaPhi"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH1D	h_dijetPtPairDeltaPhiCut	"h_dijetPtPairDeltaPhiCut"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH1D	h_dijetInvMDeltaPhiCut	"h_dijetInvMDeltaPhiCut"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH1D	h_dijetDeltaPhiWithCut	"h_dijetDeltaPhiWithCut"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH1D	h_responseInfo	"h_responseInfo"	&Lazy&Single	 1
+*AliJTH1D	h_jetResponseDeltaR	"h_jetResponseDeltaR"	&Lazy&Single	 1
+*AliJTH1D	h_jetResponseDeltaRClosest	"h_jetResponseDeltaRClosest"	&Lazy&Single	 1
+*AliJTH1D	h_jetResponseDeltaPt	"h_jetResponseDeltaPt"	&Lazy&Single	 1
+*AliJTH1D	h_jetDeltaRMin	"h_jetDeltaRMin"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH1D	h_jetBGSubtrDeltaR	"h_jetBGSubtrDeltaR"	&Dir=default&Lazy	 CentBin
+*AliJTH2D	h_jetResponse	"h_jetResponse"	&Lazy&Single	 1
+*AliJTH2D	h_jetResponse_ALICE	"h_jetResponse_ALICE"	&Lazy&Single	 1
+*AliJTH2D	h_deltaPtResponse	"h_deltaPtResponse"	&Lazy&Single	 1
+*AliJTH2D	h_deltaPtResponse_ALICE	"h_deltaPtResponse_ALICE"	&Lazy&Single	 1
+*AliJTH2D	h_deltaPtResponseEvery	"h_deltaPtResponseEvery"	&Lazy&Single	 1
+*AliJTH2D	h_deltaPtResponseEvery_ALICE	"h_deltaPtResponseEvery_ALICE"	&Lazy&Single	 1
+*AliJTH2D	h_dijetResponse	"h_dijetResponse"	&Lazy&Single	 1
+*AliJTH2D	h_dijetResponseDeltaPhiCut	"h_dijetResponseDeltaPhiCut"	&Lazy&Single	 1
+*AliJTH1D	h_dijetdeltaM1	"h_dijetdeltaM1"	&Lazy&Single	 1
+*AliJTH1D	h_dijetdeltaM2	"h_dijetdeltaM2"	&Lazy&Single	 1
+============ AliJHistManager : AliJCDijetHistManagerjcdijetDetMC ===================
+
+---- AliJBin ----
+*AliJBin	CentBin	CentBin	"Cent:"	&mode=Single	0.000000 1.000000
+*AliJBin	JetBin	JetBin	"Jet bin:"	&mode=Single	0.000000 1.000000 2.000000 3.000000 4.000000
+
+---- AliJTH1 ----
+*AliJTH1D	h_events	"h_events"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_eventSel	"h_eventSel"	&Lazy&Single	 1
+*AliJTH1D	h_info	"h_info"	&Lazy&Single	 1
+*AliJTH1D	h_centrality	"h_centrality"	&Lazy&Single	 1
+*AliJTH1D	h_zvtx	"h_zvtx"	&Lazy&Single	 1
+*AliJTH1D	h_nch	"h_nch"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_pt	"h_pt"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_ptPosEta	"h_ptPosEta"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_ptNegEta	"h_ptNegEta"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_eta	"h_eta"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_phi	"h_phi"	&Dir=default&Lazy	 CentBin
+*AliJTH2D	h_etaPhi	"h_etaPhi"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_rho	"h_rho"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_rhoHighPt	"h_rhoHighPt"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_rhom	"h_rhom"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_rhomHighPt	"h_rhomHighPt"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_rhoLin	"h_rhoLin"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_rhoLinHighPt	"h_rhoLinHighPt"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_rhomLin	"h_rhomLin"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_rhomLinHighPt	"h_rhomLinHighPt"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_jetPt	"h_jetPt"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH1D	h_jetPt_ALICE	"h_jetPt_ALICE"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH1D	h_jetPtTransBGSub	"h_jetPtTransBGSub"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH1D	h_jetN	"h_jetN"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_jetEta	"h_jetEta"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH1D	h_jetPhi	"h_jetPhi"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH2D	h_jetEtaPhi	"h_jetEtaPhi"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH2D	h_randConeEtaPhi	"h_randConeEtaPhi"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_jetArea	"h_jetArea"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH1D	h_jetAreaRho	"h_jetAreaRho"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH1D	h_deltaPt	"h_deltaPt"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_maxJetptOverPtHard	"h_maxJetptOverPtHard"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_ptHard	"h_ptHard"	&Dir=default&Lazy	 CentBin
+*AliJTH1D	h_dijetInvM	"h_dijetInvM"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH1D	h_dijetPtPair	"h_dijetPtPair"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH1D	h_dijetDeltaPhi	"h_dijetDeltaPhi"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH1D	h_dijetPtPairDeltaPhiCut	"h_dijetPtPairDeltaPhiCut"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH1D	h_dijetInvMDeltaPhiCut	"h_dijetInvMDeltaPhiCut"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH1D	h_dijetDeltaPhiWithCut	"h_dijetDeltaPhiWithCut"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH1D	h_responseInfo	"h_responseInfo"	&Lazy&Single	 1
+*AliJTH1D	h_jetResponseDeltaR	"h_jetResponseDeltaR"	&Lazy&Single	 1
+*AliJTH1D	h_jetResponseDeltaRClosest	"h_jetResponseDeltaRClosest"	&Lazy&Single	 1
+*AliJTH1D	h_jetResponseDeltaPt	"h_jetResponseDeltaPt"	&Lazy&Single	 1
+*AliJTH1D	h_jetDeltaRMin	"h_jetDeltaRMin"	&Dir=default&Lazy	 CentBin JetBin
+*AliJTH1D	h_jetBGSubtrDeltaR	"h_jetBGSubtrDeltaR"	&Dir=default&Lazy	 CentBin
+*AliJTH2D	h_jetResponse	"h_jetResponse"	&Lazy&Single	 1
+*AliJTH2D	h_jetResponse_ALICE	"h_jetResponse_ALICE"	&Lazy&Single	 1
+*AliJTH2D	h_deltaPtResponse	"h_deltaPtResponse"	&Lazy&Single	 1
+*AliJTH2D	h_deltaPtResponse_ALICE	"h_deltaPtResponse_ALICE"	&Lazy&Single	 1
+*AliJTH2D	h_deltaPtResponseEvery	"h_deltaPtResponseEvery"	&Lazy&Single	 1
+*AliJTH2D	h_deltaPtResponseEvery_ALICE	"h_deltaPtResponseEvery_ALICE"	&Lazy&Single	 1
+*AliJTH2D	h_dijetResponse	"h_dijetResponse"	&Lazy&Single	 1
+*AliJTH2D	h_dijetResponseDeltaPhiCut	"h_dijetResponseDeltaPhiCut"	&Lazy&Single	 1
+*AliJTH1D	h_dijetdeltaM1	"h_dijetdeltaM1"	&Lazy&Single	 1
+*AliJTH1D	h_dijetdeltaM2	"h_dijetdeltaM2"	&Lazy&Single	 1
+
+============= Settings =============
+cent bin:                   0
+particle eta cut:           0.9
+particle pt cut:            0.15
+jet cone size:              0.4
+kt-jet cone size:           0.4
+Using pion mass in kt-jets: 0.0
+Using DeltaPhi in BG subtr: 1.0
+Using kt-jet scheme:        pt_scheme
+jet costituent cut:         5.0
+dijet leading pt cut:       20.0
+dijet subleading pt cut:    20.0
+dijet DeltaPhi cut:         pi/2.0
+tracking inefficiency:      0.0
+
+Let's start
+
+ --------  PYTHIA Info Listing  ---------------------------------------- 
+ 
+ Beam A: id =   2212, pz =  2.510e+03, e =  2.510e+03, m =  9.383e-01.
+ Beam B: id =   2212, pz = -2.510e+03, e =  2.510e+03, m =  9.383e-01.
+
+ In 1: id =   -1, x =  1.465e-02, pdf =  4.106e-01 at Q2 =  2.334e+03.
+ In 2: id =   21, x =  4.654e-02, pdf =  2.197e+00 at same Q2.
+
+ Subprocess q g -> q g with code 113 is 2 -> 2.
+ It has sHat =  1.719e+04,    tHat = -2.786e+03,    uHat = -1.440e+04,
+       pTHat =  4.831e+01,   m3Hat =  3.300e-01,   m4Hat =  0.000e+00,
+    thetaHat =  8.287e-01,  phiHat =  1.115e+00.
+     alphaEM =  7.762e-03,  alphaS =  1.446e-01    at Q2 =  2.334e+03.
+
+ Impact parameter b =  3.800e-01 gives enhancement factor =  2.856e+00.
+ Max pT scale for MPI =  4.831e+01, ISR =  4.831e+01, FSR =  4.831e+01.
+ Number of MPI =     8, ISR =    16, FSRproc =    72, FSRreson =     0.
+
+ --------  End PYTHIA Info Listing  ------------------------------------
+
+ --------  PYTHIA Event Listing  (hard process)  -----------------------------------------------------------------------------------
+ 
+    no        id   name            status     mothers   daughters     colours      p_x        p_y        p_z         e          m 
+     0        90   (system)           -11     0     0     0     0     0     0      0.000      0.000      0.000   5020.000   5020.000
+     1      2212   (p+)               -12     0     0     3     0     0     0      0.000      0.000   2510.000   2510.000      0.938
+     2      2212   (p+)               -12     0     0     4     0     0     0      0.000      0.000  -2510.000   2510.000      0.938
+     3        -1   (dbar)             -21     1     0     5     6     0   101      0.000      0.000     36.780     36.780      0.000
+     4        21   (g)                -21     2     0     5     6   103   102      0.000      0.000   -116.826    116.826      0.000
+     5        -1   dbar                23     3     4     0     0     0   102     21.247     43.389     11.885     49.753      0.330
+     6        21   g                   23     3     4     0     0   103   101    -21.247    -43.389    -91.931    103.853      0.000
+                                   Charge sum:  0.333           Momentum sum:      0.000      0.000    -80.046    153.606    131.101
+
+ --------  End PYTHIA Event Listing  -----------------------------------------------------------------------------------------------
+
+ --------  PYTHIA Event Listing  (complete event)  ---------------------------------------------------------------------------------
+ 
+    no        id   name            status     mothers   daughters     colours      p_x        p_y        p_z         e          m 
+     0        90   (system)           -11     0     0     0     0     0     0      0.000      0.000      0.000   5020.000   5020.000
+     1      2212   (p+)               -12     0     0   361     0     0     0      0.000      0.000   2510.000   2510.000      0.938
+     2      2212   (p+)               -12     0     0   362     0     0     0      0.000      0.000  -2510.000   2510.000      0.938
+     3        -1   (dbar)             -21     7     0     5     6     0   101      0.000      0.000     36.780     36.780      0.000
+     4        21   (g)                -21     8     8     5     6   103   102      0.000      0.000   -116.826    116.826      0.000
+     5        -1   (dbar)             -23     3     4     9     9     0   102     21.247     43.389     11.885     49.753      0.330
+     6        21   (g)                -23     3     4    10    10   103   101    -21.247    -43.389    -91.931    103.853      0.000
+     7        21   (g)                -41    12    12    11     3   104   101     -0.000      0.000     99.473     99.473      0.000
+     8        21   (g)                -42    13     0     4     4   103   102      0.000     -0.000   -116.826    116.826      0.000
+     9        -1   (dbar)             -44     5     5    14    14     0   102     33.807     41.393      8.801     54.165      0.330
+    10        21   (g)                -44     6     6    15    15   103   101    -18.818    -43.775    -87.124     99.302      0.000
+    11         1   (d)                -43     7     0    16    16   104     0    -14.989      2.382     60.970     62.832      0.330
+    12        21   (g)                -42    27     0     7     7   104   101      0.000      0.000     99.473     99.473      0.000
+    13        21   (g)                -41    28    28    17     8   105   102     -0.000     -0.000   -207.413    207.413      0.000
+    14        -1   (dbar)             -44     9     9    29    29     0   102     34.826     43.903     11.378     57.183      0.330
+    15        21   (g)                -44    10    10    30    30   103   101    -14.632    -33.460    -90.576     97.661      0.000
+    16         1   (d)                -44    11    11    31    31   104     0    -14.947      2.485     60.167     62.046      0.330
+    17        21   (g)                -43    13     0    32    32   105   103     -5.247    -12.928    -88.908     89.996      0.000
+    18         2   (u)                -31    22    22    20    21   106     0      0.000      0.000    306.120    306.120      0.000
+    19        21   (g)                -31    23     0    20    21   107   108      0.000      0.000     -2.632      2.632      0.000
+    20         2   (u)                -33    18    19    24    24   107     0      2.821     10.703    293.901    294.109      0.330
+    21        21   (g)                -33    18    19    25    25   106   108     -2.821    -10.703      9.587     14.643      0.000
+    22         2   (u)                -42    34    34    18    18   106     0     -0.000     -0.000    306.120    306.120      0.000
+    23        21   (g)                -41    35     0    26    19   107   109      0.000      0.000     -4.111      4.111      0.000
+    24         2   (u)                -44    20    20    36    36   107     0      2.844     11.026    291.970    292.192      0.330
+    25        21   (g)                -44    21    21    37    37   106   108     -2.279     -2.867     -1.448      3.938      0.000
+    26        21   (g)                -43    23     0    38    38   108   109     -0.565     -8.159     11.487     14.101      0.000
+    27        -3   (sbar)             -41    46    46    33    12     0   101      0.000     -0.000    230.116    230.116      0.000
+    28        21   (g)                -42    72    72    13    13   105   102      0.000     -0.000   -207.413    207.413      0.000
+    29        -1   (dbar)             -44    14    14    70    71     0   102     37.309     45.474      9.140     59.527      0.330
+    30        21   (g)                -44    15    15    44    45   103   101    -14.375    -33.298    -89.136     96.232      0.000
+    31         1   (d)                -44    16    16   138   138   104     0    -10.521      5.285     60.635     61.768      0.330
+    32        21   (g)                -44    17    17    75    75   105   103     -5.207    -12.903    -88.284     89.374      0.000
+    33        -3   (sbar)             -43    27     0   136   137     0   104     -7.205     -4.559    130.348    130.627      0.500
+    34         2   (u)                -42    47    47    22    22   106     0      0.000      0.000    306.120    306.120      0.000
+    35        21   (g)                -41    48     0    39    23   107   110     -0.000     -0.000     -9.405      9.405      0.000
+    36         2   (u)                -44    24    24    49    49   107     0      2.632     10.951    278.722    278.950      0.330
+    37        21   (g)                -44    25    25    50    50   106   108     -7.404     -4.690      4.199      9.719      0.000
+    38        21   (g)                -44    26    26    51    51   108   109     -3.052     -9.044     15.665     18.344      0.000
+    39        21   (g)                -43    35     0    52    52   109   110      7.824      2.783     -1.871      8.513      0.000
+    40        21   (g)                -31    54    54    42    43   111   112      0.000      0.000     41.295     41.295      0.000
+    41        21   (g)                -31    55     0    42    43   113   114      0.000      0.000     -2.320      2.320      0.000
+    42        21   (g)                -33    40    41    56    56   111   114      5.885     -2.677      3.113      7.175      0.000
+    43        21   (g)                -33    40    41    57    57   113   112     -5.885      2.677     35.862     36.440      0.000
+    44        21   (g)                -51    30     0    73    74   103   115     -8.554    -31.311    -78.362     84.818      0.000
+    45        21   (g)                -51    30     0   147   147   115   101     -5.821     -1.986    -10.241     11.947      0.000
+    46        -3   (sbar)             -53   148   148    27    27     0   101      0.000     -0.000    230.649    230.649      0.000
+    47         2   (u)                -42   288   288    34    34   106     0      0.000      0.000    306.120    306.120      0.000
+    48        -2   (ubar)             -41   167   167    53    35     0   110      0.000     -0.000    -73.575     73.575      0.000
+    49         2   (u)                -44    36    36    67    68   107     0      2.640     11.003    280.798    281.026      0.330
+    50        21   (g)                -44    37    37   201   201   106   108     -7.221     -3.422      3.007      8.538      0.000
+    51        21   (g)                -44    38    38   183   183   108   109     -2.963     -8.428     13.526     16.210      0.000
+    52        21   (g)                -44    39    39   165   166   109   110      8.170      5.170     -0.710      9.694      0.000
+    53        -2   (ubar)             -43    48     0    69    69     0   107     -0.626     -4.323    -64.077     64.227      0.330
+    54        21   (g)                -42    80     0    40    40   111   112      0.000     -0.000     41.295     41.295      0.000
+    55        21   (g)                -41    81    81    58    41   116   114     -0.000      0.000     -5.679      5.679      0.000
+    56        21   (g)                -44    42    42    82    82   111   114      6.071     -5.891      6.133     10.448      0.000
+    57        21   (g)                -44    43    43    83    83   113   112     -5.858      2.220     31.646     32.260      0.000
+    58        21   (g)                -43    55     0    84    84   116   113     -0.213      3.671     -2.162      4.266      0.000
+    59         1   (d)                -31   116   116    61    62   117     0      0.000      0.000    547.740    547.740      0.000
+    60        21   (g)                -31   117     0    61    62   118   119      0.000      0.000    -24.892     24.892      0.000
+    61         1   (d)                -33    59    60   118   118   118     0      2.934     -2.156    547.601    547.613      0.330
+    62        21   (g)                -33    59    60   119   119   117   119     -2.934      2.156    -24.753     25.019      0.000
+    63        21   (g)                -31    86     0    65    66   121   120      0.000      0.000      0.064      0.064      0.000
+    64        21   (g)                -31    87    87    65    66   123   122      0.000      0.000   -225.418    225.418      0.000
+    65        21   (g)                -33    63    64    88    88   123   120     -1.245      3.334    -72.881     72.967      0.000
+    66        21   (g)                -33    63    64    89    89   121   122      1.245     -3.334   -152.473    152.514      0.000
+    67         2   (u)                -51    49     0    99   100   124     0      1.102     12.936    272.187    272.497      0.330
+    68        21   (g)                -51    49     0   101   101   107   124      1.536     -1.948      8.391      8.750      0.000
+    69        -2   (ubar)             -52    53    53   187   188     0   107     -0.624     -4.308    -63.857     64.006      0.330
+    70        -1   (dbar)             -51    29     0   150   150     0   125     21.277     30.106      5.153     37.225      0.330
+    71        21   (g)                -51    29     0   156   156   125   102     16.032     15.369      3.764     22.525      0.000
+    72        21   (g)                -53   149     0    28    28   105   102      0.000     -0.000   -207.636    207.636      0.000
+    73        21   (g)                -51    44     0    91    92   126   115    -10.183    -30.820    -81.719     87.929      0.000
+    74        21   (g)                -51    44     0    93    93   103   126      1.059     -1.905     -6.316      6.681      0.000
+    75        21   (g)                -52    32    32   153   153   105   103     -4.637    -11.489    -78.611     79.581      0.000
+    76        21   (g)                -31    94    94    78    79   128   127      0.000      0.000     39.612     39.612      0.000
+    77        21   (g)                -31    95     0    78    79   127   129      0.000      0.000     -9.933      9.933      0.000
+    78        21   (g)                -33    76    77    96    96   130   129      2.545      0.247     -9.726     10.057      0.000
+    79        21   (g)                -33    76    77    97    97   128   130     -2.545     -0.247     39.406     39.489      0.000
+    80        21   (g)                -41   106   106    85    54   131   112     -0.000      0.000    102.784    102.784      0.000
+    81        21   (g)                -42   107     0    55    55   116   114     -0.000      0.000     -5.679      5.679      0.000
+    82        21   (g)                -44    56    56   108   108   111   114      6.304     -6.320      6.001     10.757      0.000
+    83        21   (g)                -44    57    57   109   109   113   112     -4.958      0.564     32.100     32.486      0.000
+    84        21   (g)                -44    58    58   110   110   116   113     -0.183      3.617     -2.021      4.147      0.000
+    85        21   (g)                -43    80     0   111   111   131   111     -1.163      2.140     61.025     61.073      0.000
+    86        21   (g)                -41   174     0    90    63   121   132     -0.000      0.000      6.891      6.891      0.000
+    87        21   (g)                -42   175   175    64    64   123   122      0.000     -0.000   -225.418    225.418      0.000
+    88        21   (g)                -44    65    65   124   125   123   120     -0.699      1.889    -21.359     21.454      0.000
+    89        21   (g)                -44    66    66   177   177   121   122      1.507     -4.024   -203.798    203.843      0.000
+    90        21   (g)                -43    86     0   126   126   120   132     -0.808      2.136      6.630      7.012      0.000
+    91        21   (g)                -51    73     0   145   146   133   115     -2.283    -14.436    -39.474     42.093      0.000
+    92        21   (g)                -51    73     0   158   158   126   133     -7.437    -17.217    -45.006     48.757      0.000
+    93        21   (g)                -52    74    74   157   157   103   126      0.596     -1.072     -3.555      3.761      0.000
+    94        21   (g)                -42   130   130    76    76   128   127     -0.000      0.000     39.612     39.612      0.000
+    95        21   (g)                -41   131     0    98    77   127   134      0.000     -0.000    -11.375     11.375      0.000
+    96        21   (g)                -44    78    78   132   132   130   129      4.378     -0.609     -9.657     10.620      0.000
+    97        21   (g)                -44    79    79   133   133   128   130     -2.538     -0.250     38.224     38.309      0.000
+    98        21   (g)                -43    95     0   134   134   129   134     -1.841      0.859     -0.329      2.058      0.000
+    99         2   (u)                -51    67     0   393   393   135     0      2.755      7.366    152.512    152.715      0.330
+   100        21   (g)                -51    67     0   276   276   124   135     -1.544      5.431    120.277    120.410      0.000
+   101        21   (g)                -52    68    68   189   189   107   124      1.426     -1.808      7.789      8.122      0.000
+   102        -3   (sbar)             -31   470   470   104   105     0   136      0.000      0.000      0.050      0.050      0.000
+   103        21   (g)                -31   471   471   104   105   136   137      0.000      0.000   -458.607    458.607      0.000
+   104        -3   (sbar)             -33   102   103   208   209     0   138     -1.009     -1.798    -23.372     23.468      0.500
+   105        21   (g)                -33   102   103   210   210   138   137      1.009      1.798   -435.185    435.190      0.000
+   106        21   (g)                -42   144   144    80    80   131   112      0.000      0.000    102.784    102.784      0.000
+   107        21   (g)                -41   213   213   112    81   116   139     -0.000     -0.000    -11.667     11.667      0.000
+   108        21   (g)                -44    82    82   115   115   111   114      6.545     -5.566      5.354     10.124      0.000
+   109        21   (g)                -44    83    83   142   143   113   112     -4.938      0.625     31.848     32.234      0.000
+   110        21   (g)                -44    84    84   195   195   116   113      0.129      4.595     -1.386      4.801      0.000
+   111        21   (g)                -44    85    85   113   114   131   111     -1.161      2.148     61.123     61.171      0.000
+   112        21   (g)                -43   107     0   190   191   114   139     -0.575     -1.801     -5.821      6.120      0.000
+   113        21   (g)                -51   111     0   319   320   131   140     -2.455      1.507     43.706     43.801      0.000
+   114        21   (g)                -51   111     0   129   129   140   111      1.449      0.509     17.544     17.611      0.000
+   115        21   (g)                -52   108   108   127   128   111   114      6.390     -5.434      5.227      9.883      0.000
+   116         1   (d)                -42   309   309    59    59   117     0     -0.000     -0.000    547.740    547.740      0.000
+   117        21   (g)                -41   344     0   120    60   142   119      0.000      0.000    -76.060     76.060      0.000
+   118         1   (d)                -44    61    61   123   123   118     0      2.934     -2.156    547.634    547.646      0.330
+   119        21   (g)                -44    62    62   307   308   117   119     -1.367      2.609    -24.801     24.975      0.000
+   120        21   (g)                -43   117     0   121   122   142   118     -1.567     -0.454    -51.153     51.179      0.000
+   121        21   (g)                -51   120     0   216   216   142   143     -0.160     -1.231    -49.837     49.852      0.000
+   122        21   (g)                -51   120     0   196   197   143   118     -1.405      0.775     -0.835      1.808      0.000
+   123         1   (d)                -52   118   118   198   198   118     0      2.931     -2.154    547.152    547.164      0.330
+   124        21   (g)                -51    88     0   176   176   123   144     -1.347      2.371    -21.000     21.176      0.000
+   125        21   (g)                -51    88     0   179   179   144   120      0.600     -0.354      0.038      0.698      0.000
+   126        21   (g)                -52    90    90   178   178   120   132     -0.759      2.008      6.233      6.592      0.000
+   127        21   (g)                -51   115     0   192   192   145   114      5.759     -3.577      3.475      7.618      0.000
+   128        21   (g)                -51   115     0   255   255   111   145      0.771     -1.808      3.455      3.975      0.000
+   129        21   (g)                -52   114   114   306   306   140   111      1.309      0.459     15.840     15.901      0.000
+   130        21   (g)                -42   458   458    94    94   128   127     -0.000      0.000     39.612     39.612      0.000
+   131        21   (g)                -41   459   459   135    95   127   146      0.000     -0.000    -14.841     14.841      0.000
+   132        21   (g)                -44    96    96   141   141   130   129      5.154     -1.494     -9.474     10.888      0.000
+   133        21   (g)                -44    97    97   139   140   128   130     -2.534     -0.254     37.978     38.063      0.000
+   134        21   (g)                -44    98    98   205   206   129   134     -1.749      0.755     -0.441      1.956      0.000
+   135        21   (g)                -43   131     0   463   463   134   146     -0.870      0.993     -3.291      3.546      0.000
+   136        -3   (sbar)             -51    33     0   154   154     0   147     -7.080     -3.899    131.175    131.425      0.500
+   137        21   (g)                -51    33     0   159   159   147   104     -0.984     -0.229      4.109      4.231      0.000
+   138         1   (d)                -52    31    31   152   152   104     0     -9.663      4.854     55.699     56.740      0.330
+   139        21   (g)                -51   133     0   228   228   128   148     -2.418      0.008     17.920     18.082      0.000
+   140        21   (g)                -51   133     0   217   218   148   130     -0.096     -0.268     20.021     20.023      0.000
+   141        21   (g)                -52   132   132   207   207   130   129      5.134     -1.488     -9.437     10.846      0.000
+   142        21   (g)                -51   109     0   193   194   113   149     -3.822      0.056     34.192     34.405      0.000
+   143        21   (g)                -51   109     0   421   421   149   112     -1.117      0.569      4.436      4.610      0.000
+   144        21   (g)                -53   412   412   106   106   131   112      0.000      0.000    109.565    109.565      0.000
+   145         2   (u)                -51    91     0   151   151   133     0     -0.500     -1.657     -2.566      3.113      0.330
+   146        -2   (ubar)             -51    91     0   160   160     0   115     -2.307    -12.957    -37.829     40.055      0.330
+   147        21   (g)                -52    45    45   155   155   115   101     -5.298     -1.808     -9.320     10.872      0.000
+   148        -3   (sbar)             -42   170   170    46    46     0   101     -0.000     -0.000    230.649    230.649      0.000
+   149        21   (g)                -41   252   252   161    72   105   150      0.000      0.000   -569.636    569.636      0.000
+   150        -1   (dbar)             -44    70    70   186   186     0   125     21.345     30.154      5.244     37.316      0.330
+   151         2   (u)                -44   145   145   364   364   133     0     -0.488     -1.649     -2.570      3.109      0.330
+   152         1   (d)                -44   138   138   365   365   104     0     -9.661      4.855     55.685     56.726      0.330
+   153        21   (g)                -44    75    75   250   251   105   103     -4.301    -11.248    -78.638     79.555      0.000
+   154        -3   (sbar)             -44   136   136   367   367     0   147     -7.079     -3.899    131.153    131.403      0.500
+   155        21   (g)                -44   147   147   168   169   115   101     -5.255     -1.777     -9.334     10.858      0.000
+   156        21   (g)                -44    71    71   162   163   125   102     16.072     15.397      3.822     22.583      0.000
+   157        21   (g)                -44    93    93   229   230   103   126      0.612     -1.061     -3.555      3.760      0.000
+   158        21   (g)                -44    92    92   231   231   126   133     -7.238    -17.074    -45.048     48.716      0.000
+   159        21   (g)                -44   137   137   372   372   147   104     -0.983     -0.229      4.106      4.228      0.000
+   160        -2   (ubar)             -44   146   146   171   172     0   115     -2.142    -12.839    -37.854     40.031      0.330
+   161        21   (g)                -43   149     0   164   164   102   150     -0.882     -0.632   -361.998    362.000      0.000
+   162        21   (g)                -51   156     0   184   185   125   151     16.632     15.170      3.525     22.786      0.000
+   163        21   (g)                -51   156     0   265   266   151   102     -0.566      0.223     -1.935      2.029      0.000
+   164        21   (g)                -52   161   161   374   374   102   150     -0.877     -0.628   -359.766    359.768      0.000
+   165        21   (g)                -51    52     0   181   182   109   152      6.288      3.244      0.255      7.080      0.000
+   166        21   (g)                -51    52     0   280   281   152   110      1.882      1.926     -1.372      3.022      0.000
+   167        -2   (ubar)             -53   392   392    48    48     0   110      0.000     -0.000    -73.983     73.983      0.000
+   168        21   (g)                -51   155     0   173   173   115   153     -2.999     -0.926     -7.226      7.878      0.000
+   169        21   (g)                -51   155     0   204   204   153   101     -2.256     -0.851     -1.973      3.115      0.000
+   170        -3   (sbar)             -53   330   330   148   148     0   101     -0.000     -0.000    230.784    230.784      0.000
+   171        -2   (ubar)             -51   160     0   232   233     0   154     -2.627     -9.537    -27.859     29.565      0.330
+   172        21   (g)                -51   160     0   234   234   154   115      0.223     -3.382    -10.626     11.153      0.000
+   173        21   (g)                -52   168   168   202   203   115   153     -2.737     -0.845     -6.595      7.190      0.000
+   174        21   (g)                -41   336   336   180    86   121   155     -0.000     -0.000     67.125     67.125      0.000
+   175        21   (g)                -42   315   315    87    87   123   122     -0.000     -0.000   -225.418    225.418      0.000
+   176        21   (g)                -44   124   124   259   260   123   144     -1.348      2.358    -20.831     21.007      0.000
+   177        21   (g)                -44    89    89   334   335   121   122      1.507     -4.028   -204.046    204.091      0.000
+   178        21   (g)                -44   126   126   277   278   120   132     -0.799      1.090      6.343      6.485      0.000
+   179        21   (g)                -44   125   125   261   261   144   120      0.598     -0.407      0.013      0.723      0.000
+   180        21   (g)                -43   174     0   279   279   132   155      0.043      0.987     60.228     60.236      0.000
+   181        21   (g)                -51   165     0   282   282   156   152      6.029      3.408      1.076      7.009      0.000
+   182        21   (g)                -51   165     0   241   242   109   156      0.162     -0.440     -0.378      0.603      0.000
+   183        21   (g)                -52    51    51   199   200   108   109     -2.866     -8.152     13.083     15.680      0.000
+   184        21   (g)                -51   162     0   267   267   157   151     11.489      9.776      2.641     15.315      0.000
+   185        21   (g)                -51   162     0   271   272   125   157      8.359      9.945      1.674     13.098      0.000
+   186        -1   (dbar)             -52   150   150   291   291     0   125     18.129     25.604      4.453     31.689      0.330
+   187        -2   (ubar)             -51    69     0   285   285     0   158     -0.473     -1.183    -31.165     31.193      0.330
+   188        21   (g)                -51    69     0   283   284   158   107     -0.148     -3.129    -32.678     32.828      0.000
+   189        21   (g)                -52   101   101   274   275   107   124      1.424     -1.805      7.775      8.108      0.000
+   190        21   (g)                -51   112     0   235   236   159   139     -0.898     -1.942     -3.737      4.306      0.000
+   191        21   (g)                -51   112     0   249   249   114   159      0.495      0.035     -1.980      2.042      0.000
+   192        21   (g)                -52   127   127   253   254   145   114      5.587     -3.471      3.372      7.391      0.000
+   193        21   (g)                -51   142     0   415   415   160   149     -3.124      0.184     20.463     20.701      0.000
+   194        21   (g)                -51   142     0   262   263   113   160     -0.697     -0.097     13.720     13.738      0.000
+   195        21   (g)                -52   110   110   211   212   116   113      0.128      4.563     -1.376      4.767      0.000
+   196        21   (g)                -51   122     0   214   215   143   161     -1.915      0.815     -0.011      2.082      0.000
+   197        21   (g)                -51   122     0   220   221   161   118      0.515     -0.043     -0.033      0.518      0.000
+   198         1   (d)                -52   123   123   222   222   118     0      2.927     -2.151    546.361    546.373      0.330
+   199        21   (g)                -51   183     0   243   243   162   109     -2.588     -8.179     11.982     14.736      0.000
+   200        21   (g)                -51   183     0   403   403   108   162     -0.791     -0.217      1.315      1.550      0.000
+   201        21   (g)                -52    50    50   286   287   106   108     -6.708     -3.179      2.794      7.931      0.000
+   202        21   (g)                -51   173     0   324   324   115   163     -0.593      0.392     -1.197      1.392      0.000
+   203        21   (g)                -51   173     0   322   323   163   153     -3.365     -1.698     -6.465      7.483      0.000
+   204        21   (g)                -52   169   169   328   329   153   101     -1.035     -0.391     -0.905      1.430      0.000
+   205        21   (g)                -51   134     0   462   462   164   134     -1.881      0.675     -0.740      2.131      0.000
+   206        21   (g)                -51   134     0   465   465   129   164      0.723     -0.091     -0.788      1.074      0.000
+   207        21   (g)                -52   141   141   219   219   130   129      4.543     -1.317     -8.351      9.597      0.000
+   208        -3   (sbar)             -51   104     0   225   225     0   166     -0.861     -2.135    -30.082     30.174      0.500
+   209        21   (g)                -51   104     0   223   224   166   138     -0.072      0.473    -26.235     26.239      0.000
+   210        21   (g)                -52   105   105   268   269   138   137      0.933      1.662   -402.240    402.244      0.000
+   211        21   (g)                -51   195     0   264   264   167   113     -0.565      3.032     -0.609      3.144      0.000
+   212        21   (g)                -51   195     0   424   424   116   167      0.693      1.530     -1.220      2.076      0.000
+   213        21   (g)                -53   237   237   107   107   116   139      0.000     -0.000    -12.120     12.120      0.000
+   214        21   (g)                -51   196     0   240   240   168   161     -1.494      1.416     -0.302      2.081      0.000
+   215        21   (g)                -51   196     0   325   326   143   168     -0.425     -0.629     -0.837      1.130      0.000
+   216        21   (g)                -52   121   121   327   327   142   143     -0.156     -1.203    -48.708     48.723      0.000
+   217        21   (g)                -51   140     0   226   227   148   169     -0.133      0.282     19.560     19.563      0.000
+   218        21   (g)                -51   140     0   256   257   169   130      0.131     -0.577      0.289      0.658      0.000
+   219        21   (g)                -52   207   207   460   460   130   129      4.449     -1.290     -8.178      9.399      0.000
+   220        21   (g)                -51   197     0   238   239   161   170      0.521     -0.477      0.184      0.730      0.000
+   221        21   (g)                -51   197     0   301   302   170   118      0.070      0.378     14.066     14.071      0.000
+   222         1   (d)                -52   198   198   345   345   118     0      2.851     -2.095    532.077    532.089      0.330
+   223        21   (g)                -51   209     0   270   270   171   138     -0.469      0.549    -12.495     12.516      0.000
+   224        21   (g)                -51   209     0   475   475   166   171      0.109     -0.810    -23.087     23.101      0.000
+   225        -3   (sbar)             -52   208   208   472   472     0   166     -0.573     -1.401    -20.735     20.796      0.500
+   226        21   (g)                -51   217     0   258   258   172   169     -0.947      0.211     26.526     26.544      0.000
+   227        21   (g)                -51   217     0   340   341   148   172     -0.167      0.074      0.304      0.355      0.000
+   228        21   (g)                -52   139   139   461   461   128   148     -1.437      0.005     10.649     10.746      0.000
+   229        21   (g)                -51   157     0   318   318   103   173      0.601     -0.815     -2.676      2.861      0.000
+   230        21   (g)                -51   157     0   380   380   173   126     -1.452     -3.697     -9.984     10.745      0.000
+   231        21   (g)                -52   158   158   371   371   126   133     -5.775    -13.624    -35.944     38.871      0.000
+   232        -2   (ubar)             -51   171     0   373   373     0   174     -1.766     -5.412    -14.975     16.024      0.330
+   233        21   (g)                -51   171     0   381   381   174   154     -0.740     -5.956    -18.636     19.579      0.000
+   234        21   (g)                -52   172   172   377   377   154   115      0.102     -1.551     -4.873      5.115      0.000
+   235        21   (g)                -51   190     0   247   248   159   175     -0.840     -1.555     -2.569      3.118      0.000
+   236        21   (g)                -51   190     0   425   425   175   139     -0.058     -0.387     -3.829      3.849      0.000
+   237        21   (g)                -53   413   413   213   213   116   139      0.000     -0.000    -14.780     14.780      0.000
+   238        21   (g)                -51   220     0   303   303   176   170     -0.387     -0.256     -0.479      0.667      0.000
+   239        21   (g)                -51   220     0   352   352   161   176      0.420      0.243      0.565      0.744      0.000
+   240        21   (g)                -52   214   214   348   348   168   161     -1.005      0.953     -0.203      1.400      0.000
+   241        21   (g)                -51   182     0   401   401   177   156      0.460     -0.110      0.570      0.741      0.000
+   242        21   (g)                -51   182     0   246   246   109   177     -0.537     -1.084      0.156      1.219      0.000
+   243        21   (g)                -52   199   199   244   245   162   109     -2.350     -7.425     10.878     13.379      0.000
+   244        21   (g)                -51   243     0   395   395   162   178     -2.643     -7.600     10.764     13.439      0.000
+   245        21   (g)                -51   243     0   405   405   178   109      0.161     -0.093      0.152      0.240      0.000
+   246        21   (g)                -52   242   242   404   404   109   177     -0.404     -0.816      0.117      0.918      0.000
+   247        21   (g)                -51   235     0   418   418   179   175     -0.958     -0.910     -1.729      2.176      0.000
+   248        21   (g)                -51   235     0   426   426   159   179      0.391     -0.626     -1.933      2.069      0.000
+   249        21   (g)                -52   191   191   339   339   114   159      0.222      0.016     -0.888      0.915      0.000
+   250        21   (g)                -51   153     0   298   299   180   103     -2.399     -4.758    -32.492     32.926      0.000
+   251        21   (g)                -51   153     0   300   300   105   180     -1.902     -6.490    -47.138     47.621      0.000
+   252        21   (g)                -53   362   362   149   149   105   150      0.000      0.000   -570.629    570.629      0.000
+   253        21   (g)                -51   192     0   337   338   181   114      4.971     -2.724      3.549      6.688      0.000
+   254        21   (g)                -51   192     0   427   427   145   181      0.731     -1.017      0.340      1.298      0.000
+   255        21   (g)                -52   128   128   304   305   111   145      0.656     -1.537      2.938      3.380      0.000
+   256        21   (g)                -51   218     0   466   466   182   130      0.038      0.135     -0.118      0.184      0.000
+   257        21   (g)                -51   218     0   468   468   169   182     -0.014     -0.688      3.370      3.439      0.000
+   258        21   (g)                -52   226   226   342   342   172   169     -0.842      0.187     23.563     23.579      0.000
+   259        21   (g)                -51   176     0   313   314   123   183     -0.919      0.495     -4.782      4.894      0.000
+   260        21   (g)                -51   176     0   295   296   183   144     -0.392      1.838    -16.048     16.158      0.000
+   261        21   (g)                -52   179   179   297   297   144   120      0.560     -0.382      0.012      0.678      0.000
+   262        -3   (sbar)             -51   194     0   423   423     0   160     -0.572      0.409      9.092      9.133      0.500
+   263         3   (s)                -51   194     0   428   428   113     0     -0.135     -0.446      4.616      4.666      0.500
+   264        21   (g)                -52   211   211   416   416   167   113     -0.554      2.973     -0.597      3.083      0.000
+   265        21   (g)                -51   163     0   331   332   185   102     -0.673     -0.251     -1.353      1.531      0.000
+   266        21   (g)                -51   163     0   333   333   151   185      0.679      0.960     -0.451      1.260      0.000
+   267        21   (g)                -52   184   184   273   273   157   151     10.917      9.290      2.510     14.553      0.000
+   268        21   (g)                -51   210     0   473   473   186   137      0.678      1.545   -396.562    396.566      0.000
+   269        21   (g)                -51   210     0   476   476   138   186      0.168      0.218     -7.977      7.981      0.000
+   270        21   (g)                -52   223   223   474   474   171   138     -0.382      0.448    -10.196     10.213      0.000
+   271        21   (g)                -51   185     0   289   290   125   187      7.764      8.464      2.217     11.697      0.000
+   272        21   (g)                -51   185     0   384   384   187   157      3.791      4.200      0.192      5.661      0.000
+   273        21   (g)                -52   267   267   369   369   157   151      7.721      6.570      1.775     10.292      0.000
+   274        21   (g)                -51   189     0   294   294   107   188      1.384     -1.792      7.510      7.844      0.000
+   275        21   (g)                -51   189     0   406   406   188   124     -0.060      0.337      8.019      8.027      0.000
+   276        21   (g)                -52   100   100   399   399   124   135     -1.444      5.080    112.523    112.647      0.000
+   277        21   (g)                -51   178     0   450   450   120   189     -0.288     -0.248      1.885      1.923      0.000
+   278        21   (g)                -51   178     0   454   454   189   132     -0.507      1.446     11.098     11.204      0.000
+   279        21   (g)                -52   180   180   452   452   132   155      0.038      0.878     53.587     53.595      0.000
+   280        21   (g)                -51   166     0   400   400   190   110      0.577      0.106     -0.551      0.805      0.000
+   281        21   (g)                -51   166     0   310   311   152   190      2.289      2.376     -0.646      3.362      0.000
+   282        21   (g)                -52   181   181   312   312   156   152      5.044      2.851      0.900      5.863      0.000
+   283        21   (g)                -51   188     0   292   293   191   107     -0.527     -3.066    -42.046     42.161      0.000
+   284        21   (g)                -51   188     0   408   408   158   191      0.180     -0.462     -2.942      2.983      0.000
+   285        -2   (ubar)             -52   187   187   397   397     0   158     -0.274     -0.783    -18.856     18.877      0.330
+   286        21   (g)                -51   201     0   394   394   192   108     -5.883     -3.458      2.709      7.342      0.000
+   287        21   (g)                -51   201     0   409   409   106   192     -0.824      0.280      0.500      1.004      0.000
+   288         2   (u)                -53   391   391    47    47   106     0      0.000      0.000    306.535    306.535      0.000
+   289        21   (g)                -51   271     0   378   378   193   187      6.286      6.655      1.330      9.251      0.000
+   290        21   (g)                -51   271     0   385   385   125   193      6.358      8.728      2.083     10.997      0.000
+   291        -1   (dbar)             -52   186   186   363   363     0   125     13.249     18.685      3.258     23.138      0.330
+   292        21   (g)                -51   283     0   402   402   191   194      0.019     -3.060    -36.906     37.032      0.000
+   293        21   (g)                -51   283     0   410   410   194   107     -0.542     -0.011     -5.120      5.149      0.000
+   294        21   (g)                -52   274   274   398   398   107   188      1.380     -1.787      7.490      7.823      0.000
+   295        21   (g)                -51   260     0   453   453   183   195     -0.405      1.022     -4.608      4.737      0.000
+   296        21   (g)                -51   260     0   455   455   195   144      0.052      0.790    -11.440     11.467      0.000
+   297        21   (g)                -52   261   261   451   451   144   120      0.522     -0.356      0.011      0.632      0.000
+   298        21   (g)                -51   250     0   316   317   196   103     -0.770     -1.426    -13.421     13.518      0.000
+   299        21   (g)                -51   250     0   386   386   180   196     -3.136     -8.475    -56.427     57.146      0.000
+   300        21   (g)                -52   251   251   382   382   105   180     -0.395     -1.347     -9.782      9.883      0.000
+   301        21   (g)                -51   221     0   351   351   197   118      0.425      0.429     13.304     13.318      0.000
+   302        21   (g)                -51   221     0   353   353   170   197     -0.393     -0.077      0.715      0.819      0.000
+   303        21   (g)                -52   238   238   349   349   176   170     -0.349     -0.231     -0.432      0.602      0.000
+   304        21   (g)                -51   255     0   420   420   198   145      0.760     -0.945      1.587      1.997      0.000
+   305        21   (g)                -51   255     0   429   429   111   198      0.077     -0.528      3.547      3.587      0.000
+   306        21   (g)                -52   129   129   321   321   140   111      1.127      0.396     13.644     13.696      0.000
+   307        21   (g)                -51   119     0   346   346   199   119     -1.297      2.747    -20.711     20.933      0.000
+   308        21   (g)                -51   119     0   354   354   117   199     -0.069     -0.138     -4.065      4.068      0.000
+   309         1   (d)                -53   343   343   116   116   117     0     -0.000     -0.000    547.765    547.765      0.000
+   310        21   (g)                -51   281     0   407   407   200   190      0.286      0.336     -0.366      0.573      0.000
+   311        21   (g)                -51   281     0   411   411   152   200      3.763      3.035      0.034      4.834      0.000
+   312        21   (g)                -52   282   282   396   396   156   152      3.285      1.857      0.586      3.818      0.000
+   313        21   (g)                -51   259     0   448   448   201   183     -1.149      0.747    -10.599     10.687      0.000
+   314        21   (g)                -51   259     0   456   456   123   201      0.230     -0.251     -2.375      2.399      0.000
+   315        21   (g)                -53   447   447   175   175   123   122     -0.000     -0.000   -233.610    233.610      0.000
+   316        21   (g)                -51   298     0   366   366   196   202     -0.123     -1.640    -10.543     10.671      0.000
+   317        21   (g)                -51   298     0   387   387   202   103     -0.458     -0.043     -3.720      3.748      0.000
+   318        21   (g)                -52   229   229   370   370   103   173      0.412     -0.558     -1.833      1.960      0.000
+   319        21   (g)                -51   113     0   417   417   131   204     -0.194      0.661     15.563     15.579      0.000
+   320        21   (g)                -51   113     0   430   430   204   140     -2.102      0.901     30.062     30.148      0.000
+   321        21   (g)                -52   306   306   419   419   140   111      0.969      0.340     11.725     11.770      0.000
+   322        21   (g)                -51   203     0   379   379   205   153     -1.996     -0.311     -3.927      4.416      0.000
+   323        21   (g)                -51   203     0   388   388   163   205     -1.624     -1.218     -3.053      3.666      0.000
+   324        21   (g)                -52   202   202   368   368   115   163     -0.338      0.223     -0.682      0.794      0.000
+   325        21   (g)                -51   215     0   350   350   206   168     -0.729     -0.166     -1.296      1.496      0.000
+   326        21   (g)                -51   215     0   355   355   143   206      0.297     -0.521     -1.874      1.967      0.000
+   327        21   (g)                -52   216   216   347   347   142   143     -0.149     -1.145    -46.375     46.390      0.000
+   328        21   (g)                -51   204     0   376   376   153   207     -0.902     -0.281      0.056      0.947      0.000
+   329        21   (g)                -51   204     0   389   389   207   101     -0.133     -0.109     -0.712      0.733      0.000
+   330        -3   (sbar)             -53   361   361   170   170     0   101     -0.000     -0.000    231.034    231.034      0.000
+   331        21   (g)                -51   265     0   375   375   208   102     -0.542      0.416     -0.595      0.906      0.000
+   332        21   (g)                -51   265     0   390   390   185   208      0.055     -0.403     -0.881      0.970      0.000
+   333        21   (g)                -52   266   266   383   383   151   185      0.493      0.697     -0.327      0.914      0.000
+   334        21   (g)                -51   177     0   449   449   209   122      1.205     -1.915   -115.857    115.880      0.000
+   335        21   (g)                -51   177     0   457   457   121   209      0.301     -2.113    -88.187     88.213      0.000
+   336        21   (g)                -53   446   446   174   174   121   155     -0.000     -0.000     67.126     67.126      0.000
+   337        21   (g)                -51   253     0   414   414   181   210      3.769     -2.478      2.404      5.111      0.000
+   338        21   (g)                -51   253     0   431   431   210   114      1.219     -0.245      1.078      1.646      0.000
+   339        21   (g)                -52   249   249   422   422   114   159      0.205      0.014     -0.821      0.846      0.000
+   340        21   (g)                -51   227     0   467   467   148   211     -0.020      0.339      1.341      1.383      0.000
+   341        21   (g)                -51   227     0   469   469   211   172     -0.581     -0.168     11.103     11.120      0.000
+   342        21   (g)                -52   258   258   464   464   172   169     -0.408      0.091     11.423     11.431      0.000
+   343         1   (d)                -42   432   432   309   309   117     0     -0.000     -0.000    547.765    547.765      0.000
+   344        21   (g)                -41   433   433   356   117   142   212      0.000      0.000   -146.263    146.263      0.000
+   345         1   (d)                -44   222   222   434   434   118     0      2.851     -2.095    532.070    532.082      0.330
+   346        21   (g)                -44   307   307   435   435   199   119     -1.295      2.867    -20.703     20.941      0.000
+   347        21   (g)                -44   327   327   436   436   142   143     -0.143     -0.878    -46.378     46.387      0.000
+   348        21   (g)                -44   240   240   437   437   168   161     -1.005      0.957     -0.201      1.403      0.000
+   349        21   (g)                -44   303   303   438   438   176   170     -0.349     -0.228     -0.433      0.601      0.000
+   350        21   (g)                -44   325   325   439   439   206   168     -0.728     -0.158     -1.296      1.495      0.000
+   351        21   (g)                -44   301   301   440   440   197   118      0.425      0.429     13.305     13.319      0.000
+   352        21   (g)                -44   239   239   441   441   161   176      0.420      0.243      0.565      0.745      0.000
+   353        21   (g)                -44   302   302   442   442   170   197     -0.393     -0.076      0.715      0.819      0.000
+   354        21   (g)                -44   308   308   443   443   117   199     -0.069     -0.114     -4.065      4.067      0.000
+   355        21   (g)                -44   326   326   444   444   143   206      0.297     -0.510     -1.875      1.966      0.000
+   356        21   (g)                -43   344     0   445   445   119   212     -0.010     -0.437    -70.202     70.203      0.000
+   357        21   (g)                -31   477   477   359   360   214   213      0.000      0.000    126.030    126.030      0.000
+   358        21   (g)                -31   478   478   359   360   213   215      0.000      0.000    -26.790     26.790      0.000
+   359        21   (g)                -33   357   358   479   479   216   215     -0.300     -0.084    -26.789     26.791      0.000
+   360        21   (g)                -33   357   358   480   480   214   216      0.300      0.084    126.029    126.029      0.000
+   361        -3   (sbar)             -61     1     0   330   330     0   101     -0.493      1.826    231.030    231.038      0.000
+   362        21   (g)                -61     2     0   252   252   101   136     -1.534     -0.203   -570.627    570.629      0.000
+   363        -1   (dbar)             -62   291   291   742   742     0   125     13.194     18.785      3.177     23.177      0.330
+   364         2   (u)                -62   151   151   539   539   133     0     -0.496     -1.648     -2.563      3.104      0.330
+   365         1   (d)                -62   152   152   520   520   104     0     -9.782      5.300     55.667     56.769      0.330
+   366        21   (g)                -62   316   316   543   543   196   202     -0.151     -1.643    -10.537     10.665      0.000
+   367        -3   (sbar)             -62   154   154   522   522     0   147     -7.359     -2.861    131.169    131.408      0.500
+   368        21   (g)                -62   324   324   549   549   115   163     -0.340      0.224     -0.683      0.795      0.000
+   369        21   (g)                -62   273   273   738   738   157   151      7.697      6.616      1.746     10.299      0.000
+   370        21   (g)                -62   318   318   541   541   103   173      0.407     -0.558     -1.831      1.957      0.000
+   371        21   (g)                -62   231   231   506     0   126   133     -5.879    -13.625    -35.886     38.833      0.000
+   372        21   (g)                -62   159   159   521   521   147   104     -0.992     -0.196      4.107      4.230      0.000
+   373        -2   (ubar)             -62   232   232   551   551     0   174     -1.809     -5.413    -14.953     16.008      0.330
+   374        21   (g)                -62   164   164   734   734   102   136     -1.844     -0.756   -359.762    359.768      0.000
+   375        21   (g)                -62   331   331   735   735   208   102     -0.545      0.417     -0.597      0.909      0.000
+   376        21   (g)                -62   328   328   546   546   153   207     -0.905     -0.278      0.058      0.948      0.000
+   377        21   (g)                -62   234   234   508     0   154   115      0.089     -1.552     -4.867      5.109      0.000
+   378        21   (g)                -62   289   289   740   740   193   187      6.264      6.696      1.300      9.261      0.000
+   379        21   (g)                -62   322   322   547   547   205   153     -2.008     -0.311     -3.925      4.420      0.000
+   380        21   (g)                -62   230   230   506     0   173   126     -1.481     -3.698     -9.968     10.734      0.000
+   381        21   (g)                -62   233   233   508     0   174   154     -0.792     -5.959    -18.612     19.558      0.000
+   382        21   (g)                -62   300   300   507     0   101   180     -0.421     -1.350     -9.777      9.878      0.000
+   383        21   (g)                -62   333   333   737   737   151   185      0.490      0.699     -0.330      0.916      0.000
+   384        21   (g)                -62   272   272   739   739   187   157      3.777      4.222      0.174      5.668      0.000
+   385        21   (g)                -62   290   290   741   741   125   193      6.332      8.778      2.045     11.015      0.000
+   386        21   (g)                -62   299   299   544   544   180   196     -3.290     -8.493    -56.391     57.122      0.000
+   387        21   (g)                -62   317   317   542   542   202   103     -0.468     -0.044     -3.720      3.749      0.000
+   388        21   (g)                -62   323   323   548   548   163   205     -1.633     -1.216     -3.047      3.665      0.000
+   389        21   (g)                -62   329   329   507     0   207   101     -0.135     -0.109     -0.712      0.733      0.000
+   390        21   (g)                -62   332   332   736   736   185   208      0.053     -0.403     -0.879      0.969      0.000
+   391         2   (u)                -61     1     0   288   288   106     0      0.781     -1.833    306.532    306.538      0.000
+   392        -2   (ubar)             -61     2     0   167   167     0   110     -1.032      0.384    -73.977     73.985      0.000
+   393         2   (u)                -62    99    99   640   640   135     0      3.142      6.454    152.529    152.698      0.330
+   394        21   (g)                -62   286   286   581   581   192   108     -5.903     -3.477      2.738      7.377      0.000
+   395        21   (g)                -62   244   244   579   579   162   178     -2.631     -7.666     10.743     13.457      0.000
+   396        21   (g)                -62   312   312   575   575   156   152      3.268      1.852      0.570      3.799      0.000
+   397        -2   (ubar)             -62   285   285   646   646     0   158     -0.537     -0.686    -18.856     18.879      0.330
+   398        21   (g)                -62   294   294   642   642   107   188      1.398     -1.832      7.469      7.816      0.000
+   399        21   (g)                -62   276   276   505     0   124   135     -1.158      4.408    112.562    112.654      0.000
+   400        21   (g)                -62   280   280   495     0   190   110      0.568      0.109     -0.555      0.802      0.000
+   401        21   (g)                -62   241   241   576   576   177   156      0.461     -0.113      0.565      0.738      0.000
+   402        21   (g)                -62   292   292   644   644   191   194     -0.497     -2.868    -36.920     37.034      0.000
+   403        21   (g)                -62   200   200   580   580   108   162     -0.789     -0.224      1.321      1.555      0.000
+   404        21   (g)                -62   246   246   577   577   109   177     -0.408     -0.817      0.116      0.921      0.000
+   405        21   (g)                -62   245   245   578   578   178   109      0.161     -0.094      0.151      0.240      0.000
+   406        21   (g)                -62   275   275   505     0   188   124     -0.040      0.289      8.022      8.027      0.000
+   407        21   (g)                -62   310   310   495     0   200   190      0.279      0.338     -0.366      0.571      0.000
+   408        21   (g)                -62   284   284   645   645   158   191      0.139     -0.447     -2.946      2.983      0.000
+   409        21   (g)                -62   287   287   582   582   106   192     -0.826      0.276      0.508      1.009      0.000
+   410        21   (g)                -62   293   293   643   643   194   107     -0.614      0.016     -5.115      5.152      0.000
+   411        21   (g)                -62   311   311   574   574   152   200      3.736      3.033      0.020      4.812      0.000
+   412        21   (g)                -61     1     0   144   144   136   106      1.466      1.359    109.542    109.561      0.000
+   413        21   (g)                -61     2     0   237   237   216   139     -1.116     -0.333    -14.750     14.795      0.000
+   414        21   (g)                -62   337   337   727   727   181   210      3.716     -2.463      2.282      5.008      0.000
+   415        21   (g)                -62   193   193   588   588   160   128     -2.856      0.438     20.595     20.796      0.000
+   416        21   (g)                -62   264   264   670   670   167   168     -0.677      2.947     -0.621      3.087      0.000
+   417        21   (g)                -62   319   319   493     0   131   204      0.014      0.854     15.557     15.581      0.000
+   418        21   (g)                -62   247   247   488     0   179   176     -1.101     -0.951     -1.666      2.212      0.000
+   419        21   (g)                -62   321   321   731   731   140   111      1.124      0.485     11.673     11.737      0.000
+   420        21   (g)                -62   304   304   729   729   198   145      0.769     -0.928      1.570      1.979      0.000
+   421        21   (g)                -62   143   143   586   586   149   148     -1.062      0.624      4.475      4.642      0.000
+   422        21   (g)                -62   339   339   490     0   114   123      0.142     -0.004     -0.829      0.841      0.000
+   423        -3   (sbar)             -62   262   262   589   589     0   160     -0.452      0.521      9.109      9.148      0.500
+   424        21   (g)                -62   212   212   497     0   116   167      0.574      1.498     -1.274      2.049      0.000
+   425        21   (g)                -62   236   236   719   719   175   139     -0.348     -0.473     -3.811      3.856      0.000
+   426        21   (g)                -62   248   248   489     0   159   179      0.240     -0.670     -1.935      2.062      0.000
+   427        21   (g)                -62   254   254   491     0   145   144      0.706     -1.018      0.326      1.281      0.000
+   428         3   (s)                -62   263   263   665   665   113     0     -0.075     -0.389      4.629      4.673      0.500
+   429        21   (g)                -62   305   305   492     0   111   169      0.123     -0.484      3.552      3.587      0.000
+   430        21   (g)                -62   320   320   732   732   204   140     -1.702      1.274     30.133     30.208      0.000
+   431        21   (g)                -62   338   338   494     0   210   161      1.215     -0.235      1.029      1.609      0.000
+   432         1   (d)                -61     1     0   343   343   101     0      0.797      1.956    547.759    547.763      0.000
+   433        21   (g)                -61     2     0   344   344   110   101      2.006     -1.609   -146.252    146.274      0.000
+   434         1   (d)                -62   345   345   572   572   110     0      3.625     -0.194    532.097    532.109      0.330
+   435        21   (g)                -62   346   346   673   673   199   183     -1.009      2.638    -20.730     20.922      0.000
+   436        21   (g)                -62   347   347   502     0   142   121      0.493     -1.389    -46.369     46.393      0.000
+   437        21   (g)                -62   348   348   669   669   168   164     -0.993      0.951     -0.214      1.392      0.000
+   438        21   (g)                -62   349   349   488     0   176   206     -0.342     -0.233     -0.433      0.599      0.000
+   439        21   (g)                -62   350   350   720   720   206   175     -0.709     -0.173     -1.299      1.490      0.000
+   440        21   (g)                -62   351   351   493     0   136   131      0.445      0.477     13.305     13.321      0.000
+   441        21   (g)                -62   352   352   494     0   161   129      0.422      0.244      0.566      0.747      0.000
+   442        21   (g)                -62   353   353   504     0   170   120     -0.391     -0.074      0.713      0.816      0.000
+   443        21   (g)                -62   354   354   498     0   117   166     -0.013     -0.159     -4.064      4.067      0.000
+   444        21   (g)                -62   355   355   489     0   143   159      0.323     -0.531     -1.870      1.970      0.000
+   445        21   (g)                -62   356   356   500     0   119   209      0.953     -1.209    -70.193     70.210      0.000
+   446        21   (g)                -61     1     0   336   336   122   122     -0.192     -0.269     67.126     67.127      0.000
+   447        21   (g)                -61     2     0   315   315   155   155      0.358     -0.114   -233.609    233.610      0.000
+   448        21   (g)                -62   313   313   674   674   201   199     -1.133      0.742    -10.600     10.686      0.000
+   449        21   (g)                -62   334   334   500     0   209   186      1.383     -1.971   -115.858    115.883      0.000
+   450        21   (g)                -62   277   277   504     0   120   211     -0.293     -0.256      1.884      1.924      0.000
+   451        21   (g)                -62   297   297   491     0   144   181      0.522     -0.357      0.012      0.632      0.000
+   452        21   (g)                -62   279   279   583   583   132   106     -0.115      0.663     53.589     53.593      0.000
+   453        21   (g)                -62   295   295   499     0   183   134     -0.398      1.019     -4.607      4.735      0.000
+   454        21   (g)                -62   278   278   496     0   189   214     -0.539      1.402     11.100     11.201      0.000
+   455        21   (g)                -62   296   296   503     0   195   171      0.069      0.784    -11.438     11.465      0.000
+   456        21   (g)                -62   314   314   490     0   123   143      0.234     -0.253     -2.375      2.400      0.000
+   457        21   (g)                -62   335   335   679   679   121   119      0.436     -2.156    -88.190     88.217      0.000
+   458        21   (g)                -61     1     0   130   130   146   146     -0.863     -1.113     39.562     39.587      0.000
+   459        21   (g)                -61     2     0   131   131   127   127      2.037     -0.909    -14.762     14.929      0.000
+   460        21   (g)                -62   219   219   724   724   130   114      5.636     -1.851     -7.757      9.765      0.000
+   461        21   (g)                -62   228   228   587   587   128   149     -1.661     -0.298     10.522     10.656      0.000
+   462        21   (g)                -62   205   205   668   668   164   170     -1.697      0.570     -0.894      2.001      0.000
+   463        21   (g)                -62   135   135   499     0   134   182     -0.403      0.782     -3.358      3.471      0.000
+   464        21   (g)                -62   342   342   501     0   172   113     -0.656     -0.230     11.375     11.396      0.000
+   465        21   (g)                -62   206   206   725   725   129   130      0.847     -0.153     -0.725      1.125      0.000
+   466        21   (g)                -62   256   256   497     0   182   116      0.058      0.125     -0.117      0.181      0.000
+   467        21   (g)                -62   340   340   496     0   148   189     -0.047      0.300      1.332      1.366      0.000
+   468        21   (g)                -62   257   257   492     0   169   198     -0.083     -0.787      3.376      3.467      0.000
+   469        21   (g)                -62   341   341   501     0   211   172     -0.821     -0.480     11.046     11.087      0.000
+   470        -3   (sbar)             -61     1     0   102   102     0   136     -0.371      0.317     -1.149      1.248      0.000
+   471        21   (g)                -61     2     0   103   103   136   137      1.263      1.165   -464.754    464.757      0.000
+   472        -3   (sbar)             -62   225   225   510   510     0   137     -0.747     -1.162    -19.476     19.532      0.500
+   473        21   (g)                -62   268   268   677   677   186   138      1.763      2.569   -404.241    404.253      0.000
+   474        21   (g)                -62   270   270   675   675   171   201     -0.409      0.534    -13.383     13.400      0.000
+   475        21   (g)                -62   224   224   498     0   166   142      0.112     -0.713    -20.606     20.619      0.000
+   476        21   (g)                -62   269   269   503     0   138   195      0.173      0.254     -8.197      8.202      0.000
+   477        21   (g)                -61     1     0   357   357   215   215     -0.741      0.317    126.023    126.026      0.000
+   478        21   (g)                -61     2     0   358   358   213   213     -0.740     -1.241    -26.772     26.811      0.000
+   479        21   (g)                -62   359   359   681   681   216   117     -1.041     -1.325    -26.766     26.819      0.000
+   480        21   (g)                -62   360   360   584   584   214   132     -0.441      0.401    126.017    126.018      0.000
+   481      2103   (ud_1)             -63     1     0   515   515     0   217     -0.176      0.022   1039.141   1039.142      0.771
+   482         3   (s)                -63     1     0   514   514   217     0     -0.134     -0.966     32.316     32.334      0.500
+   483        -1   (dbar)             -63     1     0   530   530     0   219     -0.242     -0.944     10.671     10.720      0.330
+   484         3   (s)                -63     1     0   529   529   219     0      0.167     -0.674     -5.915      5.976      0.500
+   485      2203   (uu_1)             -63     2     0   682   682     0   216     -0.193      1.611   -732.595    732.597      0.771
+   486         1   (d)                -63     2     0   509   509   137     0     -0.655      0.944    -73.075     73.085      0.330
+   487         2   (u)                -63     2     0   718   718   139     0     -0.393      0.306   -151.466    151.467      0.330
+   488        21   (g)                -73   418   438   721   721   179   206     -1.443     -1.184     -2.099      2.811      0.102
+   489        21   (g)                -73   426   444   722   722   143   179      0.564     -1.201     -3.805      4.032      0.149
+   490        21   (g)                -73   422   456   723   723   114   143      0.376     -0.257     -3.203      3.240      0.175
+   491        21   (g)                -73   427   451   728   728   145   181      1.228     -1.375      0.337      1.913      0.386
+   492        21   (g)                -73   429   468   730   730   111   198      0.041     -1.271      6.928      7.055      0.388
+   493        21   (g)                -73   417   440   733   733   136   204      0.459      1.331     28.862     28.901      0.543
+   494        21   (g)                -73   431   441   726   726   210   129      1.637      0.010      1.595      2.357      0.574
+   495        21   (g)                -73   400   407   573   573   200   110      0.848      0.447     -0.921      1.373      0.343
+   496        21   (g)                -73   454   467   585   585   148   214     -0.585      1.702     12.432     12.567      0.378
+   497        21   (g)                -73   424   466   671   671   182   167      0.632      1.623     -1.391      2.229      0.039
+   498        21   (g)                -73   443   475   502     0   117   142      0.099     -0.872    -24.670     24.686      0.089
+   499        21   (g)                -73   453   463   672   672   183   182     -0.801      1.801     -7.965      8.206      0.138
+   500        21   (g)                -73   445   449   678   678   119   186      2.335     -3.181   -186.051    186.093      0.149
+   501        21   (g)                -73   464   469   666   666   211   113     -1.477     -0.710     22.421     22.483      0.320
+   502        21   (g)                -73   436   498   680   680   117   121      0.592     -2.261    -71.040     71.079      0.326
+   503        21   (g)                -73   455   476   676   676   138   171      0.242      1.038    -19.635     19.668      0.392
+   504        21   (g)                -73   442   450   667   667   170   211     -0.684     -0.330      2.597      2.740      0.434
+   505        21   (g)                -73   399   406   641   641   188   135     -1.198      4.697    120.584    120.681      0.185
+   506        21   (g)                -73   371   380   540   540   173   133     -7.360    -17.323    -45.854     49.568      0.317
+   507        21   (g)                -73   382   389   545   545   207   180     -0.556     -1.459    -10.488     10.611      0.385
+   508        21   (g)                -73   377   381   550   550   174   115     -0.704     -7.511    -23.478     24.667      0.579
+   509         1   (d)                -71   486   486   511   513   137     0     -0.655      0.944    -73.075     73.085      0.330
+   510        -3   (sbar)             -71   472   472   511   513     0   137     -0.747     -1.162    -19.476     19.532      0.500
+   511      -211   pi-                 83   509   510     0     0     0     0     -0.498      0.651    -34.628     34.638      0.140
+   512      2112   n0                  84   509   510     0     0     0     0     -0.369     -0.179    -20.193     20.219      0.940
+   513     -3112   Sigmabar+           84   509   510     0     0     0     0     -0.535     -0.690    -37.731     37.760      1.197
+   514         3   (s)                -71   482   482   516   519   217     0     -0.134     -0.966     32.316     32.334      0.500
+   515      2103   (ud_1)             -71   481   481   516   519     0   217     -0.176      0.022   1039.141   1039.142      0.771
+   516      -313   (K*bar0)           -83   514   515   801   802     0     0     -0.016     -0.420     57.752     57.760      0.885
+   517      -211   pi-                 83   514   515     0     0     0     0      0.075     -0.663     27.748     27.757      0.140
+   518       211   pi+                 84   514   515     0     0     0     0     -0.640      0.145    193.303    193.304      0.140
+   519      2114   (Delta0)           -84   514   515   803   804     0     0      0.271     -0.006    792.654    792.655      1.241
+   520         1   (d)                -71   365   365   523   528   104     0     -9.782      5.300     55.667     56.769      0.330
+   521        21   (g)                -71   372   372   523   528   147   104     -0.992     -0.196      4.107      4.230      0.000
+   522        -3   (sbar)             -71   367   367   523   528     0   147     -7.359     -2.861    131.169    131.408      0.500
+   523       313   (K*0)              -83   520   522   805   806     0     0     -4.070      1.963     23.964     24.403      0.887
+   524      -323   (K*-)              -83   520   522   807   808     0     0     -2.055      0.646     10.248     10.523      1.035
+   525      2214   (Delta+)           -83   520   522   809   810     0     0     -2.994      1.271     19.878     20.189      1.372
+   526       213   (rho+)             -83   520   522   811   812     0     0     -2.197      0.919     18.098     18.277      0.916
+   527     -2214   (Deltabar-)        -83   520   522   813   814     0     0     -1.385     -0.465     19.951     20.037      1.158
+   528       311   (K0)               -84   520   522   815   815     0     0     -5.433     -2.091     98.805     98.978      0.498
+   529         3   (s)                -71   484   484   531   538   219     0      0.167     -0.674     -5.915      5.976      0.500
+   530        -1   (dbar)             -71   483   483   531   538     0   219     -0.242     -0.944     10.671     10.720      0.330
+   531      -313   (K*bar0)           -83   529   530   816   817     0     0      0.202     -0.573     -4.716      4.843      0.917
+   532      -211   pi-                 83   529   530     0     0     0     0     -0.504      0.300      0.226      0.644      0.140
+   533       211   pi+                 84   529   530     0     0     0     0      0.225     -0.160     -0.615      0.688      0.140
+   534       311   (K0)               -84   529   530   818   818     0     0      0.540     -0.287      1.096      1.350      0.498
+   535      -321   K-                  84   529   530     0     0     0     0     -0.156     -0.016      0.468      0.698      0.494
+   536       211   pi+                 84   529   530     0     0     0     0     -0.570      0.100      2.863      2.924      0.140
+   537      -211   pi-                 84   529   530     0     0     0     0      0.222     -0.926      4.516      4.617      0.140
+   538       211   pi+                 84   529   530     0     0     0     0     -0.032     -0.058      0.919      0.932      0.140
+   539         2   (u)                -71   364   364   552   571   133     0     -0.496     -1.648     -2.563      3.104      0.330
+   540        21   (g)                -71   506   506   552   571   173   133     -7.360    -17.323    -45.854     49.568      0.317
+   541        21   (g)                -71   370   370   552   571   103   173      0.407     -0.558     -1.831      1.957      0.000
+   542        21   (g)                -71   387   387   552   571   202   103     -0.468     -0.044     -3.720      3.749      0.000
+   543        21   (g)                -71   366   366   552   571   196   202     -0.151     -1.643    -10.537     10.665      0.000
+   544        21   (g)                -71   386   386   552   571   180   196     -3.290     -8.493    -56.391     57.122      0.000
+   545        21   (g)                -71   507   507   552   571   207   180     -0.556     -1.459    -10.488     10.611      0.385
+   546        21   (g)                -71   376   376   552   571   153   207     -0.905     -0.278      0.058      0.948      0.000
+   547        21   (g)                -71   379   379   552   571   205   153     -2.008     -0.311     -3.925      4.420      0.000
+   548        21   (g)                -71   388   388   552   571   163   205     -1.633     -1.216     -3.047      3.665      0.000
+   549        21   (g)                -71   368   368   552   571   115   163     -0.340      0.224     -0.683      0.795      0.000
+   550        21   (g)                -71   508   508   552   571   174   115     -0.704     -7.511    -23.478     24.667      0.579
+   551        -2   (ubar)             -71   373   373   552   571     0   174     -1.809     -5.413    -14.953     16.008      0.330
+   552       211   pi+                 83   539   551     0     0     0     0     -0.054     -0.085     -0.510      0.538      0.140
+   553      -211   pi-                 83   539   551     0     0     0     0     -1.870     -4.790    -11.222     12.345      0.140
+   554       323   (K*+)              -83   539   551   819   820     0     0     -2.141     -6.020    -15.274     16.581      0.894
+   555      -313   (K*bar0)           -83   539   551   821   822     0     0     -1.059     -2.284     -6.223      6.777      0.927
+   556      -211   pi-                 83   539   551     0     0     0     0     -1.579     -3.421     -8.628      9.416      0.140
+   557       223   (omega)            -83   539   551   942   944     0     0     -1.280     -2.754     -8.991      9.522      0.784
+   558      2224   (Delta++)          -83   539   551   823   824     0     0      0.047     -2.007    -13.663     13.865      1.240
+   559     -3222   Sigmabar-           83   539   551     0     0     0     0     -1.826     -3.858    -26.699     27.064      1.189
+   560      -323   (K*-)              -83   539   551   825   826     0     0     -1.446     -3.733    -25.835     26.158      0.876
+   561       213   (rho+)             -83   539   551   827   828     0     0     -0.215     -0.282     -2.052      2.211      0.741
+   562       223   (omega)            -83   539   551   945   947     0     0      0.093     -1.147     -7.528      7.655      0.780
+   563      2112   n0                  84   539   551     0     0     0     0     -0.776     -0.431     -3.915      4.123      0.940
+   564     -2112   nbar0               84   539   551     0     0     0     0     -2.057     -1.132     -4.084      4.804      0.940
+   565       311   (K0)               -84   539   551   829   829     0     0     -0.860     -0.194     -0.475      1.119      0.498
+   566      -311   (Kbar0)            -84   539   551   830   830     0     0     -0.230     -0.242     -1.555      1.667      0.498
+   567      2112   n0                  84   539   551     0     0     0     0     -1.021     -1.206     -5.038      5.363      0.940
+   568       221   (eta)              -84   539   551   948   950     0     0     -0.341     -1.205     -2.695      3.021      0.548
+   569     -2212   pbar-               84   539   551     0     0     0     0     -0.357     -1.118     -4.970      5.192      0.938
+   570       211   pi+                 84   539   551     0     0     0     0     -1.290     -2.925     -7.473      8.129      0.140
+   571      -213   (rho-)             -84   539   551   831   832     0     0     -1.049     -6.840    -20.584     21.732      0.844
+   572         1   (d)                -71   434   434   590   639   110     0      3.625     -0.194    532.097    532.109      0.330
+   573        21   (g)                -71   495   495   590   639   200   110      0.848      0.447     -0.921      1.373      0.343
+   574        21   (g)                -71   411   411   590   639   152   200      3.736      3.033      0.020      4.812      0.000
+   575        21   (g)                -71   396   396   590   639   156   152      3.268      1.852      0.570      3.799      0.000
+   576        21   (g)                -71   401   401   590   639   177   156      0.461     -0.113      0.565      0.738      0.000
+   577        21   (g)                -71   404   404   590   639   109   177     -0.408     -0.817      0.116      0.921      0.000
+   578        21   (g)                -71   405   405   590   639   178   109      0.161     -0.094      0.151      0.240      0.000
+   579        21   (g)                -71   395   395   590   639   162   178     -2.631     -7.666     10.743     13.457      0.000
+   580        21   (g)                -71   403   403   590   639   108   162     -0.789     -0.224      1.321      1.555      0.000
+   581        21   (g)                -71   394   394   590   639   192   108     -5.903     -3.477      2.738      7.377      0.000
+   582        21   (g)                -71   409   409   590   639   106   192     -0.826      0.276      0.508      1.009      0.000
+   583        21   (g)                -71   452   452   590   639   132   106     -0.115      0.663     53.589     53.593      0.000
+   584        21   (g)                -71   480   480   590   639   214   132     -0.441      0.401    126.017    126.018      0.000
+   585        21   (g)                -71   496   496   590   639   148   214     -0.585      1.702     12.432     12.567      0.378
+   586        21   (g)                -71   421   421   590   639   149   148     -1.062      0.624      4.475      4.642      0.000
+   587        21   (g)                -71   461   461   590   639   128   149     -1.661     -0.298     10.522     10.656      0.000
+   588        21   (g)                -71   415   415   590   639   160   128     -2.856      0.438     20.595     20.796      0.000
+   589        -3   (sbar)             -71   423   423   590   639     0   160     -0.452      0.521      9.109      9.148      0.500
+   590      -213   (rho-)             -83   572   589   833   834     0     0      2.094      0.246    254.327    254.337      0.877
+   591       211   pi+                 83   572   589     0     0     0     0      0.514     -0.616    161.235    161.237      0.140
+   592      -211   pi-                 83   572   589     0     0     0     0      0.482      0.130     22.855     22.861      0.140
+   593       111   (pi0)              -83   572   589   951   952     0     0      0.106      0.409     19.433     19.438      0.135
+   594       221   (eta)              -83   572   589   953   955     0     0      0.304     -0.326     26.710     26.719      0.548
+   595       321   K+                  83   572   589     0     0     0     0     -0.299      0.230     12.815     12.830      0.494
+   596      -321   K-                  83   572   589     0     0     0     0      0.151     -0.135     10.171     10.185      0.494
+   597       211   pi+                 83   572   589     0     0     0     0     -0.135      0.065      0.798      0.824      0.140
+   598      -213   (rho-)             -83   572   589   835   836     0     0      0.122     -0.009     16.153     16.194      1.146
+   599       321   K+                  83   572   589     0     0     0     0      0.336     -0.317      4.324      4.376      0.494
+   600      -311   (Kbar0)            -83   572   589   837   837     0     0     -0.211      0.076      1.208      1.326      0.498
+   601       113   (rho0)             -83   572   589   838   839     0     0      0.537      0.194      0.114      1.214      1.066
+   602      -211   pi-                 83   572   589     0     0     0     0      0.552      0.894      0.728      1.286      0.140
+   603       113   (rho0)             -83   572   589   840   841     0     0      1.379      0.822      0.172      1.795      0.786
+   604       211   pi+                 83   572   589     0     0     0     0      0.024      0.172      0.097      0.243      0.140
+   605      -213   (rho-)             -83   572   589   842   843     0     0      1.568      0.380      0.593      2.145      1.284
+   606       223   (omega)            -83   572   589   956   958     0     0      0.292      0.320     -0.051      0.912      0.802
+   607       211   pi+                 83   572   589     0     0     0     0      1.299      1.111      0.191      1.725      0.140
+   608       111   (pi0)              -83   572   589   959   960     0     0      0.534      0.219     -0.182      0.620      0.135
+   609      3212   (Sigma0)           -83   572   589   961   962     0     0      1.484      0.441      0.409      1.996      1.193
+   610     -3222   Sigmabar-           83   572   589     0     0     0     0      0.398      0.237      0.673      1.443      1.189
+   611       211   pi+                 83   572   589     0     0     0     0      0.055     -0.502      0.325      0.617      0.140
+   612       111   (pi0)              -83   572   589   963   964     0     0     -0.796     -1.942      3.072      3.722      0.135
+   613      -211   pi-                 83   572   589     0     0     0     0     -0.344     -1.155      0.937      1.533      0.140
+   614       211   pi+                 83   572   589     0     0     0     0     -1.106     -0.449      1.793      2.159      0.140
+   615       111   (pi0)              -83   572   589   965   966     0     0     -0.467     -2.247      1.875      2.967      0.135
+   616       311   (K0)               -83   572   589   844   844     0     0     -0.751     -1.598      1.659      2.473      0.498
+   617      -311   (Kbar0)            -83   572   589   845   845     0     0     -0.397     -0.020      0.498      0.808      0.498
+   618      -211   pi-                 83   572   589     0     0     0     0     -1.503     -1.408      1.251      2.414      0.140
+   619       211   pi+                 83   572   589     0     0     0     0     -0.650     -0.871      0.919      1.431      0.140
+   620      -211   pi-                 83   572   589     0     0     0     0     -1.648     -0.680      1.451      2.303      0.140
+   621       113   (rho0)             -84   572   589   846   847     0     0     -0.958      0.024      1.009      1.737      1.040
+   622       213   (rho+)             -84   572   589   848   849     0     0     -0.862     -0.703      0.842      1.648      0.876
+   623      -211   pi-                 84   572   589     0     0     0     0      0.147     -0.126      1.364      1.385      0.140
+   624       211   pi+                 84   572   589     0     0     0     0     -0.005      0.184      1.252      1.273      0.140
+   625       311   (K0)               -84   572   589   850   850     0     0     -0.346     -0.194      0.806      1.027      0.498
+   626      -323   (K*-)              -84   572   589   851   852     0     0     -0.285     -0.031     11.664     11.708      0.977
+   627       213   (rho+)             -84   572   589   853   854     0     0     -0.033      0.807     28.248     28.270      0.768
+   628       111   (pi0)              -84   572   589   967   968     0     0      0.020     -0.595     31.579     31.585      0.135
+   629       113   (rho0)             -84   572   589   855   856     0     0     -0.271      0.717     15.302     15.340      0.765
+   630       313   (K*0)              -84   572   589   857   858     0     0     -0.372      0.023     21.449     21.470      0.888
+   631      -311   (Kbar0)            -84   572   589   859   859     0     0     -0.259      0.570     23.319     23.333      0.498
+   632      -211   pi-                 84   572   589     0     0     0     0      0.072      0.110      1.195      1.211      0.140
+   633       111   (pi0)              -84   572   589   969   970     0     0     -0.158      0.548     34.731     34.736      0.135
+   634      2224   (Delta++)          -84   572   589   860   861     0     0     -0.414      0.159     12.122     12.213      1.417
+   635       221   (eta)              -84   572   589   971   973     0     0     -0.374      0.470      6.113      6.166      0.548
+   636     -2224   (Deltabar--)       -84   572   589   862   863     0     0     -1.431      0.608     14.808     14.942      1.255
+   637       211   pi+                 84   572   589     0     0     0     0     -0.689     -0.286      6.662      6.705      0.140
+   638      -213   (rho-)             -84   572   589   864   865     0     0     -2.494      0.899     15.475     15.724      0.863
+   639       321   K+                  84   572   589     0     0     0     0     -0.840      0.220     10.153     10.202      0.494
+   640         2   (u)                -71   393   393   647   664   135     0      3.142      6.454    152.529    152.698      0.330
+   641        21   (g)                -71   505   505   647   664   188   135     -1.198      4.697    120.584    120.681      0.185
+   642        21   (g)                -71   398   398   647   664   107   188      1.398     -1.832      7.469      7.816      0.000
+   643        21   (g)                -71   410   410   647   664   194   107     -0.614      0.016     -5.115      5.152      0.000
+   644        21   (g)                -71   402   402   647   664   191   194     -0.497     -2.868    -36.920     37.034      0.000
+   645        21   (g)                -71   408   408   647   664   158   191      0.139     -0.447     -2.946      2.983      0.000
+   646        -2   (ubar)             -71   397   397   647   664     0   158     -0.537     -0.686    -18.856     18.879      0.330
+   647       321   K+                  83   640   646     0     0     0     0      1.795      4.168    104.670    104.769      0.494
+   648      -321   K-                  83   640   646     0     0     0     0      0.710      1.271     27.305     27.349      0.494
+   649       113   (rho0)             -83   640   646   866   867     0     0     -0.093      1.228     42.726     42.751      0.783
+   650       211   pi+                 83   640   646     0     0     0     0     -0.444      3.543     84.804     84.879      0.140
+   651      -211   pi-                 83   640   646     0     0     0     0      0.244      0.022      0.539      0.609      0.140
+   652       211   pi+                 83   640   646     0     0     0     0     -0.173     -0.231      1.182      1.225      0.140
+   653      -211   pi-                 83   640   646     0     0     0     0      0.529      0.386      5.231      5.273      0.140
+   654       321   K+                  83   640   646     0     0     0     0      0.137     -0.397      4.088      4.140      0.494
+   655      -313   (K*bar0)           -83   640   646   868   869     0     0     -0.367      0.216      4.690      4.802      0.936
+   656       313   (K*0)              -83   640   646   870   871     0     0      0.984     -0.409      4.573      4.786      0.926
+   657      -313   (K*bar0)           -83   640   646   872   873     0     0     -0.189     -0.326     -0.147      0.999      0.913
+   658      -211   pi-                 83   640   646     0     0     0     0     -0.216     -0.016      0.010      0.258      0.140
+   659       213   (rho+)             -83   640   646   874   875     0     0     -0.054     -0.355     -4.786      4.898      0.978
+   660      -213   (rho-)             -84   640   646   876   877     0     0     -0.003     -0.925    -10.939     11.008      0.812
+   661       113   (rho0)             -84   640   646   878   879     0     0     -0.044     -0.146     -5.480      5.618      1.230
+   662       223   (omega)            -84   640   646   974   976     0     0     -0.698     -0.923    -14.202     14.277      0.894
+   663       111   (pi0)              -84   640   646   977   978     0     0     -0.170     -0.681     -6.958      6.994      0.135
+   664       223   (omega)            -84   640   646   979   981     0     0     -0.117     -1.091    -20.564     20.608      0.786
+   665         3   (s)                -71   428   428   683   717   113     0     -0.075     -0.389      4.629      4.673      0.500
+   666        21   (g)                -71   501   501   683   717   211   113     -1.477     -0.710     22.421     22.483      0.320
+   667        21   (g)                -71   504   504   683   717   170   211     -0.684     -0.330      2.597      2.740      0.434
+   668        21   (g)                -71   462   462   683   717   164   170     -1.697      0.570     -0.894      2.001      0.000
+   669        21   (g)                -71   437   437   683   717   168   164     -0.993      0.951     -0.214      1.392      0.000
+   670        21   (g)                -71   416   416   683   717   167   168     -0.677      2.947     -0.621      3.087      0.000
+   671        21   (g)                -71   497   497   683   717   182   167      0.632      1.623     -1.391      2.229      0.039
+   672        21   (g)                -71   499   499   683   717   183   182     -0.801      1.801     -7.965      8.206      0.138
+   673        21   (g)                -71   435   435   683   717   199   183     -1.009      2.638    -20.730     20.922      0.000
+   674        21   (g)                -71   448   448   683   717   201   199     -1.133      0.742    -10.600     10.686      0.000
+   675        21   (g)                -71   474   474   683   717   171   201     -0.409      0.534    -13.383     13.400      0.000
+   676        21   (g)                -71   503   503   683   717   138   171      0.242      1.038    -19.635     19.668      0.392
+   677        21   (g)                -71   473   473   683   717   186   138      1.763      2.569   -404.241    404.253      0.000
+   678        21   (g)                -71   500   500   683   717   119   186      2.335     -3.181   -186.051    186.093      0.149
+   679        21   (g)                -71   457   457   683   717   121   119      0.436     -2.156    -88.190     88.217      0.000
+   680        21   (g)                -71   502   502   683   717   117   121      0.592     -2.261    -71.040     71.079      0.326
+   681        21   (g)                -71   479   479   683   717   216   117     -1.041     -1.325    -26.766     26.819      0.000
+   682      2203   (uu_1)             -71   485   485   683   717     0   216     -0.193      1.611   -732.595    732.597      0.771
+   683       221   (eta)              -83   665   682   982   984     0     0     -1.000     -0.624     14.497     14.556      0.548
+   684       333   (phi)              -83   665   682   985   986     0     0     -0.482     -0.563      6.860      6.974      1.019
+   685      -313   (K*bar0)           -83   665   682   880   881     0     0     -0.553     -0.089      6.261      6.344      0.849
+   686      -213   (rho-)             -83   665   682   882   883     0     0     -0.003      0.095      0.080      0.805      0.796
+   687       223   (omega)            -83   665   682   987   989     0     0     -1.034     -0.067      1.204      1.771      0.783
+   688      2224   (Delta++)          -83   665   682   884   885     0     0     -0.936      0.984     -0.060      1.867      1.280
+   689     -2224   (Deltabar--)       -83   665   682   886   887     0     0     -1.023      2.275     -1.626      3.253      1.310
+   690      2214   (Delta+)           -83   665   682   888   889     0     0     -0.033      1.623     -1.289      2.479      1.359
+   691       221   (eta)              -83   665   682   990   991     0     0     -0.518      0.003     -0.520      0.915      0.548
+   692     -2112   nbar0               83   665   682     0     0     0     0      0.177      1.027     -1.910      2.370      0.940
+   693      -213   (rho-)             -83   665   682   890   891     0     0     -0.708      0.717     -2.466      2.818      0.919
+   694       211   pi+                 83   665   682     0     0     0     0      0.008      1.895     -9.270      9.463      0.140
+   695      -211   pi-                 83   665   682     0     0     0     0      0.025      0.258     -0.768      0.823      0.140
+   696       111   (pi0)              -84   665   682   992   993     0     0     -0.649      0.086    -10.600     10.621      0.135
+   697       213   (rho+)             -84   665   682   892   893     0     0     -0.965      2.429    -24.629     24.797      1.219
+   698       311   (K0)               -84   665   682   894   894     0     0      0.248      0.347     -9.392      9.414      0.498
+   699      -311   (Kbar0)            -84   665   682   895   895     0     0     -0.124      0.016     -7.523      7.541      0.498
+   700       313   (K*0)              -84   665   682   896   897     0     0     -0.529      0.353    -26.020     26.043      0.888
+   701      -321   K-                  84   665   682     0     0     0     0      0.485      1.154   -152.849    152.855      0.494
+   702       211   pi+                 84   665   682     0     0     0     0      0.368      0.571    -32.453     32.461      0.140
+   703      -211   pi-                 84   665   682     0     0     0     0      0.098      0.110    -15.739     15.741      0.140
+   704       111   (pi0)              -84   665   682   994   995     0     0     -0.015     -0.205     -3.139      3.149      0.135
+   705       111   (pi0)              -84   665   682   996   997     0     0      0.613      0.506    -82.284     82.288      0.135
+   706       113   (rho0)             -84   665   682   898   899     0     0      0.528      0.478    -66.441     66.449      0.773
+   707       213   (rho+)             -84   665   682   900   901     0     0      1.068     -2.102   -150.956    150.976      0.791
+   708      -213   (rho-)             -84   665   682   902   903     0     0      0.220     -0.179    -31.202     31.212      0.766
+   709       211   pi+                 84   665   682     0     0     0     0      0.351     -0.557    -29.850     29.857      0.140
+   710      -213   (rho-)             -84   665   682   904   905     0     0      1.219     -2.753   -117.083    117.124      0.739
+   711       331   (eta')             -84   665   682   998   999     0     0     -0.078     -1.626    -38.419     38.465      0.958
+   712       211   pi+                 84   665   682     0     0     0     0      0.026     -0.258    -16.351     16.354      0.140
+   713      2112   n0                  84   665   682     0     0     0     0     -0.419      0.139    -61.166     61.175      0.940
+   714     -2212   pbar-               84   665   682     0     0     0     0      0.030     -0.648    -67.517     67.526      0.938
+   715       223   (omega)            -84   665   682  1000  1002     0     0     -0.572      0.269   -111.961    111.966      0.795
+   716       111   (pi0)              -84   665   682  1003  1004     0     0      0.121      0.041   -113.624    113.624      0.135
+   717      2224   (Delta++)          -84   665   682   906   907     0     0     -0.132      0.964   -396.463    396.466      1.230
+   718         2   (u)                -71   487   487   743   800   139     0     -0.393      0.306   -151.466    151.467      0.330
+   719        21   (g)                -71   425   425   743   800   175   139     -0.348     -0.473     -3.811      3.856      0.000
+   720        21   (g)                -71   439   439   743   800   206   175     -0.709     -0.173     -1.299      1.490      0.000
+   721        21   (g)                -71   488   488   743   800   179   206     -1.443     -1.184     -2.099      2.811      0.102
+   722        21   (g)                -71   489   489   743   800   143   179      0.564     -1.201     -3.805      4.032      0.149
+   723        21   (g)                -71   490   490   743   800   114   143      0.376     -0.257     -3.203      3.240      0.175
+   724        21   (g)                -71   460   460   743   800   130   114      5.636     -1.851     -7.757      9.765      0.000
+   725        21   (g)                -71   465   465   743   800   129   130      0.847     -0.153     -0.725      1.125      0.000
+   726        21   (g)                -71   494   494   743   800   210   129      1.637      0.010      1.595      2.357      0.574
+   727        21   (g)                -71   414   414   743   800   181   210      3.716     -2.463      2.282      5.008      0.000
+   728        21   (g)                -71   491   491   743   800   145   181      1.228     -1.375      0.337      1.913      0.386
+   729        21   (g)                -71   420   420   743   800   198   145      0.769     -0.928      1.570      1.979      0.000
+   730        21   (g)                -71   492   492   743   800   111   198      0.041     -1.271      6.928      7.055      0.388
+   731        21   (g)                -71   419   419   743   800   140   111      1.124      0.485     11.673     11.737      0.000
+   732        21   (g)                -71   430   430   743   800   204   140     -1.702      1.274     30.133     30.208      0.000
+   733        21   (g)                -71   493   493   743   800   136   204      0.459      1.331     28.862     28.901      0.543
+   734        21   (g)                -71   374   374   743   800   102   136     -1.844     -0.756   -359.762    359.768      0.000
+   735        21   (g)                -71   375   375   743   800   208   102     -0.545      0.417     -0.597      0.909      0.000
+   736        21   (g)                -71   390   390   743   800   185   208      0.053     -0.403     -0.879      0.969      0.000
+   737        21   (g)                -71   383   383   743   800   151   185      0.490      0.699     -0.330      0.916      0.000
+   738        21   (g)                -71   369   369   743   800   157   151      7.697      6.616      1.746     10.299      0.000
+   739        21   (g)                -71   384   384   743   800   187   157      3.777      4.222      0.174      5.668      0.000
+   740        21   (g)                -71   378   378   743   800   193   187      6.264      6.696      1.300      9.261      0.000
+   741        21   (g)                -71   385   385   743   800   125   193      6.332      8.778      2.045     11.015      0.000
+   742        -1   (dbar)             -71   363   363   743   800     0   125     13.194     18.785      3.177     23.177      0.330
+   743       213   (rho+)             -83   718   742   908   909     0     0     -0.602     -0.138   -129.952    129.957      0.898
+   744       111   (pi0)              -83   718   742  1005  1006     0     0     -0.356      0.145     -8.835      8.844      0.135
+   745       311   (K0)               -83   718   742   910   910     0     0      0.546     -0.143     -7.267      7.305      0.498
+   746      -321   K-                  83   718   742     0     0     0     0     -0.389      0.015     -3.377      3.435      0.494
+   747       321   K+                  83   718   742     0     0     0     0     -0.522      0.180     -2.387      2.499      0.494
+   748      -321   K-                  83   718   742     0     0     0     0      0.205     -0.646     -1.050      1.344      0.494
+   749       113   (rho0)             -83   718   742   911   912     0     0     -0.262     -1.161     -5.527      5.719      0.864
+   750      2212   p+                  83   718   742     0     0     0     0      0.684      0.440     -3.020      3.265      0.938
+   751     -2112   nbar0               83   718   742     0     0     0     0     -0.470     -1.865     -3.079      3.750      0.940
+   752       311   (K0)               -83   718   742   913   913     0     0      0.479     -0.163     -2.215      2.326      0.498
+   753      -323   (K*-)              -83   718   742   914   915     0     0      1.666     -0.102     -3.367      3.868      0.916
+   754       111   (pi0)              -83   718   742  1007  1008     0     0      1.356     -0.502     -0.926      1.722      0.135
+   755      2212   p+                  83   718   742     0     0     0     0      0.838     -0.497     -0.808      1.576      0.938
+   756     -2112   nbar0               83   718   742     0     0     0     0      0.875     -0.050     -0.327      1.326      0.940
+   757       221   (eta)              -83   718   742  1009  1010     0     0      0.854     -0.234     -0.289      1.081      0.548
+   758      2112   n0                  83   718   742     0     0     0     0      1.675     -1.842      0.455      2.700      0.940
+   759     -2112   nbar0               83   718   742     0     0     0     0      1.025     -0.199      0.058      1.406      0.940
+   760       111   (pi0)              -83   718   742  1011  1012     0     0     -0.039     -0.462      0.072      0.488      0.135
+   761      -211   pi-                 83   718   742     0     0     0     0      0.543     -0.184      0.707      0.921      0.140
+   762       213   (rho+)             -83   718   742   916   917     0     0      1.993     -0.391      1.514      2.617      0.659
+   763       223   (omega)            -83   718   742  1013  1015     0     0      1.037     -1.434      1.217      2.281      0.768
+   764      -211   pi-                 83   718   742     0     0     0     0      0.018     -0.605      0.455      0.770      0.140
+   765       223   (omega)            -83   718   742  1016  1018     0     0      0.310     -0.117      2.053      2.222      0.783
+   766       211   pi+                 83   718   742     0     0     0     0      0.276     -0.112      0.739      0.809      0.140
+   767      -211   pi-                 83   718   742     0     0     0     0      0.330     -0.688      1.556      1.738      0.140
+   768       211   pi+                 84   718   742     0     0     0     0     -0.002      0.671     12.770     12.789      0.140
+   769      -213   (rho-)             -84   718   742   918   919     0     0     -0.498     -0.037     13.293     13.326      0.805
+   770      3122   Lambda0             84   718   742     0     0     0     0      0.724      0.780     14.471     14.553      1.116
+   771     -3112   Sigmabar+           84   718   742     0     0     0     0     -0.605      0.932     22.763     22.822      1.197
+   772       113   (rho0)             -84   718   742   920   921     0     0      0.300      0.712      8.339      8.431      0.970
+   773      -211   pi-                 84   718   742     0     0     0     0     -0.379     -0.272      0.295      0.570      0.140
+   774       111   (pi0)              -84   718   742  1019  1020     0     0      0.244      0.190     -0.363      0.495      0.135
+   775       211   pi+                 84   718   742     0     0     0     0     -0.046     -0.444     -0.384      0.606      0.140
+   776      3212   (Sigma0)           -84   718   742  1021  1022     0     0     -0.670     -0.326     -2.300      2.696      1.193
+   777     -3222   Sigmabar-           84   718   742     0     0     0     0      0.679      0.400     -1.760      2.266      1.189
+   778       211   pi+                 84   718   742     0     0     0     0      0.187      0.298     -1.221      1.279      0.140
+   779      3212   (Sigma0)           -84   718   742  1023  1024     0     0     -0.303     -0.172    -17.047     17.092      1.193
+   780       311   (K0)               -84   718   742   922   922     0     0     -0.031      0.232    -21.580     21.587      0.498
+   781     -2212   pbar-               84   718   742     0     0     0     0     -0.635     -0.741   -144.813    144.819      0.938
+   782       111   (pi0)              -84   718   742  1025  1026     0     0     -0.396      0.258    -12.344     12.354      0.135
+   783       211   pi+                 84   718   742     0     0     0     0      0.077     -0.215    -34.517     34.518      0.140
+   784       311   (K0)               -84   718   742   923   923     0     0     -0.206     -0.300    -16.896     16.908      0.498
+   785      -311   (Kbar0)            -84   718   742   924   924     0     0     -0.791      0.225    -40.923     40.935      0.498
+   786      -211   pi-                 84   718   742     0     0     0     0      0.305      0.387    -21.451     21.458      0.140
+   787       111   (pi0)              -84   718   742  1027  1028     0     0     -0.024     -0.396     -7.933      7.944      0.135
+   788       323   (K*+)              -84   718   742   925   926     0     0     -0.234     -0.022    -12.599     12.635      0.922
+   789      -321   K-                  84   718   742     0     0     0     0      0.133     -0.011    -13.922     13.931      0.494
+   790      3212   (Sigma0)           -84   718   742  1029  1030     0     0     -0.113     -0.426     -4.783      4.949      1.193
+   791       223   (omega)            -84   718   742  1031  1033     0     0     -0.097      0.898     -4.745      4.894      0.784
+   792     -3114   (Sigma*bar+)       -84   718   742   927   928     0     0      0.479      0.304     -0.883      1.734      1.380
+   793      -213   (rho-)             -84   718   742   929   930     0     0      3.034      2.939      1.047      4.447      0.916
+   794       213   (rho+)             -84   718   742   931   932     0     0      2.488      2.177     -0.078      3.404      0.805
+   795      -211   pi-                 84   718   742     0     0     0     0      6.128      5.823      0.965      8.509      0.140
+   796       111   (pi0)              -84   718   742  1034  1035     0     0      2.031      2.883      0.565      3.574      0.135
+   797       111   (pi0)              -84   718   742  1036  1037     0     0      3.740      4.307      1.176      5.826      0.135
+   798       211   pi+                 84   718   742     0     0     0     0      5.160      6.621      0.708      8.425      0.140
+   799      -213   (rho-)             -84   718   742   933   934     0     0     13.001     18.406      3.543     22.831      0.947
+   800       211   pi+                 84   718   742     0     0     0     0      1.469      1.807      0.298      2.352      0.140
+   801      -321   K-                  91   516     0     0     0     0     0      0.118     -0.028     23.334     23.340      0.494
+   802       211   pi+                 91   516     0     0     0     0     0     -0.134     -0.392     34.418     34.420      0.140
+   803      2112   n0                  91   519     0     0     0     0     0      0.238      0.134    504.002    504.002      0.940
+   804       111   (pi0)              -91   519     0  1038  1039     0     0      0.033     -0.140    288.653    288.653      0.135
+   805       311   (K0)               -91   523     0   935   935     0     0     -2.563      1.548     15.978     16.264      0.498
+   806       111   (pi0)              -91   523     0  1040  1041     0     0     -1.508      0.415      7.986      8.139      0.135
+   807      -311   (Kbar0)            -91   524     0   936   936     0     0     -0.766      0.162      5.489      5.567      0.498
+   808      -211   pi-                 91   524     0     0     0     0     0     -1.289      0.484      4.759      4.956      0.140
+   809      2212   p+                  91   525     0     0     0     0     0     -1.629      0.887     10.536     10.739      0.938
+   810       111   (pi0)              -91   525     0  1042  1043     0     0     -1.365      0.384      9.342      9.450      0.135
+   811       211   pi+                 91   526     0     0     0     0     0     -1.043      0.764      7.234      7.350      0.140
+   812       111   (pi0)              -91   526     0  1044  1045     0     0     -1.154      0.155     10.863     10.926      0.135
+   813     -2212   pbar-               91   527     0     0     0     0     0     -1.233     -0.507     18.564     18.636      0.938
+   814       111   (pi0)              -91   527     0  1046  1047     0     0     -0.153      0.042      1.386      1.402      0.135
+   815       310   K_S0                91   528   528     0     0     0     0     -5.433     -2.091     98.805     98.978      0.498
+   816      -311   (Kbar0)            -91   531     0   937   937     0     0      0.008     -0.678     -3.642      3.737      0.498
+   817       111   (pi0)              -91   531     0  1048  1049     0     0      0.194      0.106     -1.075      1.105      0.135
+   818       310   K_S0                91   534   534     0     0     0     0      0.540     -0.287      1.096      1.350      0.498
+   819       321   K+                  91   554     0     0     0     0     0     -1.984     -5.796    -14.596     15.837      0.494
+   820       111   (pi0)              -91   554     0  1050  1051     0     0     -0.157     -0.224     -0.678      0.743      0.135
+   821      -311   (Kbar0)            -91   555     0   938   938     0     0     -0.798     -1.281     -4.359      4.639      0.498
+   822       111   (pi0)              -91   555     0  1052  1053     0     0     -0.262     -1.003     -1.864      2.137      0.135
+   823      2212   p+                  91   558     0     0     0     0     0     -0.108     -1.762    -10.725     10.909      0.938
+   824       211   pi+                 91   558     0     0     0     0     0      0.155     -0.245     -2.938      2.956      0.140
+   825      -321   K-                  91   560     0     0     0     0     0     -1.375     -3.411    -24.331     24.613      0.494
+   826       111   (pi0)              -91   560     0  1054  1055     0     0     -0.070     -0.322     -1.504      1.545      0.135
+   827       211   pi+                 91   561     0     0     0     0     0     -0.086     -0.495     -1.527      1.614      0.140
+   828       111   (pi0)              -91   561     0  1056  1057     0     0     -0.129      0.213     -0.525      0.597      0.135
+   829       310   K_S0                91   565   565     0     0     0     0     -0.860     -0.194     -0.475      1.119      0.498
+   830       310   K_S0                91   566   566     0     0     0     0     -0.230     -0.242     -1.555      1.667      0.498
+   831      -211   pi-                 91   571     0     0     0     0     0     -0.681     -5.812    -17.858     18.793      0.140
+   832       111   (pi0)              -91   571     0  1058  1059     0     0     -0.368     -1.028     -2.726      2.939      0.135
+   833      -211   pi-                 91   590     0     0     0     0     0      2.087      0.336    239.198    239.207      0.140
+   834       111   (pi0)              -91   590     0  1060  1061     0     0      0.007     -0.090     15.129     15.130      0.135
+   835      -211   pi-                 91   598     0     0     0     0     0     -0.026     -0.469     12.126     12.136      0.140
+   836       111   (pi0)              -91   598     0  1062  1063     0     0      0.147      0.460      4.027      4.058      0.135
+   837       310   K_S0                91   600   600     0     0     0     0     -0.211      0.076      1.208      1.326      0.498
+   838       211   pi+                 91   601     0     0     0     0     0     -0.028     -0.224     -0.289      0.392      0.140
+   839      -211   pi-                 91   601     0     0     0     0     0      0.565      0.417      0.403      0.822      0.140
+   840       211   pi+                 91   603     0     0     0     0     0      1.254      0.435      0.006      1.335      0.140
+   841      -211   pi-                 91   603     0     0     0     0     0      0.125      0.386      0.166      0.460      0.140
+   842      -211   pi-                 91   605     0     0     0     0     0      0.879      0.737      0.699      1.350      0.140
+   843       111   (pi0)              -91   605     0  1064  1065     0     0      0.689     -0.357     -0.106      0.795      0.135
+   844       130   K_L0                91   616   616     0     0     0     0     -0.751     -1.598      1.659      2.473      0.498
+   845       310   K_S0                91   617   617     0     0     0     0     -0.397     -0.020      0.498      0.808      0.498
+   846       211   pi+                 91   621     0     0     0     0     0     -0.069      0.401      0.230      0.488      0.140
+   847      -211   pi-                 91   621     0     0     0     0     0     -0.890     -0.378      0.779      1.249      0.140
+   848       211   pi+                 91   622     0     0     0     0     0     -0.194      0.169      0.079      0.303      0.140
+   849       111   (pi0)              -91   622     0  1066  1067     0     0     -0.668     -0.872      0.764      1.344      0.135
+   850       130   K_L0                91   625   625     0     0     0     0     -0.346     -0.194      0.806      1.027      0.498
+   851      -311   (Kbar0)            -91   626     0   939   939     0     0     -0.051     -0.341      6.931      6.957      0.498
+   852      -211   pi-                 91   626     0     0     0     0     0     -0.234      0.310      4.733      4.751      0.140
+   853       211   pi+                 91   627     0     0     0     0     0      0.131      0.140     16.136     16.138      0.140
+   854       111   (pi0)              -91   627     0  1068  1069     0     0     -0.164      0.667     12.112     12.132      0.135
+   855       211   pi+                 91   629     0     0     0     0     0     -0.385      0.540     13.837     13.854      0.140
+   856      -211   pi-                 91   629     0     0     0     0     0      0.115      0.177      1.465      1.486      0.140
+   857       321   K+                  91   630     0     0     0     0     0     -0.118      0.275     13.617     13.629      0.494
+   858      -211   pi-                 91   630     0     0     0     0     0     -0.255     -0.251      7.832      7.841      0.140
+   859       130   K_L0                91   631   631     0     0     0     0     -0.259      0.570     23.319     23.333      0.498
+   860      2212   p+                  91   634     0     0     0     0     0     -0.094     -0.210      7.227      7.292      0.938
+   861       211   pi+                 91   634     0     0     0     0     0     -0.320      0.369      4.895      4.921      0.140
+   862     -2212   pbar-               91   636     0     0     0     0     0     -1.090      0.223     10.158     10.262      0.938
+   863      -211   pi-                 91   636     0     0     0     0     0     -0.340      0.385      4.650      4.681      0.140
+   864      -211   pi-                 91   638     0     0     0     0     0     -0.089      0.196      0.954      0.988      0.140
+   865       111   (pi0)              -91   638     0  1070  1071     0     0     -2.405      0.703     14.521     14.736      0.135
+   866       211   pi+                 91   649     0     0     0     0     0     -0.410      0.688     22.122     22.137      0.140
+   867      -211   pi-                 91   649     0     0     0     0     0      0.317      0.540     20.604     20.614      0.140
+   868      -321   K-                  91   655     0     0     0     0     0      0.025      0.048      3.393      3.430      0.494
+   869       211   pi+                 91   655     0     0     0     0     0     -0.392      0.168      1.297      1.372      0.140
+   870       321   K+                  91   656     0     0     0     0     0      0.969     -0.543      4.006      4.186      0.494
+   871      -211   pi-                 91   656     0     0     0     0     0      0.014      0.135      0.567      0.600      0.140
+   872      -321   K-                  91   657     0     0     0     0     0     -0.053      0.081     -0.206      0.544      0.494
+   873       211   pi+                 91   657     0     0     0     0     0     -0.136     -0.407      0.059      0.455      0.140
+   874       211   pi+                 91   659     0     0     0     0     0     -0.204     -0.100     -4.328      4.337      0.140
+   875       111   (pi0)              -91   659     0  1072  1073     0     0      0.151     -0.255     -0.458      0.562      0.135
+   876      -211   pi-                 91   660     0     0     0     0     0      0.114     -0.341     -7.838      7.847      0.140
+   877       111   (pi0)              -91   660     0  1074  1075     0     0     -0.116     -0.584     -3.101      3.160      0.135
+   878       211   pi+                 91   661     0     0     0     0     0      0.193      0.322     -0.689      0.797      0.140
+   879      -211   pi-                 91   661     0     0     0     0     0     -0.236     -0.468     -4.790      4.821      0.140
+   880      -321   K-                  91   685     0     0     0     0     0     -0.096      0.025      2.510      2.560      0.494
+   881       211   pi+                 91   685     0     0     0     0     0     -0.458     -0.114      3.752      3.784      0.140
+   882      -211   pi-                 91   686     0     0     0     0     0     -0.360     -0.031     -0.032      0.388      0.140
+   883       111   (pi0)              -91   686     0  1076  1077     0     0      0.356      0.127      0.112      0.417      0.135
+   884      2212   p+                  91   688     0     0     0     0     0     -0.641      0.754     -0.307      1.398      0.938
+   885       211   pi+                 91   688     0     0     0     0     0     -0.295      0.230      0.247      0.469      0.140
+   886     -2212   pbar-               91   689     0     0     0     0     0     -1.074      2.115     -1.643      3.034      0.938
+   887      -211   pi-                 91   689     0     0     0     0     0      0.051      0.160      0.017      0.219      0.140
+   888      2112   n0                  91   690     0     0     0     0     0     -0.293      1.249     -1.204      1.995      0.940
+   889       211   pi+                 91   690     0     0     0     0     0      0.261      0.374     -0.085      0.484      0.140
+   890      -211   pi-                 91   693     0     0     0     0     0     -0.104     -0.156     -0.839      0.871      0.140
+   891       111   (pi0)              -91   693     0  1078  1079     0     0     -0.604      0.873     -1.627      1.948      0.135
+   892       211   pi+                 91   697     0     0     0     0     0     -0.725      2.236    -23.542     23.659      0.140
+   893       111   (pi0)              -91   697     0  1080  1081     0     0     -0.240      0.193     -1.087      1.138      0.135
+   894       130   K_L0                91   698   698     0     0     0     0      0.248      0.347     -9.392      9.414      0.498
+   895       130   K_L0                91   699   699     0     0     0     0     -0.124      0.016     -7.523      7.541      0.498
+   896       321   K+                  91   700     0     0     0     0     0     -0.492      0.133    -12.352     12.372      0.494
+   897      -211   pi-                 91   700     0     0     0     0     0     -0.037      0.220    -13.669     13.671      0.140
+   898       211   pi+                 91   706     0     0     0     0     0      0.581      0.441    -63.473     63.478      0.140
+   899      -211   pi-                 91   706     0     0     0     0     0     -0.052      0.037     -2.967      2.971      0.140
+   900       211   pi+                 91   707     0     0     0     0     0      0.429     -1.467   -107.337    107.348      0.140
+   901       111   (pi0)              -91   707     0  1082  1083     0     0      0.639     -0.635    -43.619     43.628      0.135
+   902      -211   pi-                 91   708     0     0     0     0     0     -0.086      0.099    -21.621     21.621      0.140
+   903       111   (pi0)              -91   708     0  1084  1085     0     0      0.306     -0.277     -9.581      9.591      0.135
+   904      -211   pi-                 91   710     0     0     0     0     0      1.017     -1.500    -72.360     72.383      0.140
+   905       111   (pi0)              -91   710     0  1086  1087     0     0      0.202     -1.253    -44.724     44.742      0.135
+   906      2212   p+                  91   717     0     0     0     0     0     -0.072      0.637   -240.356    240.359      0.938
+   907       211   pi+                 91   717     0     0     0     0     0     -0.060      0.327   -156.106    156.107      0.140
+   908       211   pi+                 91   743     0     0     0     0     0     -0.733     -0.335    -97.865     97.868      0.140
+   909       111   (pi0)              -91   743     0  1088  1089     0     0      0.131      0.197    -32.087     32.088      0.135
+   910       310   K_S0                91   745   745     0     0     0     0      0.546     -0.143     -7.267      7.305      0.498
+   911       211   pi+                 91   749     0     0     0     0     0     -0.296     -1.008     -2.965      3.149      0.140
+   912      -211   pi-                 91   749     0     0     0     0     0      0.034     -0.153     -2.562      2.570      0.140
+   913       130   K_L0                91   752   752     0     0     0     0      0.479     -0.163     -2.215      2.326      0.498
+   914      -311   (Kbar0)            -91   753     0   940   940     0     0      0.590     -0.116     -1.037      1.298      0.498
+   915      -211   pi-                 91   753     0     0     0     0     0      1.077      0.013     -2.330      2.570      0.140
+   916       211   pi+                 91   762     0     0     0     0     0      1.816     -0.334      1.128      2.168      0.140
+   917       111   (pi0)              -91   762     0  1090  1091     0     0      0.177     -0.057      0.386      0.449      0.135
+   918      -211   pi-                 91   769     0     0     0     0     0      0.075      0.128      7.256      7.259      0.140
+   919       111   (pi0)              -91   769     0  1092  1093     0     0     -0.573     -0.165      6.036      6.067      0.135
+   920       211   pi+                 91   772     0     0     0     0     0      0.282      0.647      2.848      2.938      0.140
+   921      -211   pi-                 91   772     0     0     0     0     0      0.017      0.065      5.491      5.493      0.140
+   922       310   K_S0                91   780   780     0     0     0     0     -0.031      0.232    -21.580     21.587      0.498
+   923       310   K_S0                91   784   784     0     0     0     0     -0.206     -0.300    -16.896     16.908      0.498
+   924       310   K_S0                91   785   785     0     0     0     0     -0.791      0.225    -40.923     40.935      0.498
+   925       311   (K0)               -91   788     0   941   941     0     0      0.163     -0.069     -6.723      6.744      0.498
+   926       211   pi+                 91   788     0     0     0     0     0     -0.396      0.047     -5.876      5.891      0.140
+   927     -3122   Lambdabar0          91   792     0     0     0     0     0      0.229      0.115     -0.734      1.360      1.116
+   928       211   pi+                 91   792     0     0     0     0     0      0.250      0.189     -0.149      0.374      0.140
+   929      -211   pi-                 91   793     0     0     0     0     0      1.118      1.394      0.064      1.793      0.140
+   930       111   (pi0)              -91   793     0  1094  1095     0     0      1.916      1.545      0.983      2.654      0.135
+   931       211   pi+                 91   794     0     0     0     0     0      2.360      2.169     -0.127      3.211      0.140
+   932       111   (pi0)              -91   794     0  1096  1097     0     0      0.128      0.008      0.049      0.193      0.135
+   933      -211   pi-                 91   799     0     0     0     0     0      3.022      4.899      1.058      5.854      0.140
+   934       111   (pi0)              -91   799     0  1098  1099     0     0      9.979     13.507      2.485     16.977      0.135
+   935       310   K_S0                91   805   805     0     0     0     0     -2.563      1.548     15.978     16.264      0.498
+   936       130   K_L0                91   807   807     0     0     0     0     -0.766      0.162      5.489      5.567      0.498
+   937       310   K_S0                91   816   816     0     0     0     0      0.008     -0.678     -3.642      3.737      0.498
+   938       130   K_L0                91   821   821     0     0     0     0     -0.798     -1.281     -4.359      4.639      0.498
+   939       310   K_S0                91   851   851     0     0     0     0     -0.051     -0.341      6.931      6.957      0.498
+   940       310   K_S0                91   914   914     0     0     0     0      0.590     -0.116     -1.037      1.298      0.498
+   941       130   K_L0                91   925   925     0     0     0     0      0.163     -0.069     -6.723      6.744      0.498
+   942       211   pi+                 91   557     0     0     0     0     0     -0.158     -0.255     -0.885      0.945      0.140
+   943      -211   pi-                 91   557     0     0     0     0     0     -1.050     -1.798     -5.953      6.308      0.140
+   944       111   (pi0)              -91   557     0  1100  1101     0     0     -0.072     -0.700     -2.153      2.269      0.135
+   945       211   pi+                 91   562     0     0     0     0     0      0.082     -0.753     -5.727      5.778      0.140
+   946      -211   pi-                 91   562     0     0     0     0     0     -0.012     -0.357     -1.233      1.291      0.140
+   947       111   (pi0)              -91   562     0  1102  1103     0     0      0.023     -0.037     -0.568      0.585      0.135
+   948       211   pi+                 91   568     0     0     0     0     0     -0.171     -0.421     -1.080      1.180      0.140
+   949      -211   pi-                 91   568     0     0     0     0     0      0.013     -0.203     -0.621      0.668      0.140
+   950       111   (pi0)              -91   568     0  1104  1105     0     0     -0.183     -0.581     -0.993      1.173      0.135
+   951        22   gamma               91   593     0     0     0     0     0      0.077      0.181     11.667     11.669      0.000
+   952        22   gamma               91   593     0     0     0     0     0      0.029      0.228      7.766      7.770      0.000
+   953       111   (pi0)              -91   594     0  1106  1107     0     0      0.086     -0.150      6.798      6.802      0.135
+   954       111   (pi0)              -91   594     0  1108  1109     0     0      0.165      0.038     10.694     10.696      0.135
+   955       111   (pi0)              -91   594     0  1110  1111     0     0      0.053     -0.213      9.218      9.221      0.135
+   956       211   pi+                 91   606     0     0     0     0     0      0.036      0.318     -0.186      0.396      0.140
+   957      -211   pi-                 91   606     0     0     0     0     0     -0.047      0.030     -0.015      0.151      0.140
+   958       111   (pi0)              -91   606     0  1112  1113     0     0      0.303     -0.029      0.151      0.365      0.135
+   959        22   gamma               91   608     0     0     0     0     0      0.533      0.228     -0.170      0.605      0.000
+   960        22   gamma               91   608     0     0     0     0     0      0.000     -0.010     -0.011      0.015      0.000
+   961      3122   Lambda0             91   609     0     0     0     0     0      1.478      0.411      0.446      1.948      1.116
+   962        22   gamma               91   609     0     0     0     0     0      0.006      0.030     -0.037      0.048      0.000
+   963        22   gamma               91   612     0     0     0     0     0     -0.404     -1.157      1.816      2.191      0.000
+   964        22   gamma               91   612     0     0     0     0     0     -0.392     -0.785      1.255      1.531      0.000
+   965        22   gamma               91   615     0     0     0     0     0     -0.465     -2.135      1.809      2.837      0.000
+   966        22   gamma               91   615     0     0     0     0     0     -0.003     -0.112      0.066      0.130      0.000
+   967        22   gamma               91   628     0     0     0     0     0     -0.022     -0.532     26.681     26.687      0.000
+   968        22   gamma               91   628     0     0     0     0     0      0.042     -0.063      4.898      4.899      0.000
+   969        22   gamma               91   633     0     0     0     0     0     -0.055      0.268     20.401     20.402      0.000
+   970        22   gamma               91   633     0     0     0     0     0     -0.104      0.280     14.331     14.334      0.000
+   971       111   (pi0)              -91   635     0  1114  1115     0     0     -0.218      0.071      2.523      2.537      0.135
+   972       111   (pi0)              -91   635     0  1116  1117     0     0     -0.059      0.123      0.879      0.900      0.135
+   973       111   (pi0)              -91   635     0  1118  1119     0     0     -0.096      0.277      2.711      2.730      0.135
+   974       211   pi+                 91   662     0     0     0     0     0     -0.239     -0.550    -10.014     10.033      0.140
+   975      -211   pi-                 91   662     0     0     0     0     0     -0.218     -0.284     -1.952      1.989      0.140
+   976       111   (pi0)              -91   662     0  1120  1121     0     0     -0.240     -0.089     -2.236      2.255      0.135
+   977        22   gamma               91   663     0     0     0     0     0     -0.005     -0.208     -2.472      2.481      0.000
+   978        22   gamma               91   663     0     0     0     0     0     -0.165     -0.473     -4.486      4.514      0.000
+   979       211   pi+                 91   664     0     0     0     0     0      0.053     -0.284     -3.689      3.703      0.140
+   980      -211   pi-                 91   664     0     0     0     0     0     -0.072      0.027     -3.044      3.049      0.140
+   981       111   (pi0)              -91   664     0  1122  1123     0     0     -0.099     -0.835    -13.830     13.856      0.135
+   982       111   (pi0)              -91   683     0  1124  1125     0     0     -0.217     -0.278      4.323      4.339      0.135
+   983       111   (pi0)              -91   683     0  1126  1127     0     0     -0.275     -0.176      4.945      4.957      0.135
+   984       111   (pi0)              -91   683     0  1128  1129     0     0     -0.508     -0.170      5.230      5.259      0.135
+   985       130   K_L0                91   684     0     0     0     0     0     -0.175     -0.168      3.133      3.181      0.498
+   986       310   K_S0                91   684     0     0     0     0     0     -0.307     -0.395      3.727      3.793      0.498
+   987       211   pi+                 91   687     0     0     0     0     0     -0.019      0.085      0.047      0.171      0.140
+   988      -211   pi-                 91   687     0     0     0     0     0     -0.759     -0.102      0.651      1.015      0.140
+   989       111   (pi0)              -91   687     0  1130  1131     0     0     -0.256     -0.050      0.505      0.585      0.135
+   990        22   gamma               91   691     0     0     0     0     0     -0.635      0.011     -0.437      0.771      0.000
+   991        22   gamma               91   691     0     0     0     0     0      0.118     -0.008     -0.083      0.144      0.000
+   992        22   gamma               91   696     0     0     0     0     0     -0.342      0.020     -4.522      4.535      0.000
+   993        22   gamma               91   696     0     0     0     0     0     -0.307      0.066     -6.078      6.086      0.000
+   994        22   gamma               91   704     0     0     0     0     0     -0.024     -0.140     -1.178      1.187      0.000
+   995        22   gamma               91   704     0     0     0     0     0      0.009     -0.065     -1.961      1.962      0.000
+   996        22   gamma               91   705     0     0     0     0     0      0.499      0.463    -66.751     66.754      0.000
+   997        22   gamma               91   705     0     0     0     0     0      0.114      0.043    -15.533     15.534      0.000
+   998       113   (rho0)             -91   711     0  1132  1133     0     0     -0.106     -1.166    -30.316     30.349      0.805
+   999        22   gamma               91   711     0     0     0     0     0      0.028     -0.460     -8.103      8.116      0.000
+  1000       211   pi+                 91   715     0     0     0     0     0     -0.020      0.036     -5.754      5.756      0.140
+  1001      -211   pi-                 91   715     0     0     0     0     0     -0.429      0.028    -48.328     48.330      0.140
+  1002       111   (pi0)              -91   715     0  1134  1135     0     0     -0.122      0.205    -57.879     57.880      0.135
+  1003        22   gamma               91   716     0     0     0     0     0      0.123      0.005   -105.625    105.625      0.000
+  1004        22   gamma               91   716     0     0     0     0     0     -0.002      0.036     -7.999      7.999      0.000
+  1005        22   gamma               91   744     0     0     0     0     0     -0.281      0.152     -7.860      7.867      0.000
+  1006        22   gamma               91   744     0     0     0     0     0     -0.075     -0.007     -0.975      0.977      0.000
+  1007        22   gamma               91   754     0     0     0     0     0      1.329     -0.489     -0.880      1.668      0.000
+  1008        22   gamma               91   754     0     0     0     0     0      0.027     -0.012     -0.046      0.054      0.000
+  1009        22   gamma               91   757     0     0     0     0     0      0.601     -0.263     -0.434      0.787      0.000
+  1010        22   gamma               91   757     0     0     0     0     0      0.254      0.030      0.146      0.294      0.000
+  1011        22   gamma               91   760     0     0     0     0     0     -0.065     -0.429      0.040      0.436      0.000
+  1012        22   gamma               91   760     0     0     0     0     0      0.026     -0.033      0.032      0.053      0.000
+  1013       211   pi+                 91   763     0     0     0     0     0     -0.011     -0.230      0.113      0.292      0.140
+  1014      -211   pi-                 91   763     0     0     0     0     0      0.532     -0.384      0.371      0.767      0.140
+  1015       111   (pi0)              -91   763     0  1136  1137     0     0      0.516     -0.820      0.733      1.222      0.135
+  1016       211   pi+                 91   765     0     0     0     0     0      0.004     -0.029      0.046      0.150      0.140
+  1017      -211   pi-                 91   765     0     0     0     0     0      0.321      0.006      1.293      1.339      0.140
+  1018       111   (pi0)              -91   765     0  1138  1139     0     0     -0.015     -0.095      0.714      0.733      0.135
+  1019        22   gamma               91   774     0     0     0     0     0      0.024      0.041     -0.142      0.150      0.000
+  1020        22   gamma               91   774     0     0     0     0     0      0.220      0.149     -0.221      0.345      0.000
+  1021      3122   Lambda0             91   776     0     0     0     0     0     -0.658     -0.240     -2.192      2.557      1.116
+  1022        22   gamma               91   776     0     0     0     0     0     -0.011     -0.086     -0.109      0.139      0.000
+  1023      3122   Lambda0             91   779     0     0     0     0     0     -0.353     -0.157    -16.644     16.686      1.116
+  1024        22   gamma               91   779     0     0     0     0     0      0.050     -0.014     -0.403      0.406      0.000
+  1025        22   gamma               91   782     0     0     0     0     0     -0.268      0.208     -7.238      7.246      0.000
+  1026        22   gamma               91   782     0     0     0     0     0     -0.128      0.051     -5.106      5.108      0.000
+  1027        22   gamma               91   787     0     0     0     0     0      0.043     -0.253     -4.331      4.338      0.000
+  1028        22   gamma               91   787     0     0     0     0     0     -0.067     -0.143     -3.602      3.606      0.000
+  1029      3122   Lambda0             91   790     0     0     0     0     0     -0.123     -0.434     -4.787      4.936      1.116
+  1030        22   gamma               91   790     0     0     0     0     0      0.010      0.008      0.004      0.013      0.000
+  1031       211   pi+                 91   791     0     0     0     0     0     -0.181      0.649     -2.724      2.809      0.140
+  1032      -211   pi-                 91   791     0     0     0     0     0     -0.096      0.163     -0.630      0.672      0.140
+  1033       111   (pi0)              -91   791     0  1140  1141     0     0      0.180      0.086     -1.391      1.412      0.135
+  1034        22   gamma               91   796     0     0     0     0     0      0.436      0.683      0.086      0.815      0.000
+  1035        22   gamma               91   796     0     0     0     0     0      1.594      2.201      0.480      2.760      0.000
+  1036        22   gamma               91   797     0     0     0     0     0      1.026      1.225      0.384      1.644      0.000
+  1037        22   gamma               91   797     0     0     0     0     0      2.714      3.082      0.791      4.182      0.000
+  1038        22   gamma               91   804     0     0     0     0     0      0.035     -0.163    270.910    270.910      0.000
+  1039        22   gamma               91   804     0     0     0     0     0     -0.002      0.024     17.742     17.742      0.000
+  1040        22   gamma               91   806     0     0     0     0     0     -0.214      0.068      0.923      0.950      0.000
+  1041        22   gamma               91   806     0     0     0     0     0     -1.294      0.347      7.063      7.189      0.000
+  1042        22   gamma               91   810     0     0     0     0     0     -0.050     -0.011      0.326      0.330      0.000
+  1043        22   gamma               91   810     0     0     0     0     0     -1.315      0.396      9.016      9.120      0.000
+  1044        22   gamma               91   812     0     0     0     0     0     -0.948      0.169      8.640      8.694      0.000
+  1045        22   gamma               91   812     0     0     0     0     0     -0.206     -0.014      2.223      2.232      0.000
+  1046        22   gamma               91   814     0     0     0     0     0     -0.086      0.043      1.201      1.205      0.000
+  1047        22   gamma               91   814     0     0     0     0     0     -0.067     -0.002      0.186      0.197      0.000
+  1048        22   gamma               91   817     0     0     0     0     0      0.196      0.122     -0.876      0.906      0.000
+  1049        22   gamma               91   817     0     0     0     0     0     -0.003     -0.017     -0.199      0.199      0.000
+  1050        22   gamma               91   820     0     0     0     0     0     -0.008     -0.008     -0.180      0.181      0.000
+  1051        22   gamma               91   820     0     0     0     0     0     -0.149     -0.216     -0.498      0.563      0.000
+  1052        22   gamma               91   822     0     0     0     0     0     -0.008     -0.233     -0.465      0.520      0.000
+  1053        22   gamma               91   822     0     0     0     0     0     -0.254     -0.771     -1.399      1.617      0.000
+  1054        22   gamma               91   826     0     0     0     0     0      0.029     -0.014     -0.156      0.159      0.000
+  1055        22   gamma               91   826     0     0     0     0     0     -0.100     -0.308     -1.348      1.386      0.000
+  1056        22   gamma               91   828     0     0     0     0     0     -0.053     -0.001     -0.068      0.086      0.000
+  1057        22   gamma               91   828     0     0     0     0     0     -0.076      0.215     -0.457      0.511      0.000
+  1058        22   gamma               91   832     0     0     0     0     0     -0.328     -0.874     -2.193      2.383      0.000
+  1059        22   gamma               91   832     0     0     0     0     0     -0.040     -0.154     -0.533      0.556      0.000
+  1060        22   gamma               91   834     0     0     0     0     0     -0.030     -0.087     13.931     13.931      0.000
+  1061        22   gamma               91   834     0     0     0     0     0      0.037     -0.004      1.198      1.199      0.000
+  1062        22   gamma               91   836     0     0     0     0     0      0.022      0.247      2.342      2.355      0.000
+  1063        22   gamma               91   836     0     0     0     0     0      0.125      0.214      1.685      1.703      0.000
+  1064        22   gamma               91   843     0     0     0     0     0      0.452     -0.242     -0.134      0.530      0.000
+  1065        22   gamma               91   843     0     0     0     0     0      0.237     -0.116      0.028      0.265      0.000
+  1066        22   gamma               91   849     0     0     0     0     0     -0.303     -0.342      0.247      0.519      0.000
+  1067        22   gamma               91   849     0     0     0     0     0     -0.365     -0.530      0.516      0.825      0.000
+  1068        22   gamma               91   854     0     0     0     0     0      0.008      0.049      0.483      0.485      0.000
+  1069        22   gamma               91   854     0     0     0     0     0     -0.172      0.618     11.629     11.647      0.000
+  1070        22   gamma               91   865     0     0     0     0     0     -1.127      0.279      6.997      7.092      0.000
+  1071        22   gamma               91   865     0     0     0     0     0     -1.278      0.424      7.524      7.643      0.000
+  1072        22   gamma               91   875     0     0     0     0     0      0.176     -0.221     -0.409      0.498      0.000
+  1073        22   gamma               91   875     0     0     0     0     0     -0.025     -0.034     -0.048      0.064      0.000
+  1074        22   gamma               91   877     0     0     0     0     0     -0.088     -0.222     -0.980      1.009      0.000
+  1075        22   gamma               91   877     0     0     0     0     0     -0.028     -0.362     -2.121      2.151      0.000
+  1076        22   gamma               91   883     0     0     0     0     0      0.187     -0.000      0.078      0.203      0.000
+  1077        22   gamma               91   883     0     0     0     0     0      0.169      0.127      0.034      0.214      0.000
+  1078        22   gamma               91   891     0     0     0     0     0     -0.264      0.483     -0.904      1.059      0.000
+  1079        22   gamma               91   891     0     0     0     0     0     -0.339      0.390     -0.723      0.889      0.000
+  1080        22   gamma               91   893     0     0     0     0     0     -0.231      0.182     -1.084      1.123      0.000
+  1081        22   gamma               91   893     0     0     0     0     0     -0.008      0.011     -0.003      0.014      0.000
+  1082        22   gamma               91   901     0     0     0     0     0      0.453     -0.368    -26.599     26.605      0.000
+  1083        22   gamma               91   901     0     0     0     0     0      0.186     -0.267    -17.020     17.023      0.000
+  1084        22   gamma               91   903     0     0     0     0     0      0.211     -0.104     -5.621      5.626      0.000
+  1085        22   gamma               91   903     0     0     0     0     0      0.095     -0.173     -3.960      3.965      0.000
+  1086        22   gamma               91   905     0     0     0     0     0      0.034     -0.550    -17.981     17.990      0.000
+  1087        22   gamma               91   905     0     0     0     0     0      0.168     -0.703    -26.742     26.752      0.000
+  1088        22   gamma               91   909     0     0     0     0     0      0.100      0.041    -16.014     16.014      0.000
+  1089        22   gamma               91   909     0     0     0     0     0      0.030      0.156    -16.074     16.074      0.000
+  1090        22   gamma               91   917     0     0     0     0     0      0.076     -0.094      0.187      0.223      0.000
+  1091        22   gamma               91   917     0     0     0     0     0      0.101      0.038      0.199      0.226      0.000
+  1092        22   gamma               91   919     0     0     0     0     0     -0.118     -0.033      0.778      0.787      0.000
+  1093        22   gamma               91   919     0     0     0     0     0     -0.455     -0.132      5.259      5.280      0.000
+  1094        22   gamma               91   930     0     0     0     0     0      0.741      0.652      0.340      1.044      0.000
+  1095        22   gamma               91   930     0     0     0     0     0      1.175      0.893      0.643      1.610      0.000
+  1096        22   gamma               91   932     0     0     0     0     0      0.124     -0.039      0.061      0.144      0.000
+  1097        22   gamma               91   932     0     0     0     0     0      0.005      0.047     -0.012      0.049      0.000
+  1098        22   gamma               91   934     0     0     0     0     0      6.774      9.064      1.687     11.441      0.000
+  1099        22   gamma               91   934     0     0     0     0     0      3.205      4.443      0.799      5.537      0.000
+  1100        22   gamma               91   944     0     0     0     0     0     -0.082     -0.538     -1.482      1.579      0.000
+  1101        22   gamma               91   944     0     0     0     0     0      0.010     -0.162     -0.670      0.690      0.000
+  1102        22   gamma               91   947     0     0     0     0     0     -0.012     -0.083     -0.359      0.369      0.000
+  1103        22   gamma               91   947     0     0     0     0     0      0.035      0.046     -0.209      0.217      0.000
+  1104        22   gamma               91   950     0     0     0     0     0     -0.155     -0.574     -0.946      1.117      0.000
+  1105        22   gamma               91   950     0     0     0     0     0     -0.029     -0.007     -0.048      0.056      0.000
+  1106        22   gamma               91   953     0     0     0     0     0      0.024     -0.066      0.937      0.940      0.000
+  1107        22   gamma               91   953     0     0     0     0     0      0.062     -0.084      5.861      5.862      0.000
+  1108        22   gamma               91   954     0     0     0     0     0      0.068     -0.033      2.116      2.117      0.000
+  1109        22   gamma               91   954     0     0     0     0     0      0.097      0.071      8.578      8.579      0.000
+  1110        22   gamma               91   955     0     0     0     0     0      0.093     -0.190      7.443      7.446      0.000
+  1111        22   gamma               91   955     0     0     0     0     0     -0.040     -0.023      1.775      1.776      0.000
+  1112        22   gamma               91   958     0     0     0     0     0      0.286      0.007      0.106      0.305      0.000
+  1113        22   gamma               91   958     0     0     0     0     0      0.016     -0.036      0.045      0.060      0.000
+  1114        22   gamma               91   971     0     0     0     0     0     -0.092     -0.038      0.890      0.896      0.000
+  1115        22   gamma               91   971     0     0     0     0     0     -0.126      0.108      1.633      1.641      0.000
+  1116        22   gamma               91   972     0     0     0     0     0     -0.086      0.073      0.758      0.767      0.000
+  1117        22   gamma               91   972     0     0     0     0     0      0.026      0.049      0.121      0.133      0.000
+  1118        22   gamma               91   973     0     0     0     0     0     -0.014      0.064      0.244      0.253      0.000
+  1119        22   gamma               91   973     0     0     0     0     0     -0.082      0.213      2.466      2.477      0.000
+  1120        22   gamma               91   976     0     0     0     0     0     -0.233     -0.076     -2.219      2.233      0.000
+  1121        22   gamma               91   976     0     0     0     0     0     -0.007     -0.012     -0.017      0.022      0.000
+  1122        22   gamma               91   981     0     0     0     0     0     -0.042     -0.383     -7.442      7.452      0.000
+  1123        22   gamma               91   981     0     0     0     0     0     -0.057     -0.452     -6.388      6.404      0.000
+  1124        22   gamma               91   982     0     0     0     0     0     -0.236     -0.265      4.104      4.120      0.000
+  1125        22   gamma               91   982     0     0     0     0     0      0.019     -0.013      0.219      0.220      0.000
+  1126        22   gamma               91   983     0     0     0     0     0     -0.076     -0.045      2.351      2.353      0.000
+  1127        22   gamma               91   983     0     0     0     0     0     -0.200     -0.131      2.593      2.604      0.000
+  1128        22   gamma               91   984     0     0     0     0     0     -0.372     -0.085      4.113      4.130      0.000
+  1129        22   gamma               91   984     0     0     0     0     0     -0.136     -0.084      1.117      1.128      0.000
+  1130        22   gamma               91   989     0     0     0     0     0     -0.097      0.040      0.133      0.169      0.000
+  1131        22   gamma               91   989     0     0     0     0     0     -0.159     -0.091      0.373      0.415      0.000
+  1132       211   pi+                 91   998     0     0     0     0     0      0.140     -0.687     -9.931      9.957      0.140
+  1133      -211   pi-                 91   998     0     0     0     0     0     -0.246     -0.479    -20.384     20.392      0.140
+  1134        22   gamma               91  1002     0     0     0     0     0     -0.149      0.173    -44.548     44.548      0.000
+  1135        22   gamma               91  1002     0     0     0     0     0      0.027      0.032    -13.331     13.332      0.000
+  1136        22   gamma               91  1015     0     0     0     0     0      0.018     -0.095      0.052      0.110      0.000
+  1137        22   gamma               91  1015     0     0     0     0     0      0.499     -0.724      0.681      1.112      0.000
+  1138        22   gamma               91  1018     0     0     0     0     0     -0.051     -0.113      0.496      0.511      0.000
+  1139        22   gamma               91  1018     0     0     0     0     0      0.035      0.019      0.219      0.222      0.000
+  1140        22   gamma               91  1033     0     0     0     0     0      0.068     -0.034     -0.504      0.509      0.000
+  1141        22   gamma               91  1033     0     0     0     0     0      0.111      0.120     -0.888      0.903      0.000
+                                   Charge sum:  2.000           Momentum sum:     -0.000     -0.000      0.000   5020.000   5020.000
+
+ --------  End PYTHIA Event Listing  -----------------------------------------------------------------------------------------------
+0	0%, nTried:1, nTrial:1, sigma:0.017
+#--------------------------------------------------------------------------
+#                         FastJet release 3.2.1
+#                 M. Cacciari, G.P. Salam and G. Soyez                  
+#     A software package for jet finding and analysis at colliders      
+#                           http://fastjet.fr                           
+#	                                                                      
+# Please cite EPJC72(2012)1896 [arXiv:1111.6097] if you use this package
+# for scientific work and optionally PLB641(2006)57 [hep-ph/0512210].   
+#                                                                       
+# FastJet is provided without warranty under the terms of the GNU GPLv2.
+# It uses T. Chan's closest pair algorithm, S. Fortune's Voronoi code,
+# CGAL and 3rd party plugin jet algorithms. See COPYING file for details.
+#--------------------------------------------------------------------------
+ PYTHIA Warning in StringFragmentation::fragmentToJunction: bad convergence junction rest frame  
+500	5%, nTried:2830, nTrial:20, sigma:0.014
+ PYTHIA Error in StringFragmentation::fragment: stuck in joining  
+ PYTHIA Error in Pythia::next: hadronLevel failed; try again  
+
+ Pythia::next(): 1000 events have been generated 
+1000	10%, nTried:5609, nTrial:2, sigma:0.014
+1500	15%, nTried:8117, nTrial:2, sigma:0.014
+ PYTHIA Error in SpaceShower::pT2nearThreshold: stuck in loop  
+
+ Pythia::next(): 2000 events have been generated 
+2000	20%, nTried:10864, nTrial:3, sigma:0.014
+2500	25%, nTried:13485, nTrial:1, sigma:0.014
+
+ Pythia::next(): 3000 events have been generated 
+3000	30%, nTried:16076, nTrial:2, sigma:0.014
+3500	35%, nTried:18845, nTrial:1, sigma:0.014
+
+ Pythia::next(): 4000 events have been generated 
+4000	40%, nTried:21414, nTrial:7, sigma:0.014
+4500	45%, nTried:24044, nTrial:20, sigma:0.014
+
+ Pythia::next(): 5000 events have been generated 
+5000	50%, nTried:26746, nTrial:1, sigma:0.014
+5500	55%, nTried:29441, nTrial:6, sigma:0.014
+
+ Pythia::next(): 6000 events have been generated 
+6000	60%, nTried:31963, nTrial:4, sigma:0.014
+6500	65%, nTried:34481, nTrial:1, sigma:0.014
+
+ Pythia::next(): 7000 events have been generated 
+7000	70%, nTried:37045, nTrial:4, sigma:0.014
+7500	75%, nTried:39779, nTrial:4, sigma:0.014
+
+ Pythia::next(): 8000 events have been generated 
+8000	80%, nTried:42564, nTrial:2, sigma:0.014
+8500	85%, nTried:45236, nTrial:4, sigma:0.014
+
+ Pythia::next(): 9000 events have been generated 
+9000	90%, nTried:47752, nTrial:6, sigma:0.014
+9500	95%, nTried:50371, nTrial:3, sigma:0.014
+10000	100%, nTried:52998, sigma:0.014
+nTried after loop:52998
+sigma after loop:0.014
+10000 events are analyzed successfully.
+Real time 0:04:33, CP time 271.490

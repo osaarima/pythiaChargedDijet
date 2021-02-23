@@ -81,7 +81,9 @@ AliJCDijetHistos::AliJCDijetHistos() :
     fh_deltaPtResponseEvery(),
     fh_deltaPtResponseEvery_ALICE(),
     fh_dijetResponse(),
-    fh_dijetResponseDeltaPhiCut()
+    fh_dijetResponseDeltaPhiCut(),
+    fh_dijetdeltaM1(),
+    fh_dijetdeltaM2()
 {
 
 }
@@ -141,7 +143,9 @@ AliJCDijetHistos::AliJCDijetHistos(const AliJCDijetHistos& obj) :
     fh_deltaPtResponseEvery(obj.fh_deltaPtResponseEvery),
     fh_deltaPtResponseEvery_ALICE(obj.fh_deltaPtResponseEvery_ALICE),
     fh_dijetResponse(obj.fh_dijetResponse),
-    fh_dijetResponseDeltaPhiCut(obj.fh_dijetResponseDeltaPhiCut)
+    fh_dijetResponseDeltaPhiCut(obj.fh_dijetResponseDeltaPhiCut),
+    fh_dijetdeltaM1(obj.fh_dijetdeltaM1),
+    fh_dijetdeltaM2(obj.fh_dijetdeltaM2)
 {
     // copy constructor
 }
@@ -472,6 +476,17 @@ void AliJCDijetHistos::CreateEventTrackHistos(){
     fh_dijetResponseDeltaPhiCut
         << TH2D("h_dijetResponseDeltaPhiCut", "h_dijetResponseDeltaPhiCut", NBINSDijet, logBinsXDijet, NBINSDijet, logBinsXDijet )
         << "END" ;
+    
+
+    fh_dijetdeltaM1
+        << TH1D("h_dijetdeltaM1", "h_dijetdeltaM1", 200, -10, 190)
+        << "END" ;
+
+    fh_dijetdeltaM2
+        << TH1D("h_dijetdeltaM2", "h_dijetdeltaM2", 200, -10, 190)
+        << "END" ;
+
+
 }
 
 int AliJCDijetHistos::GetCentralityClass(Double_t fCent){

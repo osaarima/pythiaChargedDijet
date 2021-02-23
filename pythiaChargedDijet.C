@@ -57,7 +57,7 @@ AliJCDijetAna *fanaMC;
 int main(int argc, char **argv) {
 
     if(argc<6){
-        cout<<"usage: " << argv[0] << " pythia.config pTHatMin pTHatMax dijetLeadingPt <output.root> [random_seed] [tracking inefficiency]"<<endl;exit(1);
+        cout<<"usage: " << argv[0] << " pythia.config pTHatMin pTHatMax dijetLeadingPt <output.root> [random_seed] [tracking inefficiency] [minJetPt]"<<endl;exit(1);
     }
     TStopwatch timer; 
     timer.Start();   
@@ -69,6 +69,7 @@ int main(int argc, char **argv) {
     TString outputs = argv[5];
     Int_t random_seed = argc>6 ? atoi(argv[6]) : 0;//placing the inputs into variables
     double trackingInEff = argc>7 ? atoi(argv[7]) : 0.0; //Default: no tracking ineffciency
+    double minJetPt = argc>8 ? atoi(argv[8]) : 5.0; //Default: no tracking ineffciency
 
 
     TFile *fout = new TFile(outputs.Data(),"RECREATE");
@@ -198,7 +199,7 @@ int main(int argc, char **argv) {
                       jetConstituentCut,
                       dijetLeadingPt,
                       dijetSubleadingPt,
-                      5, //jet  pt cut
+                      minJetPt, //jet  pt cut
                       dijetDeltaPhiCut,
                       fmatchingR,
                       0.0);
@@ -217,7 +218,7 @@ int main(int argc, char **argv) {
                 jetConstituentCut,
                 dijetLeadingPt,
                 dijetSubleadingPt,
-                5, //jet  pt cut
+                minJetPt, //jet  pt cut
                 dijetDeltaPhiCut,
                 fmatchingR,
                 trackingInEff);
