@@ -2,7 +2,7 @@
 ! Lines not beginning with a letter or digit are comments.
 
 ! 1) Settings used in the main program.
-Main:numberOfEvents = 10000! number of events to generate
+Main:numberOfEvents = 100! number of events to generate
 !Main:numberToList = 1              ! number of events to print
 !Main:timesToShow = 20              ! show how far along run is
 !Main:showChangedSettings = on      ! print changed flags/modes/parameters
@@ -14,9 +14,12 @@ Random:seed = 0
 
 
 ! 2) Beam parameter settings. Values below agree with default ones.
-Beams:idA = 2212                   ! first beam, p = 2212, pbar = -2212
-Beams:idB = 2212                   ! second beam, p = 2212, pbar = -2212
-Beams:eCM = 5020.                  ! CM energy of collision
+!Beams:idA = 2212                   ! first beam, p = 2212, pbar = -2212
+!Beams:idB = 2212                   ! second beam, p = 2212, pbar = -2212
+Beams:idA = 1000822080              ! first beam, Pb = 1000822080
+Beams:idB = 1000822080              ! second beam, Pb = 1000822080
+!Beams:eCM = 5020.                  ! CM energy of collision
+Beams:eCM = 5500.                   ! CM energy of collision
 
 ! 3) Settings for the hard-process generation.
 HardQCD:all = on                   ! switch on all QCD jet + jet processes

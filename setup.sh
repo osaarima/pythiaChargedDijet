@@ -5,7 +5,9 @@
 #export FASTJET=$HOME/alice/fastjet/3.1.3/inst  from AliROOT
 #export HEPMC=$HOME/alice/hepmc2.06.09-install
 #export HEPPDT=$HOME/alice/HepPDT-3.04.01-install
-export PYTHIA8=$HOME/alice/PythiaMy/pythia8226
+
+#export PYTHIA8=$HOME/alice/PythiaMy/pythia8226
+export PYTHIA8=$HOME/alice/PythiaMy/pythia8303
 
 #For puck:
 #export FASTJET=/n/work00/osanmasa/fastjet/fastjet-install

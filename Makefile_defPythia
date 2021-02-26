@@ -20,18 +20,10 @@ CXXFLAGS += $(shell $(FASTJET)/bin/fastjet-config --cxxflags )
 #LDFLAGS += -Wl,-rpath,/cvmfs/alice.cern.ch/x86_64-2.6-gnu-4.1.2/Packages/fastjet/v3.2.1_1.024-alice1-3/lib -lm  -L/cvmfs/alice.cern.ch/x86_64-2.6-gnu-4.1.2/Packages/fastjet/v3.2.1_1.024-alice1-3/lib -lfastjettools -lfastjet 
 #LDFLAGS += -Wl,-rpath,/cvmfs/alice.cern.ch/x86_64-2.6-gnu-4.1.2/Packages/fastjet/v3.0.6_1.012-7/lib -lm  -L/cvmfs/alice.cern.ch/x86_64-2.6-gnu-4.1.2/Packages/fastjet/v3.0.6_1.012-7/lib -lfastjettools -lfastjet
 LDFLAGS += $(shell $(FASTJET)/bin/fastjet-config --libs --plugins ) 
-
+LDFLAGS += -L$(PYTHIA8)/lib -lpythia8 
 # When running pythia with lhapdf:
 #LDFLAGS += -Wl,-rpath,$(PYTHIA8)/lib -lpythia8lhapdf5
-
-#Note: not needed in pythia83**
-#LDFLAGS += -L$(PYTHIA8)/lib -lpythia8 
 INCS    += -I$(PYTHIA8)/include
-#Instead:
-LDFLAGS += $(shell $(PYTHIA8)/bin/pythia8-config --cppflags --libs)
-
-#g++  -lPhysics -L/home/alidock/cernbox/pythiaChargedDijet pythiaChargedDijet.C -O -Wall -g -Wno-deprecated -Wno-misleading-indentation -DJTKT  -pthread -std=c++11 -m64 -I/home/alidock/.sw/slc7_x86-64/ROOT/v6-20-08-alice1-44/include -I/home/alidock/.sw/slc7_x86-64/fastjet/v3.2.1_1.024-alice3-84/include  src/AliJCDijetHistos.o src/AliJCDijetAna.o src/AliJHistogramInterface.o src/AliJHistManager.o src/AliJBaseTrack.o src/AliJBaseCard.o src/AliJCard.o src/AliJPhoton.o nanoDict.o -L/home/alidock/.sw/slc7_x86-64/ROOT/v6-20-08-alice1-44/lib -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -lROOTDataFrame -pthread -lm -ldl -rdynamic -Wl,-rpath,/home/alidock/.sw/slc7_x86-64/fastjet/v3.2.1_1.024-alice3-84/lib -lm -lCGAL -lgmp -L/home/alidock/.sw/slc7_x86-64/fastjet/v3.2.1_1.024-alice3-84/lib -lfastjettools -lfastjet -lfastjetplugins -lsiscone_spherical -lsiscone  -L/home/alidock/alice/PythiaMy/pythia8303/lib -Wl,-rpath,/home/alidock/alice/PythiaMy/pythia8303/lib -lpythia8 -ldl -L/home/alidock/.sw/slc7_x86-64/cgal/latest-aliroot6-user-next-root6/lib/ -lCGAL  -L/home/alidock/.sw/slc7_x86-64/GMP/latest-aliroot6-user-next-root6/lib/ -lgmp  -ldl -o pythiaChargedDijet
-
 #LDFLAGS += -L$(HEPMC)/lib -lHepMC 
 #LDFLAGS += -Wl,-rpath -Wl,$(HEPMC)/lib
 #LDFLAGS += -L$(HEPPDT)/lib -lHepPDT -lHepPID
