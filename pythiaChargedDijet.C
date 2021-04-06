@@ -53,6 +53,7 @@ AliJCDijetHistos *fhistosDet;
 AliJCDijetAna *fana;
 AliJCDijetAna *fanaMC;
 
+double getEffFromHisto(TH1D* h, double pt);
 
 int main(int argc, char **argv) {
 
@@ -68,8 +69,8 @@ int main(int argc, char **argv) {
     double dijetLeadingPt = atof(argv[4]);
     TString outputs = argv[5];
     Int_t random_seed = argc>6 ? atoi(argv[6]) : 0;//placing the inputs into variables
-    double trackingInEff = argc>7 ? atoi(argv[7]) : 0.0; //Default: no tracking ineffciency
-    double minJetPt = argc>8 ? atoi(argv[8]) : 5.0; //Default: no tracking ineffciency
+    double trackingInEff = argc>7 ? atof(argv[7]) : 0.0; //Default: no tracking ineffciency
+    double minJetPt = argc>8 ? atof(argv[8]) : 5.0; //Default: no tracking ineffciency
 
 
     TFile *fout = new TFile(outputs.Data(),"RECREATE");
@@ -221,7 +222,7 @@ int main(int argc, char **argv) {
                 minJetPt, //jet  pt cut
                 dijetDeltaPhiCut,
                 fmatchingR,
-                trackingInEff);
+                0.0);//trackingInEff); //Efficiency is handled in this macro by DJ eff histo
         fanaMC->InitHistos(fhistosDet, true, 1);
     }
 
@@ -240,7 +241,29 @@ int main(int argc, char **argv) {
     Int_t nAccepted = 0;
     Float_t sigmaGen = 0.0;
     Float_t ebeweight = 1.0;
-    TRandom3 *randomGenerator = new TRandom3();
+
+    TRandom3 *randomGenerator = new TRandom3(random_seed);
+    /* // Information about the Efficiency histograms (DJ email):
+    trackCuts = ["TPCOnly(128)","GlobalTightDCA(32)","GlobalDCA(16)","GlobalSDD(96)","Hybrid(768)","HybridStep1(256)”];
+    histnames = [
+        "gCor00","gEff00","gCon00"  # check it with ROOT file Title
+    ];
+
+    You will need Hybrid(768) and gCor00, ic=0(MB)
+
+    gr = f.Get("Efficiency/{:s}{:02}{:02}".format(histnames[i],ic,IndexTrackCuts[k]));
+    Therefore  “I” should be 0 and k = 4 , finally the graph you should take is "Efficiency/gCor000004” from the following root file.
+    Production info :
+    export TEST_DIR='/alice/sim/2017/LHC17f2b_fast/265343'
+    export ALIEN_JDL_OUTPUTDIR='/alice/sim/2017/LHC17f2b_fast/265343'
+    */
+    TFile *fIn;
+    TH1D* hCoeff;
+    if(trackingInEff!=0.0){
+        fIn= TFile::Open("Eff-LHC16q-pPb_MC_LHC17f2b_fast_1154_20201205-1425.root","read");
+        hCoeff = (TH1D*)fIn->Get("Efficiency/hCor000004");
+    }
+    double fPtEff=0.0;
 
     for(int iEvent = 0; iEvent < nEvent; ++iEvent) {//begin event loop
 
@@ -264,8 +287,12 @@ int main(int argc, char **argv) {
                 track.SetTrackEff(1.);
                 new ((*inputList)[inputList->GetEntriesFast()]) AliJBaseTrack(track);
 
-                if (trackingInEff!=0.0) continue;// Lose 4% of tracks, as in ALICE.
-                new ((*inputListDet)[inputListDet->GetEntriesFast()]) AliJBaseTrack(track);
+                if (trackingInEff!=0.0) {
+                    fPtEff = getEffFromHisto(hCoeff, TMath::Sqrt(pythia.event[i].px()*pythia.event[i].px()+pythia.event[i].py()*pythia.event[i].py()));
+                    if(fPtEff < randomGenerator->Rndm()) {
+                        new ((*inputListDet)[inputListDet->GetEntriesFast()]) AliJBaseTrack(track);
+                    }
+                }
             }
         } // end of finalparticles
 
@@ -305,4 +332,25 @@ int main(int argc, char **argv) {
     cout << EventCounter << " events are analyzed successfully."<< endl;
     timer.Print(); 
     return 0;
+}
+
+//Search pt bin from efficiency histo and return the content
+//If pt is less than first bin then return first bin.
+//If pt is more than last bin then return last bin.
+double getEffFromHisto(TH1D* h, double pt) {
+    int iBin;
+    int iLastBin = h->GetNbinsX();
+
+    if(pt<h->GetBinLowEdge(1)) return h->GetBinContent(1);
+    if(pt>h->GetBinLowEdge(iLastBin)) return h->GetBinContent(iLastBin);
+    for(int i=1; i<iLastBin; i++) {
+        if(pt>h->GetBinLowEdge(i) && pt<h->GetBinLowEdge(i+1)) {
+            if(h->GetBinContent(i)>1.0) cout << "Warning: efficiency>1.0!" << endl;
+            if(h->GetBinContent(i)<0.0) cout << "Warning: efficiency<0.0!" << endl;
+            return h->GetBinContent(i);
+        }
+
+    }
+    cout << "Warning: efficiency not found!" << endl;
+    return DBL_MAX;
 }

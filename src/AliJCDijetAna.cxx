@@ -578,39 +578,56 @@ void AliJCDijetAna::FillJetsDijets(AliJCDijetHistos *fhistos, int lCBin) {
 
     // deltaM calculations here:
     if(bHasDeltaPhiDijet) {
-        phi = dijets.at(iAcc).at(1).at(0).phi() - TMath::Pi(); //-pi to pi
-        double firstConePhi = phi-TMath::Pi()/2.0 < -TMath::Pi() ? phi+3.0*TMath::Pi()/2.0 : phi-TMath::Pi()/2.0;
+        double firstJetPhi = dijets.at(iAcc).at(1).at(0).phi() - TMath::Pi(); //-pi to pi
+        double firstConePhi = firstJetPhi-TMath::Pi()/2.0 < -TMath::Pi() ? firstJetPhi+3.0*TMath::Pi()/2.0 : firstJetPhi-TMath::Pi()/2.0;
         double coneDeltaPhi = GetDeltaPhi(dijets.at(iAcc).at(1).at(0), dijets.at(iAcc).at(1).at(1)); // 0-2pi
         double secondConePhi = firstConePhi+coneDeltaPhi > TMath::Pi() ? firstConePhi+coneDeltaPhi-2*TMath::Pi() : firstConePhi+coneDeltaPhi;
         double firstConeEta = dijets.at(iAcc).at(1).at(0).eta();
         double secondConeEta = dijets.at(iAcc).at(1).at(1).eta();
-        fastjet::PseudoJet firstCone;
-        fastjet::PseudoJet secondCone;
+        fastjet::PseudoJet firstConeP;
+        fastjet::PseudoJet secondConeP;
+        fastjet::PseudoJet firstConeDeltaP;
+        fastjet::PseudoJet secondConeDeltaP;
         for (utrack = 0; utrack < chparticles.size(); utrack++) {
             phi = chparticles.at(utrack).phi();
             eta = chparticles.at(utrack).eta();
             if(DeltaR(firstConeEta, eta, firstConePhi, phi) < fJetCone) {
-                firstCone += fastjet::PseudoJet(chparticles.at(utrack).px(), chparticles.at(utrack).py(), chparticles.at(utrack).pz(), chparticles.at(utrack).E());
+                firstConeP += fastjet::PseudoJet(chparticles.at(utrack).px(), chparticles.at(utrack).py(), chparticles.at(utrack).pz(), chparticles.at(utrack).E());
             }
             if(DeltaR(secondConeEta, eta, secondConePhi, phi) < fJetCone) {
-                secondCone += fastjet::PseudoJet(chparticles.at(utrack).px(), chparticles.at(utrack).py(), chparticles.at(utrack).pz(), chparticles.at(utrack).E());
+                secondConeP += fastjet::PseudoJet(chparticles.at(utrack).px(), chparticles.at(utrack).py(), chparticles.at(utrack).pz(), chparticles.at(utrack).E());
             }
         }
-        firstCone -= fastjet::PseudoJet(rho*jetAreaVector.px(),rho*jetAreaVector.py(),(rho+rhom)*jetAreaVector.pz(),(rho+rhom)*jetAreaVector.E());
-        secondCone -= fastjet::PseudoJet(rho*jetAreaVector.px(),rho*jetAreaVector.py(),(rho+rhom)*jetAreaVector.pz(),(rho+rhom)*jetAreaVector.E());
-        fastjet::PseudoJet doubleCone = firstCone + secondCone;
+        //Turn the cones back to jet direction
+        firstConeP.reset_PtYPhiM(firstConeP.perp(),firstConeP.rap(),dijets.at(iAcc).at(1).at(0).phi(),firstConeP.m());
+        secondConeP.reset_PtYPhiM(secondConeP.perp(),secondConeP.rap(),dijets.at(iAcc).at(1).at(1).phi(),secondConeP.m());
 
-        fhistos->fh_dijetdeltaM1->Fill(doubleCone.m());
+        jetAreaVector = dijets.at(iAcc).at(1).at(0).area_4vector();
+        firstConeDeltaP = firstConeP - fastjet::PseudoJet(rho*jetAreaVector.px(),rho*jetAreaVector.py(),(rho+rhom)*jetAreaVector.pz(),(rho+rhom)*jetAreaVector.E());
+        jetAreaVector = dijets.at(iAcc).at(1).at(1).area_4vector();
+        secondConeDeltaP = secondConeP - fastjet::PseudoJet(rho*jetAreaVector.px(),rho*jetAreaVector.py(),(rho+rhom)*jetAreaVector.pz(),(rho+rhom)*jetAreaVector.E());
+        fastjet::PseudoJet doubleDeltaCone = firstConeDeltaP + secondConeDeltaP;
+
+        fhistos->fh_dijetdeltaM1->Fill(doubleDeltaCone.m());
 
         // The second method
         dijet = dijets.at(iAcc).at(1).at(0) + dijets.at(iAcc).at(1).at(1);
-        double doubSquared = doubleCone.E()*doubleCone.E() - doubleCone.px()*doubleCone.px() - doubleCone.py()*doubleCone.py() - doubleCone.pz()*doubleCone.pz();
-        double dijetTimesCones = dijet.E()*doubleCone.E() - dijet.px()*doubleCone.px() - dijet.py()*doubleCone.py() - dijet.pz()*doubleCone.pz();
+        double doubSquared = doubleDeltaCone.E()*doubleDeltaCone.E() - doubleDeltaCone.px()*doubleDeltaCone.px() - doubleDeltaCone.py()*doubleDeltaCone.py() - doubleDeltaCone.pz()*doubleDeltaCone.pz();
+        double dijetTimesDeltaCones = dijet.E()*doubleDeltaCone.E() - dijet.px()*doubleDeltaCone.px() - dijet.py()*doubleDeltaCone.py() - dijet.pz()*doubleDeltaCone.pz();
 
         double mass2;
-        if(doubSquared + 2*dijetTimesCones > 0.0) mass2 = TMath::Sqrt(doubSquared + 2*dijetTimesCones);
-        else mass2 = -TMath::Sqrt(-(doubSquared + 2*dijetTimesCones));
+        if(doubSquared + 2*dijetTimesDeltaCones > 0.0) mass2 = TMath::Sqrt(doubSquared + 2*dijetTimesDeltaCones);
+        else mass2 = -TMath::Sqrt(-(doubSquared + 2*dijetTimesDeltaCones));
         fhistos->fh_dijetdeltaM2->Fill(mass2);
+
+        // The third method
+        fastjet::PseudoJet doubleCone = firstConeP + secondConeP;
+        double conesTimesDeltaCones = doubleCone.E()*doubleDeltaCone.E() - doubleCone.px()*doubleDeltaCone.px() - doubleCone.py()*doubleDeltaCone.py() - doubleCone.pz()*doubleDeltaCone.pz();
+
+        double mass3;
+        if(doubSquared + 2*conesTimesDeltaCones > 0.0) mass3 = TMath::Sqrt(doubSquared + 2*conesTimesDeltaCones);
+        else mass3 = -TMath::Sqrt(-(doubSquared + 2*conesTimesDeltaCones));
+        fhistos->fh_dijetdeltaM3->Fill(mass3);
     }
     return;
 }

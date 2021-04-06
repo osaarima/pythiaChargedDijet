@@ -116,6 +116,7 @@ class AliJCDijetHistos : public AliJHistogramInterface
 
         AliJTH1D fh_dijetdeltaM1;             //! // Dijet deltaM
         AliJTH1D fh_dijetdeltaM2;             //! // Dijet deltaM
+        AliJTH1D fh_dijetdeltaM3;             //! // Dijet deltaM
 };
 
 #endif //ALIJCDIJETHISTOS_H

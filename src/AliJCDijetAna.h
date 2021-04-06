@@ -35,6 +35,7 @@ class AliJCDijetAna : public TObject
         AliJCDijetAna& operator=(const AliJCDijetAna& obj); // Equal sign operator
 
 #if !defined(__CINT__) && !defined(__MAKECINT__)
+        vector<fastjet::PseudoJet> GetTracks() { return chparticles; }
         vector<vector<fastjet::PseudoJet>> GetJets() { return jets; }
         vector<vector<vector<fastjet::PseudoJet>>> GetDijets() { return dijets; }
         bool HasDijet() { return bHasDijet; }
