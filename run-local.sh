@@ -3,9 +3,9 @@
 #Runs all the bins parallel -> Needs 10 threads!
 
 PROG=`basename $0`
-if [ $# -ne 3 ]
+if [ $# -ne 4 ]
 then
-    echo "Usage: $PROG pythiaconfig.cmnd trackingIneff seedNo"
+    echo "Usage: $PROG pythiaconfig.cmnd trackingIneff seedNo name"
     exit 0;
 fi
 
@@ -14,8 +14,7 @@ function setenv(){ export $1=$2; }
 setenv pyconfigname $1
 setenv trackingIneff $2
 setenv seedNo $3
-
-setenv oname        trackingEffDJRun
+setenv oname $4
 
 setenv Disk         `pwd`
 setenv Out_DIR      $Disk/output/${oname}/data

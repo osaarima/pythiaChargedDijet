@@ -82,9 +82,12 @@ AliJCDijetHistos::AliJCDijetHistos() :
     fh_deltaPtResponseEvery_ALICE(),
     fh_dijetResponse(),
     fh_dijetResponseDeltaPhiCut(),
+    fh_doubleConeM(),
     fh_dijetdeltaM1(),
     fh_dijetdeltaM2(),
-    fh_dijetdeltaM3()
+    fh_dijetdeltaM3(),
+    fh_dijetdeltaM4(),
+    fh_dijetdeltaM5()
 {
 
 }
@@ -145,9 +148,12 @@ AliJCDijetHistos::AliJCDijetHistos(const AliJCDijetHistos& obj) :
     fh_deltaPtResponseEvery_ALICE(obj.fh_deltaPtResponseEvery_ALICE),
     fh_dijetResponse(obj.fh_dijetResponse),
     fh_dijetResponseDeltaPhiCut(obj.fh_dijetResponseDeltaPhiCut),
+    fh_doubleConeM(obj.fh_doubleConeM),
     fh_dijetdeltaM1(obj.fh_dijetdeltaM1),
     fh_dijetdeltaM2(obj.fh_dijetdeltaM2),
-    fh_dijetdeltaM3(obj.fh_dijetdeltaM3)
+    fh_dijetdeltaM3(obj.fh_dijetdeltaM3),
+    fh_dijetdeltaM4(obj.fh_dijetdeltaM4),
+    fh_dijetdeltaM5(obj.fh_dijetdeltaM5)
 {
     // copy constructor
 }
@@ -478,17 +484,29 @@ void AliJCDijetHistos::CreateEventTrackHistos(){
     fh_dijetResponseDeltaPhiCut
         << TH2D("h_dijetResponseDeltaPhiCut", "h_dijetResponseDeltaPhiCut", NBINSDijet, logBinsXDijet, NBINSDijet, logBinsXDijet )
         << "END" ;
+
+    fh_doubleConeM
+        << TH1D("h_doubleConeM", "h_doubleConeM", 500, 0, 500)
+        << "END" ;
     
     fh_dijetdeltaM1
-        << TH1D("h_dijetdeltaM1", "h_dijetdeltaM1", 300, -50, 250)
+        << TH1D("h_dijetdeltaM1", "h_dijetdeltaM1", 500, -250, 250)
         << "END" ;
 
     fh_dijetdeltaM2
-        << TH1D("h_dijetdeltaM2", "h_dijetdeltaM2", 300, -50, 250)
+        << TH1D("h_dijetdeltaM2", "h_dijetdeltaM2", 500, -250, 250)
         << "END" ;
 
     fh_dijetdeltaM3
-        << TH1D("h_dijetdeltaM3", "h_dijetdeltaM3", 300, -50, 250)
+        << TH1D("h_dijetdeltaM3", "h_dijetdeltaM3", 500, -250, 250)
+        << "END" ;
+
+    fh_dijetdeltaM4
+        << TH1D("h_dijetdeltaM4", "h_dijetdeltaM4", 500, -250, 250)
+        << "END" ;
+
+    fh_dijetdeltaM5
+        << TH1D("h_dijetdeltaM5", "h_dijetdeltaM5", 500, -250, 250)
         << "END" ;
 
 

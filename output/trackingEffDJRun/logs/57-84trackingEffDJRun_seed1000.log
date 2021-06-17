@@ -8,7 +8,7 @@
  |  |   P  P   Y Y     T    H   H   I    A A     This is PYTHIA version 8.303      |  | 
  |  |   PPP     Y      T    HHHHH   I   AAAAA    Last date of change:  1 Sep 2020  |  | 
  |  |   P       Y      T    H   H   I   A   A                                      |  | 
- |  |   P       Y      T    H   H  III  A   A    Now is 30 Mar 2021 at 09:00:06    |  | 
+ |  |   P       Y      T    H   H  III  A   A    Now is 07 Apr 2021 at 06:49:46    |  | 
  |  |                                                                              |  | 
  |  |   Christian Bierlich;  Department of Astronomy and Theoretical Physics,      |  | 
  |  |      Lund University, Solvegatan 14A, SE-223 62 Lund, Sweden;                |  | 
@@ -74,7 +74,7 @@
 
  PYTHIA Error in Settings::flag: unknown key Main:showChangedParticleData
  PYTHIA Error in Settings::mode: unknown key Beams:eCM
-Events=50000 RNDM seed 1000
+Events=100000 RNDM seed 1000
 
  *-------  PYTHIA Process Initialization  --------------------------*
  |                                                                  |
@@ -114,7 +114,7 @@ Events=50000 RNDM seed 1000
  |                                               |                          |                                      | 
  | Beams:eCM                                     |                 5020.000 |    14000.000         0.0             | 
  | HardQCD:all                                   |                       on |          off                         | 
- | Main:numberOfEvents                           |                    50000 |         1000           0             | 
+ | Main:numberOfEvents                           |                   100000 |         1000           0             | 
  | ParticleDecays:limitTau0                      |                       on |          off                         | 
  | PhaseSpace:mHatMin                            |                      0.0 |      4.00000         0.0             | 
  | PhaseSpace:pTHatMax                           |                 84.00000 |     -1.00000                         | 
@@ -193,9 +193,12 @@ Events=50000 RNDM seed 1000
 *AliJTH2D	h_deltaPtResponseEvery_ALICE	"h_deltaPtResponseEvery_ALICE"	&Lazy&Single	 1
 *AliJTH2D	h_dijetResponse	"h_dijetResponse"	&Lazy&Single	 1
 *AliJTH2D	h_dijetResponseDeltaPhiCut	"h_dijetResponseDeltaPhiCut"	&Lazy&Single	 1
+*AliJTH1D	h_doubleConeM	"h_doubleConeM"	&Lazy&Single	 1
 *AliJTH1D	h_dijetdeltaM1	"h_dijetdeltaM1"	&Lazy&Single	 1
 *AliJTH1D	h_dijetdeltaM2	"h_dijetdeltaM2"	&Lazy&Single	 1
 *AliJTH1D	h_dijetdeltaM3	"h_dijetdeltaM3"	&Lazy&Single	 1
+*AliJTH1D	h_dijetdeltaM4	"h_dijetdeltaM4"	&Lazy&Single	 1
+*AliJTH1D	h_dijetdeltaM5	"h_dijetdeltaM5"	&Lazy&Single	 1
 ============ AliJHistManager : AliJCDijetHistManagerjcdijetDetMC ===================
 
 ---- AliJBin ----
@@ -256,9 +259,12 @@ Events=50000 RNDM seed 1000
 *AliJTH2D	h_deltaPtResponseEvery_ALICE	"h_deltaPtResponseEvery_ALICE"	&Lazy&Single	 1
 *AliJTH2D	h_dijetResponse	"h_dijetResponse"	&Lazy&Single	 1
 *AliJTH2D	h_dijetResponseDeltaPhiCut	"h_dijetResponseDeltaPhiCut"	&Lazy&Single	 1
+*AliJTH1D	h_doubleConeM	"h_doubleConeM"	&Lazy&Single	 1
 *AliJTH1D	h_dijetdeltaM1	"h_dijetdeltaM1"	&Lazy&Single	 1
 *AliJTH1D	h_dijetdeltaM2	"h_dijetdeltaM2"	&Lazy&Single	 1
 *AliJTH1D	h_dijetdeltaM3	"h_dijetdeltaM3"	&Lazy&Single	 1
+*AliJTH1D	h_dijetdeltaM4	"h_dijetdeltaM4"	&Lazy&Single	 1
+*AliJTH1D	h_dijetdeltaM5	"h_dijetdeltaM5"	&Lazy&Single	 1
 
 ============= Settings =============
 cent bin:                   0
@@ -1934,7 +1940,6 @@ Let's start
  PYTHIA Warning in SimpleSpaceShower::pT2nextQCD: weight above unity  
 
  Pythia::next(): 2000 events have been generated 
-2500	5%, nTried:13545, nTrial:1, sigma:0.002
 
  Pythia::next(): 3000 events have been generated 
  PYTHIA Error in StringFragmentation::fragmentToJunction: caught in junction flavour loop  
@@ -1943,13 +1948,12 @@ Let's start
  PYTHIA Error in SimpleSpaceShower::pT2nearThreshold: stuck in loop  
 
  Pythia::next(): 5000 events have been generated 
-5000	10%, nTried:27721, nTrial:5, sigma:0.002
+5000	5%, nTried:27721, nTrial:5, sigma:0.002
  PYTHIA Warning in MultipartonInteractions::pTnext: weight above unity  
 
  Pythia::next(): 6000 events have been generated 
 
  Pythia::next(): 7000 events have been generated 
-7500	15%, nTried:41378, nTrial:12, sigma:0.002
 
  Pythia::next(): 8000 events have been generated 
 
@@ -1957,36 +1961,33 @@ Let's start
  PYTHIA Warning in Pythia::check: not quite matched particle energy/momentum/mass  
 
  Pythia::next(): 10000 events have been generated 
-10000	20%, nTried:54657, nTrial:1, sigma:0.002
+10000	10%, nTried:54657, nTrial:1, sigma:0.002
 
  Pythia::next(): 11000 events have been generated 
 
  Pythia::next(): 12000 events have been generated 
-12500	25%, nTried:68340, nTrial:2, sigma:0.002
 
  Pythia::next(): 13000 events have been generated 
 
  Pythia::next(): 14000 events have been generated 
 
  Pythia::next(): 15000 events have been generated 
-15000	30%, nTried:81704, nTrial:3, sigma:0.002
+15000	15%, nTried:81704, nTrial:3, sigma:0.002
 
  Pythia::next(): 16000 events have been generated 
 
  Pythia::next(): 17000 events have been generated 
-17500	35%, nTried:95186, nTrial:3, sigma:0.002
 
  Pythia::next(): 18000 events have been generated 
 
  Pythia::next(): 19000 events have been generated 
 
  Pythia::next(): 20000 events have been generated 
-20000	40%, nTried:108922, nTrial:9, sigma:0.002
+20000	20%, nTried:108922, nTrial:9, sigma:0.002
 
  Pythia::next(): 21000 events have been generated 
 
  Pythia::next(): 22000 events have been generated 
-22500	45%, nTried:122330, nTrial:23, sigma:0.002
 
  Pythia::next(): 23000 events have been generated 
 
@@ -1994,67 +1995,174 @@ Let's start
  PYTHIA Warning in HadronWidths::pickMasses: angular momentum and running widths not used  
 
  Pythia::next(): 25000 events have been generated 
-25000	50%, nTried:136140, nTrial:3, sigma:0.002
+25000	25%, nTried:136140, nTrial:3, sigma:0.002
  PYTHIA Warning in PhaseSpace2to2tauyz::trialKin: maximum for cross section violated  
 
  Pythia::next(): 26000 events have been generated 
 
  Pythia::next(): 27000 events have been generated 
-27500	55%, nTried:149854, nTrial:5, sigma:0.002
 
  Pythia::next(): 28000 events have been generated 
 
  Pythia::next(): 29000 events have been generated 
 
  Pythia::next(): 30000 events have been generated 
-30000	60%, nTried:163363, nTrial:11, sigma:0.002
+30000	30%, nTried:163363, nTrial:11, sigma:0.002
 
  Pythia::next(): 31000 events have been generated 
 
  Pythia::next(): 32000 events have been generated 
-32500	65%, nTried:176949, nTrial:2, sigma:0.002
 
  Pythia::next(): 33000 events have been generated 
 
  Pythia::next(): 34000 events have been generated 
 
  Pythia::next(): 35000 events have been generated 
-35000	70%, nTried:190788, nTrial:7, sigma:0.002
+35000	35%, nTried:190788, nTrial:7, sigma:0.002
 
  Pythia::next(): 36000 events have been generated 
 
  Pythia::next(): 37000 events have been generated 
-37500	75%, nTried:204342, nTrial:4, sigma:0.002
 
  Pythia::next(): 38000 events have been generated 
 
  Pythia::next(): 39000 events have been generated 
 
  Pythia::next(): 40000 events have been generated 
-40000	80%, nTried:217772, nTrial:3, sigma:0.002
+40000	40%, nTried:217772, nTrial:3, sigma:0.002
 
  Pythia::next(): 41000 events have been generated 
 
  Pythia::next(): 42000 events have been generated 
-42500	85%, nTried:231278, nTrial:2, sigma:0.002
 
  Pythia::next(): 43000 events have been generated 
 
  Pythia::next(): 44000 events have been generated 
 
  Pythia::next(): 45000 events have been generated 
-45000	90%, nTried:244936, nTrial:2, sigma:0.002
+45000	45%, nTried:244936, nTrial:2, sigma:0.002
 
  Pythia::next(): 46000 events have been generated 
 
  Pythia::next(): 47000 events have been generated 
-47500	95%, nTried:258693, nTrial:3, sigma:0.002
 
  Pythia::next(): 48000 events have been generated 
 
  Pythia::next(): 49000 events have been generated 
-50000	100%, nTried:272390, sigma:0.002
-nTried after loop:272390
+
+ Pythia::next(): 50000 events have been generated 
+50000	50%, nTried:272394, nTrial:4, sigma:0.002
+
+ Pythia::next(): 51000 events have been generated 
+
+ Pythia::next(): 52000 events have been generated 
+
+ Pythia::next(): 53000 events have been generated 
+
+ Pythia::next(): 54000 events have been generated 
+
+ Pythia::next(): 55000 events have been generated 
+55000	55%, nTried:299428, nTrial:1, sigma:0.002
+
+ Pythia::next(): 56000 events have been generated 
+
+ Pythia::next(): 57000 events have been generated 
+
+ Pythia::next(): 58000 events have been generated 
+
+ Pythia::next(): 59000 events have been generated 
+
+ Pythia::next(): 60000 events have been generated 
+60000	60%, nTried:327104, nTrial:1, sigma:0.002
+
+ Pythia::next(): 61000 events have been generated 
+
+ Pythia::next(): 62000 events have been generated 
+
+ Pythia::next(): 63000 events have been generated 
+
+ Pythia::next(): 64000 events have been generated 
+
+ Pythia::next(): 65000 events have been generated 
+65000	65%, nTried:354313, nTrial:8, sigma:0.002
+
+ Pythia::next(): 66000 events have been generated 
+
+ Pythia::next(): 67000 events have been generated 
+
+ Pythia::next(): 68000 events have been generated 
+
+ Pythia::next(): 69000 events have been generated 
+
+ Pythia::next(): 70000 events have been generated 
+70000	70%, nTried:381579, nTrial:12, sigma:0.002
+
+ Pythia::next(): 71000 events have been generated 
+
+ Pythia::next(): 72000 events have been generated 
+
+ Pythia::next(): 73000 events have been generated 
+
+ Pythia::next(): 74000 events have been generated 
+
+ Pythia::next(): 75000 events have been generated 
+75000	75%, nTried:407991, nTrial:3, sigma:0.002
+
+ Pythia::next(): 76000 events have been generated 
+
+ Pythia::next(): 77000 events have been generated 
+
+ Pythia::next(): 78000 events have been generated 
+
+ Pythia::next(): 79000 events have been generated 
+
+ Pythia::next(): 80000 events have been generated 
+80000	80%, nTried:435430, nTrial:3, sigma:0.002
+
+ Pythia::next(): 81000 events have been generated 
+
+ Pythia::next(): 82000 events have been generated 
+
+ Pythia::next(): 83000 events have been generated 
+
+ Pythia::next(): 84000 events have been generated 
+ PYTHIA Warning in TauDecays::decay: unknown correlated tau production, assuming from unpolarized photon  
+
+ Pythia::next(): 85000 events have been generated 
+85000	85%, nTried:462503, nTrial:1, sigma:0.002
+
+ Pythia::next(): 86000 events have been generated 
+
+ Pythia::next(): 87000 events have been generated 
+
+ Pythia::next(): 88000 events have been generated 
+
+ Pythia::next(): 89000 events have been generated 
+
+ Pythia::next(): 90000 events have been generated 
+90000	90%, nTried:488935, nTrial:3, sigma:0.002
+
+ Pythia::next(): 91000 events have been generated 
+ PYTHIA Warning in Pythia::check: energy-momentum not quite conserved  
+
+ Pythia::next(): 92000 events have been generated 
+
+ Pythia::next(): 93000 events have been generated 
+
+ Pythia::next(): 94000 events have been generated 
+
+ Pythia::next(): 95000 events have been generated 
+95000	95%, nTried:515860, nTrial:1, sigma:0.002
+
+ Pythia::next(): 96000 events have been generated 
+
+ Pythia::next(): 97000 events have been generated 
+
+ Pythia::next(): 98000 events have been generated 
+
+ Pythia::next(): 99000 events have been generated 
+100000	100%, nTried:543315, sigma:0.002
+nTried after loop:543315
 sigma after loop:0.002
-50000 events are analyzed successfully.
-Real time 0:28:30, CP time 1710.320
+100000 events are analyzed successfully.
+Real time 0:56:09, CP time 3354.020

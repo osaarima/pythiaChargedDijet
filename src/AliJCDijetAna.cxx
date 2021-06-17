@@ -584,18 +584,26 @@ void AliJCDijetAna::FillJetsDijets(AliJCDijetHistos *fhistos, int lCBin) {
         double secondConePhi = firstConePhi+coneDeltaPhi > TMath::Pi() ? firstConePhi+coneDeltaPhi-2*TMath::Pi() : firstConePhi+coneDeltaPhi;
         double firstConeEta = dijets.at(iAcc).at(1).at(0).eta();
         double secondConeEta = dijets.at(iAcc).at(1).at(1).eta();
+        fastjet::PseudoJet holderJet;
         fastjet::PseudoJet firstConeP;
         fastjet::PseudoJet secondConeP;
         fastjet::PseudoJet firstConeDeltaP;
         fastjet::PseudoJet secondConeDeltaP;
+        pt = 0;
+        pt2 = 0;
         for (utrack = 0; utrack < chparticles.size(); utrack++) {
             phi = chparticles.at(utrack).phi();
             eta = chparticles.at(utrack).eta();
             if(DeltaR(firstConeEta, eta, firstConePhi, phi) < fJetCone) {
-                firstConeP += fastjet::PseudoJet(chparticles.at(utrack).px(), chparticles.at(utrack).py(), chparticles.at(utrack).pz(), chparticles.at(utrack).E());
+                holderJet = fastjet::PseudoJet(chparticles.at(utrack).px(), chparticles.at(utrack).py(), chparticles.at(utrack).pz(), chparticles.at(utrack).E());
+                firstConeP += holderJet;
+                pt += holderJet.pt();
+                    
             }
             if(DeltaR(secondConeEta, eta, secondConePhi, phi) < fJetCone) {
-                secondConeP += fastjet::PseudoJet(chparticles.at(utrack).px(), chparticles.at(utrack).py(), chparticles.at(utrack).pz(), chparticles.at(utrack).E());
+                holderJet = fastjet::PseudoJet(chparticles.at(utrack).px(), chparticles.at(utrack).py(), chparticles.at(utrack).pz(), chparticles.at(utrack).E());
+                secondConeP += holderJet;
+                pt2 += holderJet.pt();
             }
         }
         //Turn the cones back to jet direction
@@ -622,12 +630,43 @@ void AliJCDijetAna::FillJetsDijets(AliJCDijetHistos *fhistos, int lCBin) {
 
         // The third method
         fastjet::PseudoJet doubleCone = firstConeP + secondConeP;
+        fhistos->fh_doubleConeM->Fill(doubleCone.m());
         double conesTimesDeltaCones = doubleCone.E()*doubleDeltaCone.E() - doubleCone.px()*doubleDeltaCone.px() - doubleCone.py()*doubleDeltaCone.py() - doubleCone.pz()*doubleDeltaCone.pz();
 
         double mass3;
         if(doubSquared + 2*conesTimesDeltaCones > 0.0) mass3 = TMath::Sqrt(doubSquared + 2*conesTimesDeltaCones);
         else mass3 = -TMath::Sqrt(-(doubSquared + 2*conesTimesDeltaCones));
         fhistos->fh_dijetdeltaM3->Fill(mass3);
+
+        // The fourth method
+        double localRho1 = pt/(TMath::Pi()*0.4*0.4);
+        double localRho2 = pt2/(TMath::Pi()*0.4*0.4);
+        double deltaRho1 = rho-localRho1;
+        double deltaRho2 = rho-localRho2;
+        fastjet::PseudoJet deltaPmu1_fourth = deltaRho1*dijets.at(iAcc).at(1).at(0).area_4vector();
+        fastjet::PseudoJet deltaPmu2_fourth = deltaRho2*dijets.at(iAcc).at(1).at(1).area_4vector();
+        fastjet::PseudoJet doubleDeltaCone_fourth = deltaPmu1_fourth + deltaPmu2_fourth;
+
+        fhistos->fh_dijetdeltaM4->Fill(doubleDeltaCone_fourth.m());
+
+        // THe fifth method
+        deltaPmu1_fourth = localRho1*dijets.at(iAcc).at(1).at(0).area_4vector();
+        deltaPmu2_fourth = localRho2*dijets.at(iAcc).at(1).at(1).area_4vector();
+        fastjet::PseudoJet bgsubtrJeFifth1 = fastjet::PseudoJet(dijets.at(iAcc).at(1).at(0).px() - localRho1 * dijets.at(iAcc).at(1).at(0).area_4vector().px(),
+                                                                dijets.at(iAcc).at(1).at(0).py() - localRho1 * dijets.at(iAcc).at(1).at(0).area_4vector().py(),
+                                                                dijets.at(iAcc).at(1).at(0).pz() - localRho1 * dijets.at(iAcc).at(1).at(0).area_4vector().pz(),
+                                                                dijets.at(iAcc).at(1).at(0).E()  - localRho1 * dijets.at(iAcc).at(1).at(0).area_4vector().E());
+        fastjet::PseudoJet bgsubtrJeFifth2 = fastjet::PseudoJet(dijets.at(iAcc).at(1).at(1).px() - localRho2 * dijets.at(iAcc).at(1).at(1).area_4vector().px(),
+                                                                dijets.at(iAcc).at(1).at(1).py() - localRho2 * dijets.at(iAcc).at(1).at(1).area_4vector().py(),
+                                                                dijets.at(iAcc).at(1).at(1).pz() - localRho2 * dijets.at(iAcc).at(1).at(1).area_4vector().pz(),
+                                                                dijets.at(iAcc).at(1).at(1).E()  - localRho2 * dijets.at(iAcc).at(1).at(1).area_4vector().E());
+        doubleDeltaCone_fourth = bgsubtrJeFifth1 + bgsubtrJeFifth2;
+        //doubleDeltaCone_fourth =   dijets.at(iAcc).at(1).at(0) - deltaPmu1_fourth
+        //                         + dijets.at(iAcc).at(1).at(1) - deltaPmu2_fourth;
+
+        dijet = dijets.at(iBGSubtr).at(1).at(0) + dijets.at(iBGSubtr).at(1).at(1);
+
+        fhistos->fh_dijetdeltaM5->Fill(dijet.m()-doubleDeltaCone_fourth.m());
     }
     return;
 }

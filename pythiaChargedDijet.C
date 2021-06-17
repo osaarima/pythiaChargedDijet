@@ -116,11 +116,13 @@ int main(int argc, char **argv) {
     fhistos->CreateEventTrackHistos();
     fhistos->fHMG->Print();
 
-    fhistosDet = new AliJCDijetHistos();
-    fhistosDet->SetName("jcdijetDetMC");
-    fhistosDet->SetCentralityBinsHistos(centbins);
-    fhistosDet->CreateEventTrackHistos();
-    fhistosDet->fHMG->Print();
+    if(trackingInEff!=0.0) {
+        fhistosDet = new AliJCDijetHistos();
+        fhistosDet->SetName("jcdijetDetMC");
+        fhistosDet->SetCentralityBinsHistos(centbins);
+        fhistosDet->CreateEventTrackHistos();
+        fhistosDet->fHMG->Print();
+    }
 
     fana = new AliJCDijetAna();
     if(trackingInEff!=0.0) fanaMC = new AliJCDijetAna();
@@ -204,7 +206,7 @@ int main(int argc, char **argv) {
                       dijetDeltaPhiCut,
                       fmatchingR,
                       0.0);
-    fana->InitHistos(fhistos, true, 1);
+    fana->InitHistos(fhistos, true, 2);
 
     if(trackingInEff!=0.0) {
         fanaMC->SetSettings(5,
@@ -223,7 +225,7 @@ int main(int argc, char **argv) {
                 dijetDeltaPhiCut,
                 fmatchingR,
                 0.0);//trackingInEff); //Efficiency is handled in this macro by DJ eff histo
-        fanaMC->InitHistos(fhistosDet, true, 1);
+        fanaMC->InitHistos(fhistosDet, true, 2);
     }
 
 
@@ -276,10 +278,12 @@ int main(int argc, char **argv) {
         sigmaGen = pythia.info.sigmaGen();
         ebeweight = 1.0; //no event-by-event weight at all. //sigmaGen/nTrial;
         hCrossSectionInfo->Fill(7.5,ebeweight);
+        fhistos->fh_events[fCBin]->Fill("events",1.0);
+        if(trackingInEff!=0.0) fhistosDet->fh_events[fCBin]->Fill("events",1.0);
         if(iEvent % ieout == 0) cout << iEvent << "\t" << int(float(iEvent)/nEvent*100) << "%, nTried:" << nTried << ", nTrial:" << nTrial << ", sigma:" << sigmaGen << endl;
 
         for (int i = 0; i < pythia.event.size(); ++i) {//loop over all the particles in the event
-            if (pythia.event[i].isFinal() && pythia.event[i].isCharged() && pythia.event[i].isHadron() ) { // Only check if it is final, charged and hadron since the acceptance is checked in the CalculateJetsDijets
+            if (pythia.event[i].isFinal() && pythia.event[i].isCharged()) { // Only check if it is final, charged and hadron since the acceptance is checked in the CalculateJetsDijets
 
                 TLorentzVector lParticle(pythia.event[i].px(), pythia.event[i].py(), pythia.event[i].pz(), pythia.event[i].e());
                 AliJBaseTrack track( lParticle );
@@ -289,7 +293,7 @@ int main(int argc, char **argv) {
 
                 if (trackingInEff!=0.0) {
                     fPtEff = getEffFromHisto(hCoeff, TMath::Sqrt(pythia.event[i].px()*pythia.event[i].px()+pythia.event[i].py()*pythia.event[i].py()));
-                    if(fPtEff < randomGenerator->Rndm()) {
+                    if(fPtEff > randomGenerator->Rndm()) {
                         new ((*inputListDet)[inputListDet->GetEntriesFast()]) AliJBaseTrack(track);
                     }
                 }

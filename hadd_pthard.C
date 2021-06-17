@@ -1,7 +1,7 @@
 #include "../AliJCDijet-Results/DijetHelper.h"
 const int Nfiles = 10;
-TString sOutFolder = "trackingEffDJRun";
-TString sDefName = "seed1000";
+TString sOutFolder = "trackingEffDJRun_closure";
+TString sDefName = "seed2000";
 TString inputfiles[Nfiles]={
     Form("output/%s/data/11-21%s_%s.root",sOutFolder.Data(),sOutFolder.Data(),sDefName.Data()),
 	Form("output/%s/data/21-36%s_%s.root",sOutFolder.Data(),sOutFolder.Data(),sDefName.Data()),

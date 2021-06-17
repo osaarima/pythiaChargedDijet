@@ -114,9 +114,12 @@ class AliJCDijetHistos : public AliJHistogramInterface
         AliJTH2D fh_dijetResponse;            //! // Dijet response matrix
         AliJTH2D fh_dijetResponseDeltaPhiCut; //! // Dijet response matrix with deltaPhi cut
 
+        AliJTH1D fh_doubleConeM;              //! // Double cone invariant mass
         AliJTH1D fh_dijetdeltaM1;             //! // Dijet deltaM
         AliJTH1D fh_dijetdeltaM2;             //! // Dijet deltaM
         AliJTH1D fh_dijetdeltaM3;             //! // Dijet deltaM
+        AliJTH1D fh_dijetdeltaM4;             //! // Dijet deltaM
+        AliJTH1D fh_dijetdeltaM5;             //! // Dijet deltaM
 };
 
 #endif //ALIJCDIJETHISTOS_H
