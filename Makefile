@@ -32,8 +32,8 @@ LDFLAGS += $(shell $(PYTHIA8)/bin/pythia8-config --cppflags --libs)
 #LDFLAGS += -Wl,-rpath -Wl,$(HEPPDT)/lib
 #INCS    += -I$(HEPMC)/include
 #INCS    += -I$(HEPPDT)/include
-LDFLAGS += -L/home/alidock/.sw/slc7_x86-64/cgal/latest-aliroot6-user-next-root6/lib/ -lCGAL 
-LDFLAGS += -L/home/alidock/.sw/slc7_x86-64/GMP/latest-aliroot6-user-next-root6/lib/ -lgmp
+LDFLAGS += -L/home/osaarima/alice/sw/ubuntu1804_x86-64/cgal/latest-aliroot6-user-next-root6/lib/ -lCGAL 
+LDFLAGS += -L/home/osaarima/alice/sw/ubuntu1804_x86-64/GMP/latest-aliroot6-user-next-root6/lib/ -lgmp
 CXXFLAGS  += $(INCS)
 LDFLAGS += $L -ldl
 

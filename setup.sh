@@ -7,7 +7,7 @@
 #export HEPPDT=$HOME/alice/HepPDT-3.04.01-install
 
 #export PYTHIA8=$HOME/alice/PythiaMy/pythia8226
-export PYTHIA8=$HOME/alice/PythiaMy/pythia8303
+export PYTHIA8=$HOME/alidock/alice/PythiaMy/pythia8303
 
 #For puck:
 #export FASTJET=/n/work00/osanmasa/fastjet/fastjet-install

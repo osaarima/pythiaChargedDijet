@@ -309,7 +309,7 @@ int main(int argc, char **argv) {
             fanaMC->FillJetsDijets(fhistosDet, fCBin);
 
             // Here response matrix calculation.
-            fana->CalculateResponse(fanaMC,fhistosDet);
+            fana->CalculateResponse(fanaMC,fhistosDet,AliJCDijetAna::iAcc,AliJCDijetAna::iAcc); //new CalculateResponse with two indices
         }
 
         EventCounter++;

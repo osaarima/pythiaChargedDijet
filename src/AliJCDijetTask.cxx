@@ -351,10 +351,20 @@ void AliJCDijetTask::UserExec(Option_t* /*option*/)
         fhistosDetMC->fh_centrality->Fill(fJCatalystTask->GetCentrality());
         if(fCBinDetMC == -1) return;
 
+        TList *genHeaders = 0x0;
+        AliGenEventHeader* gh = 0;
         AliMCEvent *mcEvent = MCEvent();
-        AliGenPythiaEventHeader *pythiaGenHeader = AliAnalysisHelperJetTasks::GetPythiaEventHeader(mcEvent);
-        if(pythiaGenHeader!=0) fptHardBin = pythiaGenHeader->GetPtHard();
-        else fptHardBin = 0.0;
+        if(mcEvent) genHeaders = mcEvent->GetCocktailList();
+        if(genHeaders){
+            for(Int_t i = 0; i<genHeaders->GetEntries(); i++){
+                gh = (AliGenEventHeader*)genHeaders->At(i);
+                AliGenPythiaEventHeader* pythiaGenHeader= dynamic_cast<AliGenPythiaEventHeader*>(gh); //identify pythia header
+                //AliGenPythiaEventHeader *pythiaGenHeader = AliAnalysisHelperJetTasks::GetPythiaEventHeader(mcEvent);
+                if(pythiaGenHeader) fptHardBin = pythiaGenHeader->GetPtHard();
+                else fptHardBin = 0.0;
+                //cout << "genHeader " << i << ": " << pythiaGenHeader << ", fptHardBin: " << fptHardBin << endl;
+            }
+        }
         //cout << "fptHardBin: " << fptHardBin << endl;
         //fana->SetPtHardBin(fptHardBin);
         fanaMC->SetPtHardBin(fptHardBin);
@@ -407,7 +417,7 @@ void AliJCDijetTask::UserExec(Option_t* /*option*/)
     // Here response matrix calculation.
     if(fIsMC) {
 #if !defined(__CINT__) && !defined(__MAKECINT__)
-        fana->CalculateResponse(fanaMC,fhistosDetMC);
+        fana->CalculateResponse(fanaMC,fhistosDetMC,AliJCDijetAna::iAcc,AliJCDijetAna::iAcc);
 #endif
     }
 
