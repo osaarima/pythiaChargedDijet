@@ -27,6 +27,7 @@
 #include "AliMCEvent.h"
 #include "AliGenPythiaEventHeader.h"
 #include "AliAnalysisHelperJetTasks.h"
+#include "AliEventCuts.h"
 
 
 
@@ -53,8 +54,10 @@ class AliJCDijetTask : public AliAnalysisTaskSE {
         virtual void Terminate(Option_t* );
         AliJCatalystTask *GetJCatalystTask() {return fJCatalystTask;}
         void    SetCentralityBins( vector<double> centralityBins ) {fcentralityBins=centralityBins; }
+        void    SetDijetMBins( TString dijetMBins ) {fsDijetMBins=dijetMBins; }
         void    SetJetConeSize(double jetCone, double ktjetCone) {fjetCone=jetCone; fktJetCone=ktjetCone; }
         void    SetBGSubtrSettings(int ktScheme, int antiktScheme, Bool_t usePionMass, Bool_t useDeltaPhiBGSubtr) {fktScheme=ktScheme; fantiktScheme=antiktScheme; fusePionMass=usePionMass; fuseDeltaPhiBGSubtr=useDeltaPhiBGSubtr; }
+        void    SetUnfoldingJetSets(AliJCDijetAna::jetClasses lJetClassTrue, AliJCDijetAna::jetClasses lJetClassDet) { iUnfJetClassTrue = lJetClassTrue; iUnfJetClassDet = lJetClassDet;}
         Bool_t  IsMC()const{ return fIsMC; }
         void    SetIsMC(Bool_t b) { fIsMC=b; }
         void    SetCuts(double particleEta,
@@ -80,7 +83,9 @@ class AliJCDijetTask : public AliAnalysisTaskSE {
         enum{
             DIJET_VERTEX13PA      = 0x1,
             DIJET_PILEUPSPD       = 0x2,
-            DIJET_UTILSPILEUPSPD  = 0x4
+            DIJET_UTILSPILEUPSPD  = 0x4,
+            DIJET_ALIEVENTCUT     = 0x8,
+            DIJET_CATALYST        = 0x100
         };
 
         // Methods specific for this class
@@ -91,9 +96,11 @@ class AliJCDijetTask : public AliAnalysisTaskSE {
 
         AliJCatalystTask *fJCatalystTask;  //
         AliJCatalystTask *fJCatalystDetMCTask;  //
+        AliEventCuts fEventCuts; // Event cut object
         TString           fJCatalystTaskName; // Name for JCatalyst task
         TString           fJCatalystDetMCTaskName; // Name for JCatalyst task
         vector<double> fcentralityBins;
+        TString fsDijetMBins;
         double fjetCone;
         double fktJetCone;
         int  fktScheme;
@@ -121,6 +128,8 @@ class AliJCDijetTask : public AliAnalysisTaskSE {
         AliAnalysisUtils *fUtils; //!
         double fptHardBin;
         int fDetMCFlag;
+        AliJCDijetAna::jetClasses iUnfJetClassTrue;
+        AliJCDijetAna::jetClasses iUnfJetClassDet;
 
         ClassDef(AliJCDijetTask, 1); 
 };

@@ -93,7 +93,7 @@ AliJCDijetTask::AliJCDijetTask(const char *name, TString inputformat):
     fUtils(nullptr)
 {
     // Constructor
-    AliInfo("---- AliJCDijetTask Constructor ----");
+    AliInfo(Form("---- AliJCDijetTask Constructor: %s ----",name));
     DefineOutput (1, TDirectory::Class());
 }
 
@@ -163,7 +163,7 @@ AliJCDijetTask::~AliJCDijetTask()
 void AliJCDijetTask::UserCreateOutputObjects()
 {  
     //=== create the jcorran outputs objects
-    if(fDebug > 1) printf("AliJCDijetTask::UserCreateOutPutData() \n");
+    if(fDebug > 1) printf("AliJCDijetTask::UserCreateOutPutObjects() \n");
     //=== Get AnalysisManager
     AliAnalysisManager *man = AliAnalysisManager::GetAnalysisManager();
 
@@ -177,6 +177,7 @@ void AliJCDijetTask::UserCreateOutputObjects()
     fhistos = new AliJCDijetHistos();
     fhistos->SetName("jcdijet");
     fhistos->SetCentralityBinsHistos(fcentralityBins);
+    fhistos->SetDijetMBinsHistos(fsDijetMBins);
     fhistos->CreateEventTrackHistos();
     fhistos->fHMG->Print();
     fana = new AliJCDijetAna();
@@ -185,6 +186,7 @@ void AliJCDijetTask::UserCreateOutputObjects()
         fhistosDetMC = new AliJCDijetHistos();
         fhistosDetMC->SetName("jcdijetDetMC");
         fhistosDetMC->SetCentralityBinsHistos(fcentralityBins);
+        fhistosDetMC->SetDijetMBinsHistos(fsDijetMBins);
         fhistosDetMC->CreateEventTrackHistos();
         fhistosDetMC->fHMG->Print();
         fanaMC = new AliJCDijetAna();
@@ -238,6 +240,7 @@ void AliJCDijetTask::UserCreateOutputObjects()
     cout << "Centrality bins:            ";
     for(unsigned i=0; i< fcentralityBins.size(); i++) cout << fcentralityBins.at(i) << " ";
     cout << endl;
+    cout << "Dijet M bins:               " << fsDijetMBins.Data() << endl;
     cout << "Jet cone size:              " << fjetCone << endl;
     cout << "kt-jet cone size:           " << fktJetCone << endl;
     cout << "Using kt-jet scheme:        " << sktScheme.Data() << endl;
@@ -253,6 +256,9 @@ void AliJCDijetTask::UserCreateOutputObjects()
     cout << "Dijet DeltaPhi cut:         pi/" << fdeltaPhiCut << endl;
     cout << "Matching R for MC:          " << fmatchingR << endl;
     cout << "Tracking ineff for DetMC:   " << ftrackingIneff << endl;
+    cout << "Unfolding with true MC set: " << iUnfJetClassTrue << endl;
+    cout << "Unfolding with det  MC set: " << iUnfJetClassDet << endl;
+    cout << "Event selection flag:       " << flags << endl;
     cout << endl;
 
     if(fusePionMass && (fktScheme!=0 || fantiktScheme!=0)) {
@@ -302,6 +308,11 @@ void AliJCDijetTask::UserCreateOutputObjects()
     fana->InitHistos(fhistos, fIsMC, fcentralityBins.size());
     if(fIsMC) fanaMC->InitHistos(fhistosDetMC, fIsMC, fcentralityBins.size());
 
+    fEventCuts.SetupRun2pp();
+
+    //fEventCuts.SetupRun2pA(0);
+    // iPeriod: 0 p-Pb 5&8 TeV, 1 Pb-p 8 TeV
+
 #endif
 
     // Load Custom Configuration and parameters
@@ -329,8 +340,15 @@ void AliJCDijetTask::UserExec(Option_t* /*option*/)
         fhistosDetMC->fh_eventSel->Fill("events wo/ cuts",1.0);
         if(fJCatalystDetMCTask->GetJCatalystEntry() != fEntry) return;
         fhistosDetMC->fh_eventSel->Fill("catalyst entry ok",1.0);
-        if( !fJCatalystDetMCTask->GetIsGoodEvent() ) return;
-        fhistosDetMC->fh_eventSel->Fill("catalyst ok",1.0);
+        if(flags & DIJET_CATALYST) {
+            if( !fJCatalystDetMCTask->GetIsGoodEvent() ) return;
+            fhistosDetMC->fh_eventSel->Fill("catalyst ok",1.0);
+        }
+
+        if(flags & DIJET_ALIEVENTCUT) {
+            if( !fEventCuts.AcceptEvent(InputEvent()) ) return;
+            fhistosDetMC->fh_eventSel->Fill("alieventcut ok",1.0);
+        }
 
         if(flags & DIJET_VERTEX13PA) {
             if(!fUtils->IsVertexSelected2013pA(InputEvent())) return;
@@ -384,21 +402,28 @@ void AliJCDijetTask::UserExec(Option_t* /*option*/)
     }
 
     fhistos->fh_eventSel->Fill("catalyst entry ok",1.0);
-    if( !fJCatalystTask->GetIsGoodEvent() ) return;
-    fhistos->fh_eventSel->Fill("catalyst ok",1.0);
+    if(flags & DIJET_CATALYST) {
+        //if( !fJCatalystTask->GetIsGoodEvent() ) return;
+        fhistos->fh_eventSel->Fill("catalyst ok",1.0);
+    }
+
+    if(flags & DIJET_ALIEVENTCUT) {
+        //if( !fEventCuts.AcceptEvent(InputEvent()) ) return;
+        fhistos->fh_eventSel->Fill("alieventcut ok",1.0);
+    }
 
     if(flags & DIJET_VERTEX13PA) {
-        if(!fUtils->IsVertexSelected2013pA(InputEvent())) return;
+        //if(!fUtils->IsVertexSelected2013pA(InputEvent())) return;
         fhistos->fh_eventSel->Fill("vertex2013pA ok",1.0);
     }
 
     if(flags & DIJET_PILEUPSPD) {
-        if(InputEvent()->IsPileupFromSPD(3,0.6,3,2,5)) return;
+        //if(InputEvent()->IsPileupFromSPD(3,0.6,3,2,5)) return;
         fhistos->fh_eventSel->Fill("pileupSPD ok",1.0);
     }
 
     if(flags & DIJET_UTILSPILEUPSPD) {
-        if(fUtils->IsPileUpSPD(InputEvent())) return;
+        //if(fUtils->IsPileUpSPD(InputEvent())) return;
         fhistos->fh_eventSel->Fill("utils pileupSPD ok",1.0);
     }
 
@@ -410,14 +435,24 @@ void AliJCDijetTask::UserExec(Option_t* /*option*/)
 
 #if !defined(__CINT__) && !defined(__MAKECINT__)
     //cout << "Next true level calculations:" << endl;
-    fana->CalculateJets(fInputList, fhistos, fCBin);
-    fana->FillJetsDijets(fhistos, fCBin);
+    if( fEventCuts.AcceptEvent(InputEvent()) && (!fJCatalystTask->GetIsGoodEvent()||!fUtils->IsVertexSelected2013pA(InputEvent())||!InputEvent()->IsPileupFromSPD(3,0.6,3,2,5)) ) {
+        fana->CalculateJets(fInputList, fhistos, fCBin);
+        fana->FillJetsDijets(fhistos, fCBin);
+    }
 #endif
 
     // Here response matrix calculation.
     if(fIsMC) {
 #if !defined(__CINT__) && !defined(__MAKECINT__)
         fana->CalculateResponse(fanaMC,fhistosDetMC,AliJCDijetAna::iAcc,AliJCDijetAna::iAcc);
+        fana->CalculateResponse(fanaMC,fhistosDetMC,AliJCDijetAna::iBGSubtr,AliJCDijetAna::iBGSubtr);
+        fana->CalculateResponse(fanaMC,fhistosDetMC,AliJCDijetAna::iBGSubtrCutsRaw,AliJCDijetAna::iBGSubtrCutsRaw);
+        //we can run custom configuration with an argument
+        if( !((iUnfJetClassTrue==AliJCDijetAna::iAcc            && iUnfJetClassDet==AliJCDijetAna::iAcc)
+        ||    (iUnfJetClassTrue==AliJCDijetAna::iBGSubtr        && iUnfJetClassDet==AliJCDijetAna::iBGSubtr)
+        ||    (iUnfJetClassTrue==AliJCDijetAna::iBGSubtrCutsRaw && iUnfJetClassDet==AliJCDijetAna::iBGSubtrCutsRaw))) {
+            fana->CalculateResponse(fanaMC,fhistosDetMC,iUnfJetClassTrue,iUnfJetClassDet);
+        }
 #endif
     }
 

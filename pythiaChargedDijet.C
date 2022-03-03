@@ -342,7 +342,6 @@ int main(int argc, char **argv) {
 //If pt is less than first bin then return first bin.
 //If pt is more than last bin then return last bin.
 double getEffFromHisto(TH1D* h, double pt) {
-    int iBin;
     int iLastBin = h->GetNbinsX();
 
     if(pt<h->GetBinLowEdge(1)) return h->GetBinContent(1);
