@@ -258,6 +258,7 @@ void AliJCDijetTask::UserCreateOutputObjects()
     cout << "Tracking ineff for DetMC:   " << ftrackingIneff << endl;
     cout << "Unfolding with true MC set: " << iUnfJetClassTrue << endl;
     cout << "Unfolding with det  MC set: " << iUnfJetClassDet << endl;
+    cout << "Use C-rho estimation:       " << bUseCrho << endl;
     cout << "Event selection flag:       " << flags << endl;
     cout << endl;
 
@@ -282,7 +283,8 @@ void AliJCDijetTask::UserCreateOutputObjects()
                       fMinJetPt,
                       fdeltaPhiCut,
                       fmatchingR,
-                      0.0); //Tracking ineff only for det level.
+                      0.0, //Tracking ineff only for det level.
+                      bUseCrho);
 
     if(fIsMC) {
         fanaMC->SetSettings(fDebug,
@@ -300,18 +302,14 @@ void AliJCDijetTask::UserCreateOutputObjects()
                             fMinJetPt,
                             fdeltaPhiCut,
                             fmatchingR,
-                            ftrackingIneff);
+                            ftrackingIneff,
+                            bUseCrho);
     }
 
     // Save information about the settings used.
     // Done after SetSettings
     fana->InitHistos(fhistos, fIsMC, fcentralityBins.size());
     if(fIsMC) fanaMC->InitHistos(fhistosDetMC, fIsMC, fcentralityBins.size());
-
-    fEventCuts.SetupRun2pp();
-
-    //fEventCuts.SetupRun2pA(0);
-    // iPeriod: 0 p-Pb 5&8 TeV, 1 Pb-p 8 TeV
 
 #endif
 
@@ -403,27 +401,27 @@ void AliJCDijetTask::UserExec(Option_t* /*option*/)
 
     fhistos->fh_eventSel->Fill("catalyst entry ok",1.0);
     if(flags & DIJET_CATALYST) {
-        //if( !fJCatalystTask->GetIsGoodEvent() ) return;
+        if( !fJCatalystTask->GetIsGoodEvent() ) return;
         fhistos->fh_eventSel->Fill("catalyst ok",1.0);
     }
 
     if(flags & DIJET_ALIEVENTCUT) {
-        //if( !fEventCuts.AcceptEvent(InputEvent()) ) return;
+        if( !fEventCuts.AcceptEvent(InputEvent()) ) return;
         fhistos->fh_eventSel->Fill("alieventcut ok",1.0);
     }
 
     if(flags & DIJET_VERTEX13PA) {
-        //if(!fUtils->IsVertexSelected2013pA(InputEvent())) return;
+        if(!fUtils->IsVertexSelected2013pA(InputEvent())) return;
         fhistos->fh_eventSel->Fill("vertex2013pA ok",1.0);
     }
 
     if(flags & DIJET_PILEUPSPD) {
-        //if(InputEvent()->IsPileupFromSPD(3,0.6,3,2,5)) return;
+        if(InputEvent()->IsPileupFromSPD(3,0.6,3,2,5)) return;
         fhistos->fh_eventSel->Fill("pileupSPD ok",1.0);
     }
 
     if(flags & DIJET_UTILSPILEUPSPD) {
-        //if(fUtils->IsPileUpSPD(InputEvent())) return;
+        if(fUtils->IsPileUpSPD(InputEvent())) return;
         fhistos->fh_eventSel->Fill("utils pileupSPD ok",1.0);
     }
 
@@ -435,10 +433,8 @@ void AliJCDijetTask::UserExec(Option_t* /*option*/)
 
 #if !defined(__CINT__) && !defined(__MAKECINT__)
     //cout << "Next true level calculations:" << endl;
-    if( fEventCuts.AcceptEvent(InputEvent()) && (!fJCatalystTask->GetIsGoodEvent()||!fUtils->IsVertexSelected2013pA(InputEvent())||!InputEvent()->IsPileupFromSPD(3,0.6,3,2,5)) ) {
-        fana->CalculateJets(fInputList, fhistos, fCBin);
-        fana->FillJetsDijets(fhistos, fCBin);
-    }
+    fana->CalculateJets(fInputList, fhistos, fCBin);
+    fana->FillJetsDijets(fhistos, fCBin);
 #endif
 
     // Here response matrix calculation.

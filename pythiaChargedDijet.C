@@ -183,6 +183,7 @@ int main(int argc, char **argv) {
     cout << "dijet subleading pt cut:    " << dijetSubleadingPt << endl;
     cout << "dijet DeltaPhi cut:         pi/" << dijetDeltaPhiCut << endl;
     cout << "tracking inefficiency:      " << trackingInEff << endl;
+    cout << "use CMS rho:                " << true << endl;
     cout << endl;
 
     if(fusePionMassInktjets && fktScheme!=0) {
@@ -205,7 +206,8 @@ int main(int argc, char **argv) {
                       minJetPt, //jet  pt cut
                       dijetDeltaPhiCut,
                       fmatchingR,
-                      0.0);
+                      0.0,
+                      true);
     fana->InitHistos(fhistos, true, 2);
 
     if(trackingInEff!=0.0) {
@@ -224,7 +226,8 @@ int main(int argc, char **argv) {
                 minJetPt, //jet  pt cut
                 dijetDeltaPhiCut,
                 fmatchingR,
-                0.0);//trackingInEff); //Efficiency is handled in this macro by DJ eff histo
+                0.0,//Efficiency is handled in this macro by DJ eff histo
+                true);//trackingInEff); 
         fanaMC->InitHistos(fhistosDet, true, 2);
     }
 

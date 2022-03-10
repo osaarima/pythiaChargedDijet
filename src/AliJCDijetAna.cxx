@@ -52,6 +52,7 @@ AliJCDijetAna::AliJCDijetAna() :
     rawJets(),
     rawKtJets(),
     rhoEstJets(),
+    rhoCEstJets(),
     dijets(),
     ktScheme(),
     antiktScheme(),
@@ -64,7 +65,9 @@ AliJCDijetAna::AliJCDijetAna() :
     area_def_bge(),
     selectorAllButTwo(),
     selectorEta(),
+    selectorNoGhosts(),
     selectorBoth(),
+    selectorEtaNoGhosts(),
     bge()
 #endif
 {
@@ -99,6 +102,7 @@ AliJCDijetAna::AliJCDijetAna(const AliJCDijetAna& obj) :
     rawJets(obj.rawJets),
     rawKtJets(obj.rawKtJets),
     rhoEstJets(obj.rhoEstJets),
+    rhoCEstJets(obj.rhoCEstJets),
     dijets(obj.dijets),
     ktScheme(obj.ktScheme),
     antiktScheme(obj.antiktScheme),
@@ -111,7 +115,9 @@ AliJCDijetAna::AliJCDijetAna(const AliJCDijetAna& obj) :
     area_def_bge(obj.area_def_bge),
     selectorAllButTwo(obj.selectorAllButTwo),
     selectorEta(obj.selectorEta),
+    selectorNoGhosts(obj.selectorNoGhosts),
     selectorBoth(obj.selectorBoth),
+    selectorEtaNoGhosts(obj.selectorEtaNoGhosts),
     bge(obj.bge)
 #endif
 {
@@ -141,7 +147,8 @@ void AliJCDijetAna::SetSettings(int    lDebug,
                                 double lMinJetPt,
                                 double lDeltaPhiCut,
                                 double lmatchingR,
-                                double ltrackingIneff){
+                                double ltrackingIneff,
+                                double luseCrho){
     fDebug = lDebug;
     fParticleEtaCut = lParticleEtaCut;
     fParticlePtCut = lParticlePtCut;
@@ -152,6 +159,7 @@ void AliJCDijetAna::SetSettings(int    lDebug,
     fSubleadingJetCut = lSubleadingJetCut;
     fDeltaPhiCut = lDeltaPhiCut;
     ftrackingIneff = ltrackingIneff;
+    bUseCrho = luseCrho;
 
     etaMaxCutForJet = lParticleEtaCut-lJetCone;
     etaMaxCutForKtJet = lParticleEtaCut-lktJetCone;
@@ -233,7 +241,9 @@ void AliJCDijetAna::SetSettings(int    lDebug,
     // Selector selects first all jets inside rapidity acceptance and then all but two hardest jets.
     selectorAllButTwo  = fastjet::Selector(!fastjet::SelectorNHardest(2));
     selectorEta  = fastjet::SelectorAbsEtaMax(ghost_maxrap - fktJetCone);
+    selectorNoGhosts  = !fastjet::SelectorIsPureGhost();
     selectorBoth  = selectorAllButTwo * selectorEta; // Here right selector is applied first, then the left one.
+    selectorEtaNoGhosts  = selectorNoGhosts * selectorEta; // Here right selector is applied first, then the left one.
     bge = fastjet::JetMedianBackgroundEstimator(selectorEta, jet_def_bge, area_def_bge);
 
 
@@ -319,7 +329,7 @@ int AliJCDijetAna::CalculateJets(TClonesArray *inList, AliJCDijetHistos *fhistos
 
     // Here one can choose to calculate background from kt jets which has left out the dijet with
     // delta phi cut used.
-    if(fUseDeltaPhiBGSubtr) {
+    if(fUseDeltaPhiBGSubtr && !bUseCrho) {
         removed = false;
         for (uktjet = 1; uktjet < rawKtJets.size(); uktjet++) { // First jet is already skipped here.
             if (!removed
@@ -331,7 +341,12 @@ int AliJCDijetAna::CalculateJets(TClonesArray *inList, AliJCDijetHistos *fhistos
             rhoEstJets.push_back(rawKtJets.at(uktjet)); 
         }
     } else {
-        rhoEstJets = selectorBoth(rawKtJets);
+        if(bUseCrho) {
+            rhoEstJets = selectorEtaNoGhosts(rawKtJets);
+            rhoCEstJets = selectorEta(rawKtJets);
+        } else {
+            rhoEstJets = selectorBoth(rawKtJets);
+        }
     }
 
     if( rhoEstJets.size() < 1 ) {
@@ -343,6 +358,32 @@ int AliJCDijetAna::CalculateJets(TClonesArray *inList, AliJCDijetHistos *fhistos
         bge.set_jets(rhoEstJets);
         rho  = bge.rho()<0   ? 0.0 : bge.rho();
         rhom = bge.rho_m()<0 ? 0.0 : bge.rho_m();
+        //This will turn on the "new CMS" method, where empty areas are taken
+        //into account specifically.
+        if(bUseCrho) {
+            /*
+            cout << "VVVVVV" << endl;
+            cout << "ALL kt:               " << rawKtJets.size() << endl;
+            cout << "Eta cut kt:           " << rhoCEstJets.size() << endl;
+            cout << "Eta cut no ghosts kt: " << rhoEstJets.size() << endl;
+            for (uktjet = 0; uktjet < rhoEstJets.size(); uktjet++) { // First jet is already skipped here.
+                cout << "Jet" << uktjet << ": " << rhoEstJets[uktjet].pt() << endl;
+            }
+            */
+            double Covered=0.0;
+            double Total=0.0;
+            for (uktjet = 0; uktjet < rhoCEstJets.size(); uktjet++) { // First jet is already skipped here.
+                if(rhoCEstJets[uktjet].is_pure_ghost()) {
+                    Total+=rhoCEstJets[uktjet].area();
+                } else {
+                    Total+=rhoCEstJets[uktjet].area();
+                    Covered+=rhoCEstJets[uktjet].area();
+                }
+            }
+            Covered/=Total;
+            rho=rho*Covered;
+            fhistos->fh_coveredRatio[lCBin]->Fill(Covered);
+        }
     }
 
 
