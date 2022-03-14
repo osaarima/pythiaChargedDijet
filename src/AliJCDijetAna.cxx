@@ -52,7 +52,6 @@ AliJCDijetAna::AliJCDijetAna() :
     rawJets(),
     rawKtJets(),
     rhoEstJets(),
-    rhoCEstJets(),
     dijets(),
     ktScheme(),
     antiktScheme(),
@@ -66,8 +65,7 @@ AliJCDijetAna::AliJCDijetAna() :
     selectorAllButTwo(),
     selectorEta(),
     selectorNoGhosts(),
-    selectorBoth(),
-    selectorEtaNoGhosts(),
+    selectorNoGhostsAllButTwo(),
     bge()
 #endif
 {
@@ -102,7 +100,6 @@ AliJCDijetAna::AliJCDijetAna(const AliJCDijetAna& obj) :
     rawJets(obj.rawJets),
     rawKtJets(obj.rawKtJets),
     rhoEstJets(obj.rhoEstJets),
-    rhoCEstJets(obj.rhoCEstJets),
     dijets(obj.dijets),
     ktScheme(obj.ktScheme),
     antiktScheme(obj.antiktScheme),
@@ -116,8 +113,7 @@ AliJCDijetAna::AliJCDijetAna(const AliJCDijetAna& obj) :
     selectorAllButTwo(obj.selectorAllButTwo),
     selectorEta(obj.selectorEta),
     selectorNoGhosts(obj.selectorNoGhosts),
-    selectorBoth(obj.selectorBoth),
-    selectorEtaNoGhosts(obj.selectorEtaNoGhosts),
+    selectorNoGhostsAllButTwo(obj.selectorNoGhostsAllButTwo),
     bge(obj.bge)
 #endif
 {
@@ -242,8 +238,7 @@ void AliJCDijetAna::SetSettings(int    lDebug,
     selectorAllButTwo  = fastjet::Selector(!fastjet::SelectorNHardest(2));
     selectorEta  = fastjet::SelectorAbsEtaMax(ghost_maxrap - fktJetCone);
     selectorNoGhosts  = !fastjet::SelectorIsPureGhost();
-    selectorBoth  = selectorAllButTwo * selectorEta; // Here right selector is applied first, then the left one.
-    selectorEtaNoGhosts  = selectorNoGhosts * selectorEta; // Here right selector is applied first, then the left one.
+    selectorNoGhostsAllButTwo  = selectorAllButTwo * selectorNoGhosts; // Here right selector is applied first, then the left one.
     bge = fastjet::JetMedianBackgroundEstimator(selectorEta, jet_def_bge, area_def_bge);
 
 
@@ -309,7 +304,7 @@ int AliJCDijetAna::CalculateJets(TClonesArray *inList, AliJCDijetHistos *fhistos
     }
     fhistos->fh_randConeEtaPhi[lCBin]->Fill(randConeEta,randConePhi);
 
-    rawKtJets = fastjet::sorted_by_pt(cs_bge->inclusive_jets(0.0)); // APPLY Min pt cut for jet
+    rawKtJets = fastjet::sorted_by_pt(selectorEta(cs_bge->inclusive_jets(0.0))); // APPLY Min pt cut for jet
 
     fhistos->fh_events[lCBin]->Fill("particles",noTracks);
     for (utrack = 0; utrack < chparticles.size(); utrack++) {
@@ -329,7 +324,7 @@ int AliJCDijetAna::CalculateJets(TClonesArray *inList, AliJCDijetHistos *fhistos
 
     // Here one can choose to calculate background from kt jets which has left out the dijet with
     // delta phi cut used.
-    if(fUseDeltaPhiBGSubtr && !bUseCrho) {
+    if(fUseDeltaPhiBGSubtr) {
         removed = false;
         for (uktjet = 1; uktjet < rawKtJets.size(); uktjet++) { // First jet is already skipped here.
             if (!removed
@@ -338,14 +333,21 @@ int AliJCDijetAna::CalculateJets(TClonesArray *inList, AliJCDijetHistos *fhistos
                 removed = true;
                 continue;
             }
-            rhoEstJets.push_back(rawKtJets.at(uktjet)); 
+            //If using C factor do not include ghost-only jets.
+            if(bUseCrho) {
+                if(!rawKtJets[uktjet].is_pure_ghost()) {
+                    rhoEstJets.push_back(rawKtJets.at(uktjet)); 
+                }
+            } else {
+                rhoEstJets.push_back(rawKtJets.at(uktjet)); 
+            }
         }
     } else {
         if(bUseCrho) {
-            rhoEstJets = selectorEtaNoGhosts(rawKtJets);
-            rhoCEstJets = selectorEta(rawKtJets);
+            //If using C factor do not include ghost-only jets.
+            rhoEstJets = selectorNoGhostsAllButTwo(rawKtJets);
         } else {
-            rhoEstJets = selectorBoth(rawKtJets);
+            rhoEstJets = selectorAllButTwo(rawKtJets);
         }
     }
 
@@ -361,23 +363,15 @@ int AliJCDijetAna::CalculateJets(TClonesArray *inList, AliJCDijetHistos *fhistos
         //This will turn on the "new CMS" method, where empty areas are taken
         //into account specifically.
         if(bUseCrho) {
-            /*
-            cout << "VVVVVV" << endl;
-            cout << "ALL kt:               " << rawKtJets.size() << endl;
-            cout << "Eta cut kt:           " << rhoCEstJets.size() << endl;
-            cout << "Eta cut no ghosts kt: " << rhoEstJets.size() << endl;
-            for (uktjet = 0; uktjet < rhoEstJets.size(); uktjet++) { // First jet is already skipped here.
-                cout << "Jet" << uktjet << ": " << rhoEstJets[uktjet].pt() << endl;
-            }
-            */
             double Covered=0.0;
             double Total=0.0;
-            for (uktjet = 0; uktjet < rhoCEstJets.size(); uktjet++) { // First jet is already skipped here.
-                if(rhoCEstJets[uktjet].is_pure_ghost()) {
-                    Total+=rhoCEstJets[uktjet].area();
+            //For C factor, all kt jets are included.
+            for (uktjet = 0; uktjet < rawKtJets.size(); uktjet++) { // First jet is already skipped here.
+                if(rawKtJets[uktjet].is_pure_ghost()) {
+                    Total+=rawKtJets[uktjet].area();
                 } else {
-                    Total+=rhoCEstJets[uktjet].area();
-                    Covered+=rhoCEstJets[uktjet].area();
+                    Total+=rawKtJets[uktjet].area();
+                    Covered+=rawKtJets[uktjet].area();
                 }
             }
             Covered/=Total;

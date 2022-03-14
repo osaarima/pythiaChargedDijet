@@ -122,7 +122,6 @@ class AliJCDijetAna : public TObject
         vector<fastjet::PseudoJet> rawJets;
         vector<fastjet::PseudoJet> rawKtJets;
         vector<fastjet::PseudoJet> rhoEstJets;
-        vector<fastjet::PseudoJet> rhoCEstJets;
         vector<vector<vector<fastjet::PseudoJet>>> dijets;
 
         fastjet::RecombinationScheme ktScheme;
@@ -141,8 +140,7 @@ class AliJCDijetAna : public TObject
         fastjet::Selector selectorAllButTwo;
         fastjet::Selector selectorEta;
         fastjet::Selector selectorNoGhosts;
-        fastjet::Selector selectorBoth;
-        fastjet::Selector selectorEtaNoGhosts;
+        fastjet::Selector selectorNoGhostsAllButTwo;
         fastjet::JetMedianBackgroundEstimator bge;
 
         unique_ptr<fastjet::ClusterSequenceArea> cs;

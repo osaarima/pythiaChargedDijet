@@ -14,18 +14,19 @@ Random:seed = 0
 
 
 ! 2) Beam parameter settings. Values below agree with default ones.
-!Beams:idA = 2212                   ! first beam, p = 2212, pbar = -2212
-!Beams:idB = 2212                   ! second beam, p = 2212, pbar = -2212
-Beams:idA = 1000822080              ! first beam, Pb = 1000822080
+Beams:idA = 2212                    ! first beam, p = 2212
 Beams:idB = 1000822080              ! second beam, Pb = 1000822080
-Beams:eCM = 5020.                  ! CM energy of collision
-!Beams:eCM = 5500.                   ! CM energy of collision
+Beams:frameType = 2                   ! 2: the beams are back-to-back, but with different energies
+Beams:eA = 4000.                ! Energy of beam A going to +z
+Beams:eB = 1576.9231                ! Energy of beam B going to -z
+!Beams:eCM = 5020.                  ! CM energy of collision
+!Beams:eCM = 5500.                  ! CM energy of collision
 
 ! 3) Settings for the hard-process generation.
 HardQCD:all = on                   ! switch on all QCD jet + jet processes
 !PromptPhoton:all = on              ! swich on gamma + jet and gamma + gamma 
 
-PhaseSpace:pTHatMin =  3.0          ! minimal pT scale in process 
+PhaseSpace:pTHatMin =  10.0          ! minimal pT scale in process 
 PhaseSpace:pTHatMax = -1.0          ! minimal pT scale in process 
 
 # Use this for hard leading-jets in a certain mHat window
@@ -62,6 +63,10 @@ ParticleDecays:tau0Max = 10.0
 
 
 # Tune setup:
-Tune:pp = 14
+!Tune:pp = 14
+HeavyIon:mode = 1
+
+! Turn on nuclear PDF for beam B (Pb)
+PDF:useHardNPDFB = on
 
 
