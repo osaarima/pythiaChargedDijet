@@ -2,7 +2,7 @@
 ! Lines not beginning with a letter or digit are comments.
 
 ! 1) Settings used in the main program.
-Main:numberOfEvents = 100! number of events to generate
+Main:numberOfEvents = 10000! number of events to generate
 !Main:numberToList = 1              ! number of events to print
 !Main:timesToShow = 20              ! show how far along run is
 !Main:showChangedSettings = on      ! print changed flags/modes/parameters
@@ -25,7 +25,7 @@ Beams:eCM = 5020.                  ! CM energy of collision
 HardQCD:all = on                   ! switch on all QCD jet + jet processes
 !PromptPhoton:all = on              ! swich on gamma + jet and gamma + gamma 
 
-PhaseSpace:pTHatMin =  3.0          ! minimal pT scale in process 
+PhaseSpace:pTHatMin =  10.0          ! minimal pT scale in process 
 PhaseSpace:pTHatMax = -1.0          ! minimal pT scale in process 
 
 # Use this for hard leading-jets in a certain mHat window
