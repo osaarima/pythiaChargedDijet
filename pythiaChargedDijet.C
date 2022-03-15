@@ -110,9 +110,11 @@ int main(int argc, char **argv) {
     // Histograms and tools
     //-------------------------------------------------------
     vector<double> centbins = {0.0, 100.0};
+    TString sDijetMBins = "0, 20, 40, 45, 55, 65, 75, 85, 100, 120, 150, 250, 400, 500, 100000";
     fhistos = new AliJCDijetHistos();
     fhistos->SetName("jcdijet");
     fhistos->SetCentralityBinsHistos(centbins);
+    fhistos->SetDijetMBinsHistos(sDijetMBins);
     fhistos->CreateEventTrackHistos();
     fhistos->fHMG->Print();
 
@@ -120,6 +122,7 @@ int main(int argc, char **argv) {
         fhistosDet = new AliJCDijetHistos();
         fhistosDet->SetName("jcdijetDetMC");
         fhistosDet->SetCentralityBinsHistos(centbins);
+        fhistosDet->SetDijetMBinsHistos(sDijetMBins);
         fhistosDet->CreateEventTrackHistos();
         fhistosDet->fHMG->Print();
     }
