@@ -197,6 +197,7 @@ int main(int argc, char **argv) {
     fana->SetSettings(5,
                       partMinEtaCut,
                       partMinPtCut,
+                      DBL_MAX, //particle pt cut max
                       coneR,
                       ktconeR,
                       fktScheme,
@@ -210,6 +211,7 @@ int main(int argc, char **argv) {
                       dijetDeltaPhiCut,
                       fmatchingR,
                       0.0,
+                      true,
                       true);
     fana->InitHistos(fhistos, true, 2);
 
@@ -217,6 +219,7 @@ int main(int argc, char **argv) {
         fanaMC->SetSettings(5,
                 partMinEtaCut,
                 partMinPtCut,
+                DBL_MAX,
                 coneR,
                 ktconeR,
                 fktScheme,
@@ -230,6 +233,7 @@ int main(int argc, char **argv) {
                 dijetDeltaPhiCut,
                 fmatchingR,
                 0.0,//Efficiency is handled in this macro by DJ eff histo
+                true,
                 true);//trackingInEff); 
         fanaMC->InitHistos(fhistosDet, true, 2);
     }
@@ -282,7 +286,7 @@ int main(int argc, char **argv) {
         nTrial = nTried - prev_nTried;
         prev_nTried = nTried;
         sigmaGen = pythia.info.sigmaGen();
-        ebeweight = 1.0; //no event-by-event weight at all. //sigmaGen/nTrial;
+        ebeweight = pythia.info.weight(); //no event-by-event weight at all. //sigmaGen/nTrial;
         hCrossSectionInfo->Fill(7.5,ebeweight);
         fhistos->fh_events[fCBin]->Fill("events",1.0);
         if(trackingInEff!=0.0) fhistosDet->fh_events[fCBin]->Fill("events",1.0);
@@ -307,8 +311,8 @@ int main(int argc, char **argv) {
         } // end of finalparticles
 
         // Here I call my function
-        fana->CalculateJets(inputList, fhistos, fCBin);
-        fana->FillJetsDijets(fhistos, fCBin);
+        fana->CalculateJets(inputList, fhistos, fCBin, ebeweight);
+        fana->FillJetsDijets(fhistos, fCBin, ebeweight);
 
         if(trackingInEff!=0.0) {
             fanaMC->CalculateJets(inputListDet, fhistosDet, fCBin);

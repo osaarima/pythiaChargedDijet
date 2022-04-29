@@ -23,6 +23,7 @@ Beams:eCM = 5020.                  ! CM energy of collision
 
 ! 3) Settings for the hard-process generation.
 HardQCD:all = on                   ! switch on all QCD jet + jet processes
+!SoftQCD:nonDiffractive = on       ! switch on non-diffractive soft processes
 !PromptPhoton:all = on              ! swich on gamma + jet and gamma + gamma 
 
 PhaseSpace:pTHatMin =  10.0          ! minimal pT scale in process 
