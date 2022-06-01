@@ -24,6 +24,7 @@ Beams:eB = 1576.9231                ! Energy of beam B going to -z
 
 ! 3) Settings for the hard-process generation.
 HardQCD:all = on                   ! switch on all QCD jet + jet processes
+!SoftQCD:nonDiffractive = on       ! switch on non-diffractive soft processes
 !PromptPhoton:all = on              ! swich on gamma + jet and gamma + gamma 
 
 PhaseSpace:pTHatMin =  10.0          ! minimal pT scale in process 
