@@ -58,7 +58,7 @@ double getEffFromHisto(TH1D* h, double pt);
 int main(int argc, char **argv) {
 
     if(argc<6){
-        cout<<"usage: " << argv[0] << " pythia.config pTHatMin pTHatMax dijetLeadingPt <output.root> [random_seed] [tracking inefficiency] [minJetPt]"<<endl;exit(1);
+        cout<<"usage: " << argv[0] << " pythia.config pTHatMin pTHatMax dijetLeadingPt <output.root> [random_seed] [tracking inefficiency] [minJetPt] [softQCD?]"<<endl;exit(1);
     }
     TStopwatch timer; 
     timer.Start();   
@@ -71,6 +71,7 @@ int main(int argc, char **argv) {
     Int_t random_seed = argc>6 ? atoi(argv[6]) : 0;//placing the inputs into variables
     double trackingInEff = argc>7 ? atof(argv[7]) : 0.0; //Default: no tracking ineffciency
     double minJetPt = argc>8 ? atof(argv[8]) : 5.0; //Default: no tracking ineffciency
+    Int_t softQCD = argc>9 ? atoi(argv[9]) : 0; //Default: use hardQCD
 
 
     TFile *fout = new TFile(outputs.Data(),"RECREATE");
@@ -92,6 +93,13 @@ int main(int argc, char **argv) {
     int    nEvent  = pythia.mode("Main:numberOfEvents");
     bool   showCPD = pythia.flag("Main:showChangedParticleData");
     double energy  = pythia.mode("Beams:eCM");
+
+    if (softQCD==1) {
+        pythia.readString(Form("HardQCD:all = off"));
+        pythia.readString(Form("SoftQCD:nonDiffractive = on"));
+        pTHatMin=0.0;
+        pTHatMax=-1;
+    }
 
     pythia.readString(Form("PhaseSpace:pTHatMin ==%f",pTHatMin));
     pythia.readString(Form("PhaseSpace:pTHatMax ==%f",pTHatMax));
@@ -131,6 +139,7 @@ int main(int argc, char **argv) {
     if(trackingInEff!=0.0) fanaMC = new AliJCDijetAna();
 
     TH1D *hCrossSectionInfo = new TH1D("hCrossSection","CrossSectionInfo",8,0,8);
+    TH1D *hPtHatInfo = new TH1D("hPtHatInfo","PtHatInfo",500,0,500);
 
     //------------------------------------------------------------------
     // Define jet reconstruction
@@ -282,11 +291,13 @@ int main(int argc, char **argv) {
         if (!pythia.next()) continue;
         inputList->Clear("C");
         inputListDet->Clear("C");
+        if (softQCD==1 && pythia.info.pTHat()>30) continue;
         nTried = pythia.info.nTried();
         nTrial = nTried - prev_nTried;
         prev_nTried = nTried;
         sigmaGen = pythia.info.sigmaGen();
-        ebeweight = pythia.info.weight(); //no event-by-event weight at all. //sigmaGen/nTrial;
+        ebeweight = pythia.info.weight();
+        hPtHatInfo->Fill(pythia.info.pTHat());
         hCrossSectionInfo->Fill(7.5,ebeweight);
         fhistos->fh_events[fCBin]->Fill("events",1.0);
         if(trackingInEff!=0.0) fhistosDet->fh_events[fCBin]->Fill("events",1.0);
