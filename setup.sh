@@ -9,7 +9,7 @@
 #export PYTHIA8=$HOME/alice/PythiaMy/pythia8226
 #export PYTHIA8=$HOME/alice/PythiaMy/pythia8226
 #export PYTHIA8=$HOME/alice/PythiaMy/pythia8303-install #pythia HI
-export PYTHIA8=$HOME/alice/PythiaMy/pythia8307 #pythia HI
+#export PYTHIA8=$HOME/alice/PythiaMy/pythia8307 #pythia HI
 #export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PYTHIA8/lib
 
 #For puck:
@@ -18,3 +18,7 @@ export PYTHIA8=$HOME/alice/PythiaMy/pythia8307 #pythia HI
 #export PYTHIA8=/n/work00/osanmasa/pythia/pythia8226-lhapdf-test/pythia8226
 #source /n/work00/osanmasa/root/root-6.10.08-build/bin/thisroot.sh
 
+#For Kone:
+export PYTHIA8=/autohome/home3/osanmasa/PYTHIA/pythia8307 #pythia HI
+export FASTJET=/autohome/home3/osanmasa/PYTHIA/fastjet-3.4.0-install
+#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PYTHIA8/lib:$FASTJET/lib

@@ -12,7 +12,7 @@ SOFLAGS       = -shared
 ############################################
 CXXFLAGS += $(shell root-config --cflags)
 LDFLAGS  = $(shell root-config --libs)
-CXXFLAGS += $(shell $(FASTJET)/bin/fastjet-config --cxxflags )
+INCS += $(shell $(FASTJET)/bin/fastjet-config --cxxflags )
 #LDFLAGS += -Wl,-rpath,/cvmfs/alice.cern.ch/x86_64-2.6-gnu-4.1.2/Packages/fastjet/v3.2.1_1.024-alice1-3/lib -lm  -L/cvmfs/alice.cern.ch/x86_64-2.6-gnu-4.1.2/Packages/fastjet/v3.2.1_1.024-alice1-3/lib -lfastjettools -lfastjet 
 #LDFLAGS += -Wl,-rpath,/cvmfs/alice.cern.ch/x86_64-2.6-gnu-4.1.2/Packages/fastjet/v3.0.6_1.012-7/lib -lm  -L/cvmfs/alice.cern.ch/x86_64-2.6-gnu-4.1.2/Packages/fastjet/v3.0.6_1.012-7/lib -lfastjettools -lfastjet
 LDFLAGS += $(shell $(FASTJET)/bin/fastjet-config --libs --plugins ) 
@@ -32,8 +32,8 @@ LDFLAGS += $(shell $(PYTHIA8)/bin/pythia8-config --cppflags --libs)
 #LDFLAGS += -Wl,-rpath -Wl,$(HEPPDT)/lib
 #INCS    += -I$(HEPMC)/include
 #INCS    += -I$(HEPPDT)/include
-LDFLAGS += -L/home/osaarima/alice/sw/ubuntu1804_x86-64/cgal/latest-aliroot6-user-next-root6/lib/ -lCGAL 
-LDFLAGS += -L/home/osaarima/alice/sw/ubuntu1804_x86-64/GMP/latest-aliroot6-user-next-root6/lib/ -lgmp
+#LDFLAGS += -L/home/osaarima/alice/sw/ubuntu1804_x86-64/cgal/latest-aliroot6-user-next-root6/lib/ -lCGAL 
+#LDFLAGS += -L/home/osaarima/alice/sw/ubuntu1804_x86-64/GMP/latest-aliroot6-user-next-root6/lib/ -lgmp
 CXXFLAGS  += $(INCS)
 LDFLAGS += $L -ldl
 
@@ -79,4 +79,4 @@ cl:  clean $(PROGRAM)
 nanoDict.cc: $(HDRSDICT)
 		@echo "Generating dictionary ..."
 		@rm -f nanoDict.cc nanoDict.hh nanoDict.h
-		@rootcint nanoDict.cc -c -D$(version) $(HDRSDICT)
+		@rootcint nanoDict.cc -D$(version) $(HDRSDICT) $(INCS)
