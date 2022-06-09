@@ -140,6 +140,7 @@ int main(int argc, char **argv) {
 
     TH1D *hCrossSectionInfo = new TH1D("hCrossSection","CrossSectionInfo",8,0,8);
     TH1D *hPtHatInfo = new TH1D("hPtHatInfo","PtHatInfo",500,0,500);
+    TH1D *hEbeweight = new TH1D("hEbeweight","Ebeweight",500,0,100);
 
     //------------------------------------------------------------------
     // Define jet reconstruction
@@ -291,14 +292,16 @@ int main(int argc, char **argv) {
         if (!pythia.next()) continue;
         inputList->Clear("C");
         inputListDet->Clear("C");
+        ebeweight = pythia.info.weight();
+        hEbeweight->Fill(ebeweight);
+        //This needs to be filled before the softQCD veto
+        hCrossSectionInfo->Fill(7.5,ebeweight);
         if (softQCD==1 && pythia.info.pTHat()>30) continue;
         nTried = pythia.info.nTried();
         nTrial = nTried - prev_nTried;
         prev_nTried = nTried;
         sigmaGen = pythia.info.sigmaGen();
-        ebeweight = pythia.info.weight();
-        hPtHatInfo->Fill(pythia.info.pTHat());
-        hCrossSectionInfo->Fill(7.5,ebeweight);
+        hPtHatInfo->Fill(pythia.info.pTHat(), ebeweight);
         fhistos->fh_events[fCBin]->Fill("events",1.0);
         if(trackingInEff!=0.0) fhistosDet->fh_events[fCBin]->Fill("events",1.0);
         if(iEvent % ieout == 0) cout << iEvent << "\t" << int(float(iEvent)/nEvent*100) << "%, nTried:" << nTried << ", nTrial:" << nTrial << ", sigma:" << sigmaGen << endl;
@@ -351,6 +354,8 @@ int main(int argc, char **argv) {
     hCrossSectionInfo->Fill(4.5,energy);
     hCrossSectionInfo->Fill(5.5,1); // for counting # of merged
     hCrossSectionInfo->Fill(6.5,pythia.info.weightSum()); // for counting # of merged
+
+    //This should be about 10 times less than weightSum()
 
     fout->Write();
     fout->Close();
