@@ -140,7 +140,12 @@ int main(int argc, char **argv) {
 
     TH1D *hCrossSectionInfo = new TH1D("hCrossSection","CrossSectionInfo",8,0,8);
     TH1D *hPtHatInfo = new TH1D("hPtHatInfo","PtHatInfo",500,0,500);
-    TH1D *hEbeweight = new TH1D("hEbeweight","Ebeweight",500,0,100);
+    int NBINS=300;
+    double logBinsX[NBINS+1], LimL=1e-3, LimH=3000;
+    double logBW = (log(LimH)-log(LimL))/NBINS;
+    for(int iBin=0;iBin<=NBINS;iBin++) logBinsX[iBin]=LimL*exp(iBin*logBW);
+    //TH1D *hEbeweight = new TH1D("hEbeweight","Ebeweight",10000,0,1000);
+    TH1D *hEbeweight = new TH1D("hEbeweight","Ebeweight", NBINS, logBinsX);
 
     //------------------------------------------------------------------
     // Define jet reconstruction
