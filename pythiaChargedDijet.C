@@ -138,7 +138,7 @@ int main(int argc, char **argv) {
     fana = new AliJCDijetAna();
     if(trackingInEff!=0.0) fanaMC = new AliJCDijetAna();
 
-    TH1D *hCrossSectionInfo = new TH1D("hCrossSection","CrossSectionInfo",8,0,8);
+    TH1D *hCrossSectionInfo = new TH1D("hCrossSection","CrossSectionInfo",10,0,10);
     TH1D *hPtHatInfo = new TH1D("hPtHatInfo","PtHatInfo",500,0,500);
     int NBINS=300;
     double logBinsX[NBINS+1], LimL=1e-3, LimH=3000;
@@ -315,15 +315,18 @@ int main(int argc, char **argv) {
         //This needs to be filled before the softQCD veto
         hCrossSectionInfo->Fill(7.5,ebeweight);
         if (softQCD==1) {
-            if(pythia.info.pTHat()>30) continue;
-            //cout << "new event" << endl;
+            if(pythia.info.pTHat()>30) {
+                hCrossSectionInfo->Fill(8.5,1.0);
+                continue;
+            }
+            //cout << "=============new event=============" << endl;
             for (int i = 0; i < pythia.event.size(); ++i) {
                 //cout << "status: " << pythia.event[i].status() << endl;
                 if (pythia.event[i].status()==-23){
-                    //cout << "test" << endl;
                     if(pythia.event[i].pT()>30) {
-                        cout << "There was pythia event over 30 which was not pthat>30! Rejected" << endl;
-                        cout << "pt(): " << pythia.event[i].pT() <<  endl;
+                        hCrossSectionInfo->Fill(9.5,1.0);
+                        //cout << "There was pythia event over 30 which was not pthat>30! Rejected" << endl;
+                        //cout << "pt(): " << pythia.event[i].pT() <<  endl;
                         continue;
                     }
                 }
