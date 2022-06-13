@@ -291,17 +291,44 @@ int main(int argc, char **argv) {
         hCoeff = (TH1D*)fIn->Get("Efficiency/hCor000004");
     }
     double fPtEff=0.0;
+    int idCode;
 
     for(int iEvent = 0; iEvent < nEvent; ++iEvent) {//begin event loop
 
         if (!pythia.next()) continue;
         inputList->Clear("C");
         inputListDet->Clear("C");
+
+        //For HI we need to select non-diffractive softQCD events by hand.
+        //The setting softQCD:non-diffractive will select all softQCD for HI.
+        /*
+        if(softQCD==1) {
+            idCode=pythia.info.codeSub();
+            if(idCode<110) {//What is the correct code?
+                continue;
+            }
+        }
+        */
+
         ebeweight = pythia.info.weight();
         hEbeweight->Fill(ebeweight);
         //This needs to be filled before the softQCD veto
         hCrossSectionInfo->Fill(7.5,ebeweight);
-        if (softQCD==1 && pythia.info.pTHat()>30) continue;
+        if (softQCD==1) {
+            if(pythia.info.pTHat()>30) continue;
+            //cout << "new event" << endl;
+            for (int i = 0; i < pythia.event.size(); ++i) {
+                //cout << "status: " << pythia.event[i].status() << endl;
+                if (pythia.event[i].status()==-23){
+                    //cout << "test" << endl;
+                    if(pythia.event[i].pT()>30) {
+                        cout << "There was pythia event over 30 which was not pthat>30! Rejected" << endl;
+                        cout << "pt(): " << pythia.event[i].pT() <<  endl;
+                        continue;
+                    }
+                }
+            }
+        }
         nTried = pythia.info.nTried();
         nTrial = nTried - prev_nTried;
         prev_nTried = nTried;
