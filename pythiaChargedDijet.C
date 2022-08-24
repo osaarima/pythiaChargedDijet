@@ -164,7 +164,8 @@ int main(int argc, char **argv) {
     double dijetDeltaPhiCut     = 2.0; // Cut is pi/dijetDeltaPhiCut
     double fmatchingR           = 0.3;
     int fktScheme               = 1;
-    int centBin=0;
+    int centBin                 = 0;
+    bool useCMSrho              = false;
 
     TString sktScheme;
     switch (fktScheme) {
@@ -201,7 +202,7 @@ int main(int argc, char **argv) {
     cout << "dijet subleading pt cut:    " << dijetSubleadingPt << endl;
     cout << "dijet DeltaPhi cut:         pi/" << dijetDeltaPhiCut << endl;
     cout << "tracking inefficiency:      " << trackingInEff << endl;
-    cout << "use CMS rho:                " << true << endl;
+    cout << "use CMS rho:                " << useCMSrho << endl;
     cout << endl;
 
     if(fusePionMassInktjets && fktScheme!=0) {
@@ -226,7 +227,7 @@ int main(int argc, char **argv) {
                       dijetDeltaPhiCut,
                       fmatchingR,
                       0.0,
-                      true,
+                      useCMSrho,
                       true);
     fana->InitHistos(fhistos, true, 2);
 
@@ -248,7 +249,7 @@ int main(int argc, char **argv) {
                 dijetDeltaPhiCut,
                 fmatchingR,
                 0.0,//Efficiency is handled in this macro by DJ eff histo
-                true,
+                useCMSrho,
                 true);//trackingInEff); 
         fanaMC->InitHistos(fhistosDet, true, 2);
     }
