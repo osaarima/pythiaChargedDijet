@@ -61,6 +61,10 @@ PhaseSpace:mHatMax = -1.0   # max mHat
 ParticleDecays:limitTau0 = On
 ParticleDecays:tau0Max = 10.0
 
+# Use nPDF for beam B
+PDF:useHardNPDFB = on
+PDF:nPDFSetB = 3 #Use EPPS16
+PDF:nPDFBeamB = 100822080 #Pb nPDF
 
 # Tune setup:
 Tune:pp = 14

@@ -3,10 +3,6 @@
 
 ! 1) Settings used in the main program.
 Main:numberOfEvents = 1000! number of events to generate
-!Main:numberToList = 1              ! number of events to print
-!Main:timesToShow = 20              ! show how far along run is
-!Main:showChangedSettings = on      ! print changed flags/modes/parameters
-!Main:showChangedParticleData = on  ! print changed particle and decay data
 
 # random seed
 Random:setSeed = on
@@ -22,11 +18,11 @@ Beams:eCM = 5020.                  ! CM energy of collision
 !Beams:eCM = 5500.                   ! CM energy of collision
 
 ! 3) Settings for the hard-process generation.
-HardQCD:all = on                   ! switch on all QCD jet + jet processes
-!SoftQCD:nonDiffractive = on       ! switch on non-diffractive soft processes
+!HardQCD:all = on                   ! switch on all QCD jet + jet processes
+SoftQCD:nonDiffractive = on       ! switch on non-diffractive soft processes
 !PromptPhoton:all = on              ! swich on gamma + jet and gamma + gamma 
 
-PhaseSpace:pTHatMin =  10.0          ! minimal pT scale in process 
+PhaseSpace:pTHatMin =  0.0          ! minimal pT scale in process 
 PhaseSpace:pTHatMax = -1.0          ! minimal pT scale in process 
 
 # Use this for hard leading-jets in a certain mHat window
@@ -64,5 +60,10 @@ ParticleDecays:tau0Max = 10.0
 
 # Tune setup:
 Tune:pp = 14
+!HeavyIon:mode = 1
+
+! Turn on nuclear PDF for beam B (Pb)
+!PDF:useHardNPDFB = on
+
 
 

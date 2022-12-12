@@ -117,12 +117,17 @@ int main(int argc, char **argv) {
     //-------------------------------------------------------
     // Histograms and tools
     //-------------------------------------------------------
+
+    fana = new AliJCDijetAna();
+    if(trackingInEff!=0.0) fanaMC = new AliJCDijetAna();
+
     vector<double> centbins = {0.0, 100.0};
     TString sDijetMBins = "0, 20, 40, 45, 55, 65, 75, 85, 100, 120, 150, 250, 400, 500, 100000";
     fhistos = new AliJCDijetHistos();
     fhistos->SetName("jcdijet");
     fhistos->SetCentralityBinsHistos(centbins);
     fhistos->SetDijetMBinsHistos(sDijetMBins);
+    fhistos->SetNJetClasses(fana->jetClassesSize);
     fhistos->CreateEventTrackHistos();
     fhistos->fHMG->Print();
 
@@ -131,12 +136,10 @@ int main(int argc, char **argv) {
         fhistosDet->SetName("jcdijetDetMC");
         fhistosDet->SetCentralityBinsHistos(centbins);
         fhistosDet->SetDijetMBinsHistos(sDijetMBins);
+        fhistosDet->SetNJetClasses(fana->jetClassesSize);
         fhistosDet->CreateEventTrackHistos();
         fhistosDet->fHMG->Print();
     }
-
-    fana = new AliJCDijetAna();
-    if(trackingInEff!=0.0) fanaMC = new AliJCDijetAna();
 
     TH1D *hCrossSectionInfo = new TH1D("hCrossSection","CrossSectionInfo",10,0,10);
     TH1D *hPtHatInfo = new TH1D("hPtHatInfo","PtHatInfo",500,0,500);
@@ -165,7 +168,7 @@ int main(int argc, char **argv) {
     double fmatchingR           = 0.3;
     int fktScheme               = 1;
     int centBin                 = 0;
-    bool useCMSrho              = false;
+    bool useCMSrho              = true;
 
     TString sktScheme;
     switch (fktScheme) {
@@ -229,7 +232,7 @@ int main(int argc, char **argv) {
                       0.0,
                       useCMSrho,
                       true);
-    fana->InitHistos(fhistos, true, 2);
+    fana->InitHistos(fhistos, true, 2, 0, 0);
 
     if(trackingInEff!=0.0) {
         fanaMC->SetSettings(5,
@@ -250,8 +253,8 @@ int main(int argc, char **argv) {
                 fmatchingR,
                 0.0,//Efficiency is handled in this macro by DJ eff histo
                 useCMSrho,
-                true);//trackingInEff); 
-        fanaMC->InitHistos(fhistosDet, true, 2);
+                false);//trackingInEff); 
+        fanaMC->InitHistos(fhistosDet, true, 2, 0, 0);
     }
 
 
